@@ -8,6 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        "input-shadow": "1px 1px 8px 1px rgba(0, 0, 0, 0.03);",
+      },
+      backgroundImage: {
+        "gradient-1": "linear-gradient(180deg, #ECF9FF 0%, #F5F4FF 100%)",
+        "gradient-2": "linear-gradient(180deg, #FFFBE8 0%, #F5F4FF 100%)",
+        "gradient-3": "linear-gradient(180deg, #FFECEC 0%, #F5F4FF 100%)",
+      },
       colors: {
         black: "#251F2A",
         white: "#ffffff",
@@ -58,11 +66,6 @@ const config: Config = {
           2: "#C2B6CA",
           3: "#9B8CA6",
           4: "#64596D",
-        },
-        gradient: {
-          1: "linear-gradient(180deg, #ECF9FF 0%, #F5F4FF 100%)",
-          2: "linear-gradient(180deg, #FFFBE8 0%, #F5F4FF 100%)",
-          3: "linear-gradient(180deg, #FFECEC 0%, #F5F4FF 100%)",
         },
       },
     },

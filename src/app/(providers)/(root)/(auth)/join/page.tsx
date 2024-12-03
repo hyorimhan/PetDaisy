@@ -1,7 +1,11 @@
-import React from 'react';
+import JoinForm from '@/components/features/auth/join/JoinForm';
 
-const page = () => {
-  return <div>page</div>;
+const JoinPage = () => {
+  return (
+    <div>
+      <JoinForm />
+    </div>
+  );
 };
 
-export default page;
+export default JoinPage;

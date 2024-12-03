@@ -22,6 +22,7 @@ const MainPage = () => {
             type="lg"
             textColor="text-white"
             bgColor="bg-blue-4"
+            href="/join"
           />
           <Button
             content="카카오 로그인하기"

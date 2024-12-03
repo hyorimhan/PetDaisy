@@ -8,7 +8,7 @@ export function handleJoinError(message: string) {
   });
 }
 
-export function handleUserError(message: string) {
+export function handleError(message: string) {
   return NextResponse.json({ message });
 }
 
@@ -16,6 +16,6 @@ export function handleNetworkError() {
   return NextResponse.json({ error: '네트워크 오류가 발생했습니다' });
 }
 
-export function handleSuccess(message: string) {
-  return NextResponse.json({ message });
+export function handleSuccess(message: string, data?: any) {
+  return NextResponse.json({ message, data });
 }

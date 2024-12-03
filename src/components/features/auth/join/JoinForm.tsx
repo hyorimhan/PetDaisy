@@ -1,4 +1,5 @@
 'use client';
+import Button from '@/components/common/Button/Button';
 import {
   EMAIL_VALIDATION,
   NICKNAME_VALIDATION,
@@ -33,14 +34,13 @@ function JoinForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(joinSubmit, handleError)}>
+      <form
+        onSubmit={handleSubmit(joinSubmit, handleError)}
+        className="space-y-5 pt-[3.125rem]"
+      >
         <div>
           <label htmlFor="nickname">닉네임</label>
-          <input
-            type="text"
-            {...register('nickname', NICKNAME_VALIDATION())}
-            className="h-[68px]"
-          />
+          <input type="text" {...register('nickname', NICKNAME_VALIDATION())} />
         </div>
         <div>
           <label htmlFor="email">아이디</label>
@@ -63,7 +63,13 @@ function JoinForm() {
             )}
           />
         </div>
-        <button type="submit">가입하기</button>
+
+        <Button
+          content="회원가입"
+          type="lg"
+          textColor="text-white "
+          bgColor="bg-blue-4  "
+        />
       </form>
     </div>
   );

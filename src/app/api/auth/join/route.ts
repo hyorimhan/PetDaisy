@@ -1,9 +1,9 @@
 import { createClient } from '@/supabase/server';
 import {
+  handleError,
   handleJoinError,
   handleNetworkError,
   handleSuccess,
-  handleUserError,
 } from '@/utils/api/error/api';
 import { NextRequest } from 'next/server';
 
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       .from('user')
       .insert({ nickname: nickname });
 
-    if (userError) return handleUserError(userError.message);
+    if (userError) return handleError(userError.message);
 
     return handleSuccess('회원가입 되었습니다');
   } catch {

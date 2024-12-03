@@ -35,10 +35,12 @@ function JoinForm() {
     <div>
       <form onSubmit={handleSubmit(joinSubmit, handleError)}>
         <div>
-          <label htmlFor="nickname" className="text-4xl">
-            닉네임
-          </label>
-          <input type="text" {...register('nickname', NICKNAME_VALIDATION())} />
+          <label htmlFor="nickname">닉네임</label>
+          <input
+            type="text"
+            {...register('nickname', NICKNAME_VALIDATION())}
+            className="h-[68px]"
+          />
         </div>
         <div>
           <label htmlFor="email">아이디</label>

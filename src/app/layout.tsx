@@ -9,7 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="bg-main-2">
         <QueryProvider>
           <AuthProvider>
             <main>{children}</main>

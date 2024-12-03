@@ -1,11 +1,10 @@
-import { useId } from "react";
-
-interface InputProps {
+import { ComponentProps, useId } from "react";
+type InputProps = {
   label: string;
   type: "text" | "password" | "email";
   invalid?: boolean;
-}
-function Input({ label, type, invalid }: InputProps) {
+} & ComponentProps<"input">;
+function Input({ label, type, invalid, ...props }: InputProps) {
   invalid = invalid || false;
   const inputId = useId();
   return (
@@ -18,7 +17,12 @@ function Input({ label, type, invalid }: InputProps) {
         <label className="text-[14px] text-gray-3 font-semibold" htmlFor={inputId}>
           {label}
         </label>
-        <input className="text-[16px] text-gray-4 focus:ring-0 focus-visible:outline-none" id={inputId} type={type} />
+        <input
+          className="text-[16px] text-gray-4 focus:ring-0 focus-visible:outline-none"
+          id={inputId}
+          type={type}
+          {...props}
+        />
       </div>
       {invalid && <p className="text-[12px] text-red-5">올바른 형식이 아닙니다</p>}
     </>

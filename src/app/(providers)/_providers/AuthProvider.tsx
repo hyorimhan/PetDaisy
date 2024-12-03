@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 function AuthProvider({ children }: Readonly<PropsWithChildren>) {
-  return <>{children}</>;
+  return <div>{children}</div>;
 }
 
 export default AuthProvider;

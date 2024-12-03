@@ -16,12 +16,14 @@ const MainPage = () => {
             types="lg"
             textColor="text-white"
             bgColor="bg-main-4"
+            href="/login"
           />
           <Button
             content="회원가입"
             types="lg"
             textColor="text-white"
             bgColor="bg-blue-4"
+            href="/join"
           />
           <Button
             content="카카오 로그인하기"

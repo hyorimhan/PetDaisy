@@ -66,9 +66,10 @@ function JoinForm() {
 
         <Button
           content="회원가입"
-          type="lg"
+          types="lg"
           textColor="text-white "
           bgColor="bg-blue-4  "
+          type="submit"
         />
       </form>
     </div>

@@ -1,4 +1,5 @@
 import AuthProvider from './(providers)/_providers/AuthProvider';
+import ModalProvider from './(providers)/_providers/ModalProvider';
 import QueryProvider from './(providers)/_providers/QueryProvider';
 import './globals.css';
 
@@ -12,7 +13,9 @@ export default function RootLayout({
       <body className="bg-main-2">
         <QueryProvider>
           <AuthProvider>
-            <main>{children}</main>
+            <ModalProvider>
+              <main>{children}</main>
+            </ModalProvider>
           </AuthProvider>
         </QueryProvider>
       </body>

@@ -1,19 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ComponentProps } from 'react';
 
-interface ButtonProps {
+type ButtonBaseProps = {
   content: string;
-  href?: string;
-  type: 'sm' | 'md' | 'lg' | 'add';
+  types: 'sm' | 'md' | 'lg' | 'add';
   bgColor?: string;
   textColor?: string;
   outlineColor?: string;
-}
+};
+
+type ButtonProps = ButtonBaseProps & {
+  href?: string;
+} & Omit<ComponentProps<'button'>, keyof ButtonBaseProps | 'href'>;
+
 function Button({
-  content,
   href,
+  content,
   bgColor,
-  type,
+  types,
   textColor,
   outlineColor,
   ...props
@@ -25,20 +30,21 @@ function Button({
     add: 'w-full py-[10px] text-[14px] rounded-lg flex items-center justify-center border border-main-3 bg-white gap-[7px] text-main-3',
   };
 
-  if (href)
+  if (href) {
     return (
       <Link
-        className={`${bgColor} ${textColor} ${variantStyle[type]}`}
+        className={`${bgColor} ${textColor} ${variantStyle[types]}`}
         href={href}
       >
         {content}
       </Link>
     );
+  }
 
   if (outlineColor) {
     return (
       <button
-        className={`bg-white border ${outlineColor} ${textColor} ${variantStyle[type]} `}
+        className={`bg-white border ${outlineColor} ${textColor} ${variantStyle[types]}`}
         {...props}
       >
         {content}
@@ -46,14 +52,14 @@ function Button({
     );
   }
 
-  if (type === 'add') {
+  if (types === 'add') {
     return (
-      <button className={`${textColor} ${variantStyle[type]} `} {...props}>
+      <button className={`${textColor} ${variantStyle[types]}`} {...props}>
         <Image
           src="/img/icon/add.svg"
           alt="플러스 아이콘"
           width={20}
-          height={0}
+          height={20}
         />
         {content}
       </button>
@@ -62,7 +68,7 @@ function Button({
 
   return (
     <button
-      className={`${bgColor} ${textColor} ${variantStyle[type]}`}
+      className={`${bgColor} ${textColor} ${variantStyle[types]}`}
       {...props}
     >
       {content}

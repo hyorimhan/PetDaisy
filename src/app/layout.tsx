@@ -1,5 +1,6 @@
-import AuthProvider from './(providers)/_providers/AuthProvider';
-import QueryProvider from './(providers)/_providers/QueryProvider';
+import AuthProvider from "./(providers)/_providers/AuthProvider";
+import QueryProvider from "./(providers)/_providers/QueryProvider";
+import "./globals.css";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="bg-main-2">
         <QueryProvider>
           <AuthProvider>
             <main>{children}</main>

@@ -1,7 +1,11 @@
-import React from 'react';
+import Page from "@/components/common/Page/Page";
 
 const MainPage = () => {
-  return <div>page</div>;
+  return (
+    <Page>
+      <span className="text-red-5">123</span>
+    </Page>
+  );
 };
 
 export default MainPage;

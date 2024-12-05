@@ -5,6 +5,7 @@ import Select from "@/components/common/Input/Select";
 import Logo from "@/components/common/Logo/Logo";
 import Page from "@/components/common/Page/Page";
 import AppDescription from "@/components/features/main/AppDescription";
+import { signInWithKakao } from "@/service/auth";
 import useMdoalStore from "@/zustand/modalStore";
 
 const MainPage = () => {
@@ -59,6 +60,7 @@ const MainPage = () => {
             types="lg"
             textColor="text-gray-2"
             outlineColor="border-gray-2"
+            onClick={signInWithKakao}
           />
           <Button
             content="구글 로그인하기"

@@ -1,14 +1,14 @@
-import { createClient } from '@/supabase/server';
+import { createClient } from "@/supabase/server";
 import {
   handleError,
   handleJoinError,
   handleNetworkError,
   handleSuccess,
-} from '@/utils/api/error/api';
-import { NextRequest } from 'next/server';
+} from "@/utils/api/error/api";
+import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   try {
     const response = await request.json();
@@ -26,12 +26,12 @@ export async function POST(request: NextRequest) {
     if (joinError) return handleJoinError(joinError.message);
 
     const { error: userError } = await supabase
-      .from('user')
+      .from("user")
       .insert({ nickname: nickname });
 
     if (userError) return handleError(userError.message);
 
-    return handleSuccess('회원가입 되었습니다');
+    return handleSuccess("회원가입 되었습니다");
   } catch {
     return handleNetworkError();
   }

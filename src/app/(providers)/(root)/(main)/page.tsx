@@ -113,7 +113,7 @@ const MainPage = () => {
           <Input label="아이디" type="text" invalid={true} />
           <Input label="아이디" type="text" invalid={true} unit="kg" />
           <Select
-            label="선택"
+            label="중성화 여부"
             options={[
               { key: 1, value: "옵션1" },
               { key: 2, value: "옵션2" },

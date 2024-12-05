@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
+import Select from "@/components/common/Input/Select";
 import Logo from "@/components/common/Logo/Logo";
 import Page from "@/components/common/Page/Page";
 import AppDescription from "@/components/features/main/AppDescription";
@@ -110,6 +111,15 @@ const MainPage = () => {
           인풋 예시
           <Input label="아이디" type="text" />
           <Input label="아이디" type="text" invalid={true} />
+          <Input label="아이디" type="text" invalid={true} unit="kg" />
+          <Select
+            label="선택"
+            options={[
+              { key: 1, value: "옵션1" },
+              { key: 2, value: "옵션2" },
+              { key: 3, value: "옵션3" },
+            ]}
+          />
         </div>
         <div className="mt-5 w-full">
           버튼 하나 짜리

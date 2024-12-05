@@ -4,7 +4,7 @@ import { ComponentProps } from "react";
 
 type ButtonBaseProps = {
   content: string;
-  types?: "sm" | "md" | "lg" | "add";
+  types?: "sm" | "md" | "lg" | "addInfo";
   bgColor?: string;
   textColor?: string;
   outlineColor?: string;
@@ -32,7 +32,8 @@ function Button({
     sm: "py-[7px] px-[18px] rounded-lg text-[14px]",
     md: "py-4 px-[50px] rounded-lg text-[14px]",
     lg: "w-full py-5 text-[20px] rounded-lg text-center",
-    add: "w-full py-[10px] text-[14px] rounded-lg flex items-center justify-center border border-main-3 bg-white gap-[7px] text-main-3",
+    addInfo:
+      "w-full py-[10px] text-[14px] rounded-lg flex items-center justify-center border border-main-3 bg-white gap-[7px] text-main-3",
   };
 
   if (href) {
@@ -46,29 +47,26 @@ function Button({
     );
   }
 
-  if (outlineColor) {
+  if (href && types === "addInfo") {
     return (
-      <button
-        className={`bg-white border ${outlineColor} ${textColor} ${variantStyle[types]}`}
-        {...(props as ComponentProps<"button">)}
-      >
-        {content}
-      </button>
-    );
-  }
-
-  if (types === "add") {
-    return (
-      <button
-        className={`${textColor} ${variantStyle[types]}`}
-        {...(props as ComponentProps<"button">)}
-      >
+      <Link href={href} className={`${variantStyle[types]}`}>
         <Image
           src="/img/icon/add.svg"
           alt="플러스 아이콘"
           width={20}
           height={20}
         />
+        {content}
+      </Link>
+    );
+  }
+
+  if (outlineColor) {
+    return (
+      <button
+        className={`bg-white border ${outlineColor} ${textColor} ${variantStyle[types]}`}
+        {...(props as ComponentProps<"button">)}
+      >
         {content}
       </button>
     );

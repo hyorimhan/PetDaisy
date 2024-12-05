@@ -1,13 +1,13 @@
-'use client';
-import Button from '@/components/common/Button/Button';
+"use client";
+import Button from "@/components/common/Button/Button";
 import {
   EMAIL_VALIDATION,
   NICKNAME_VALIDATION,
   PASSWORD_CONFIRM_VALIDATION,
   PASSWORD_VALIDATION,
-} from '@/constants/auth';
-import { handleJoin } from '@/service/auth';
-import { FieldErrors, useForm } from 'react-hook-form';
+} from "@/constants/auth";
+import { handleJoin } from "@/service/auth";
+import { FieldErrors, useForm } from "react-hook-form";
 
 type joinFormDataType = {
   nickname: string;
@@ -18,7 +18,7 @@ type joinFormDataType = {
 
 function JoinForm() {
   const { register, handleSubmit, watch } = useForm<joinFormDataType>();
-  const password = watch('password');
+  const password = watch("password");
 
   const joinSubmit = async (data: joinFormDataType) => {
     const response = await handleJoin(data);
@@ -40,17 +40,17 @@ function JoinForm() {
       >
         <div>
           <label htmlFor="nickname">닉네임</label>
-          <input type="text" {...register('nickname', NICKNAME_VALIDATION())} />
+          <input type="text" {...register("nickname", NICKNAME_VALIDATION())} />
         </div>
         <div>
           <label htmlFor="email">아이디</label>
-          <input type="email" {...register('email', EMAIL_VALIDATION())} />
+          <input type="email" {...register("email", EMAIL_VALIDATION())} />
         </div>
         <div>
           <label htmlFor="password">비밀번호</label>
           <input
             type="password"
-            {...register('password', PASSWORD_VALIDATION())}
+            {...register("password", PASSWORD_VALIDATION())}
           />
         </div>
         <div>
@@ -58,7 +58,7 @@ function JoinForm() {
           <input
             type="password"
             {...register(
-              'passwordConfirm',
+              "passwordConfirm",
               PASSWORD_CONFIRM_VALIDATION(password)
             )}
           />

@@ -3,8 +3,9 @@ type InputProps = {
   label: string;
   type: "text" | "password" | "email";
   invalid?: boolean;
+  unit?: string;
 } & ComponentProps<"input">;
-function Input({ label, type, invalid, ...props }: InputProps) {
+function Input({ label, type, invalid, unit, ...props }: InputProps) {
   invalid = invalid || false;
   const inputId = useId();
   return (
@@ -14,17 +15,27 @@ function Input({ label, type, invalid, ...props }: InputProps) {
           invalid ? "border border-red-5" : "ring-0"
         }`}
       >
-        <label className="text-[14px] text-gray-3 font-semibold" htmlFor={inputId}>
+        <label
+          className="text-[14px] text-gray-3 font-semibold"
+          htmlFor={inputId}
+        >
           {label}
         </label>
-        <input
-          className="text-[16px] text-gray-4 focus:ring-0 focus-visible:outline-none"
-          id={inputId}
-          type={type}
-          {...props}
-        />
+        <div className="flex justify-between items-center">
+          <input
+            className="w-full text-[16px] text-gray-4 focus:ring-0 focus-visible:outline-none"
+            id={inputId}
+            type={type}
+            {...props}
+          />
+          {unit && (
+            <span className="text-[16px] text-gray-4 shrink-0">{unit}</span>
+          )}
+        </div>
       </div>
-      {invalid && <p className="text-[12px] text-red-5">올바른 형식이 아닙니다</p>}
+      {invalid && (
+        <p className="text-[12px] text-red-5">올바른 형식이 아닙니다</p>
+      )}
     </>
   );
 }

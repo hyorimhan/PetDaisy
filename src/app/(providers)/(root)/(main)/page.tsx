@@ -1,10 +1,13 @@
 "use client";
 import Button from "@/components/common/Button/Button";
+import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Input from "@/components/common/Input/Input";
 import Select from "@/components/common/Input/Select";
 import Logo from "@/components/common/Logo/Logo";
 import Page from "@/components/common/Page/Page";
 import AppDescription from "@/components/features/main/AppDescription";
+import useUploadImages from "@/hooks/useUploadImages";
+import { uploadPetImages } from "@/service/petProfile";
 import useMdoalStore from "@/zustand/modalStore";
 
 const MainPage = () => {
@@ -34,6 +37,13 @@ const MainPage = () => {
       },
     });
   };
+
+  const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
+    useUploadImages({
+      type: "pet-profiles",
+      uploadFn: uploadPetImages,
+    });
+
   return (
     <Page>
       <div className="py-[130px] flex flex-col items-center justify-center">
@@ -105,7 +115,13 @@ const MainPage = () => {
             textColor="text-gray-2"
             outlineColor="border-gray-2"
           />
-          <Button content="type: add" types="add" />
+          <Button content="정보 등록하기" types="addInfo" />
+          <ImageUploadButton
+            content="사진 선택"
+            imagePaths={imagePaths}
+            error={imageUploadError}
+            handleImageUpload={handleImageUpload}
+          />
         </div>
         <div className="mt-5 w-full flex flex-col gap-3">
           인풋 예시

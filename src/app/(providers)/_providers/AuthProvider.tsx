@@ -10,7 +10,7 @@ function AuthProvider({ children }: Readonly<PropsWithChildren>) {
     queryKey: ["userInfo"],
     queryFn: loginUserInfo,
   });
-  console.log(user);
+
   useEffect(() => {
     if (userInfo) {
       saveUser(userInfo.user);

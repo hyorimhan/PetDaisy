@@ -1,10 +1,38 @@
-import Button from '@/components/common/Button/Button';
-import Input from '@/components/common/Input/Input';
-import Logo from '@/components/common/Logo/Logo';
-import Page from '@/components/common/Page/Page';
-import AppDescription from '@/components/features/main/AppDescription';
+"use client";
+import Button from "@/components/common/Button/Button";
+import Input from "@/components/common/Input/Input";
+import Logo from "@/components/common/Logo/Logo";
+import Page from "@/components/common/Page/Page";
+import AppDescription from "@/components/features/main/AppDescription";
+import useMdoalStore from "@/zustand/modalStore";
 
 const MainPage = () => {
+  const openModal = useMdoalStore((state) => state.openModal);
+  const handleOpenModal = () => {
+    openModal({
+      type: "success",
+      title: "로그인 성공",
+      content: "로그인에 성공했습니다.",
+      onConfirm: () => {
+        alert("확인 버튼 클릭");
+      },
+    });
+  };
+
+  const handleOpenModalTwoButton = () => {
+    openModal({
+      type: "warning",
+      title: "삭제하시겠습니까?",
+      content: "해당 게시글을 삭제합니다",
+      isTwoButton: true,
+      onConfirm: () => {
+        alert("확인 버튼 클릭");
+      },
+      onCancel: () => {
+        alert("취소 버튼 클릭");
+      },
+    });
+  };
   return (
     <Page>
       <div className="py-[130px] flex flex-col items-center justify-center">
@@ -82,6 +110,26 @@ const MainPage = () => {
           인풋 예시
           <Input label="아이디" type="text" />
           <Input label="아이디" type="text" invalid={true} />
+        </div>
+        <div className="mt-5 w-full">
+          버튼 하나 짜리
+          <Button
+            content="모달"
+            types="lg"
+            textColor="text-white"
+            bgColor="bg-main-4"
+            onClick={handleOpenModal}
+          />
+        </div>
+        <div className="mt-5 w-full">
+          버튼 두개 짜리
+          <Button
+            content="모달"
+            types="lg"
+            textColor="text-white"
+            bgColor="bg-main-4"
+            onClick={handleOpenModalTwoButton}
+          />
         </div>
       </div>
     </Page>

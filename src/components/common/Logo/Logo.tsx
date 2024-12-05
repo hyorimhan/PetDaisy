@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface LogoProps {
   size: "md" | "lg";
@@ -10,7 +11,14 @@ function Logo({ size }: LogoProps) {
   };
   return (
     <h1>
-      <Image src={logoPathBySize[size]} width={210} height={0} alt="PET DAISY" />
+      <Link href="/">
+        <Image
+          src={logoPathBySize[size]}
+          width={210}
+          height={0}
+          alt="PET DAISY"
+        />
+      </Link>
     </h1>
   );
 }

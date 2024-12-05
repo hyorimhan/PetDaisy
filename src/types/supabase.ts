@@ -98,6 +98,7 @@ export type Database = {
           created_at: string
           gender: string
           id: number
+          images: string
           neutered: boolean
           pet_id: string
           weight: number
@@ -107,6 +108,7 @@ export type Database = {
           created_at?: string
           gender: string
           id?: number
+          images?: string
           neutered?: boolean
           pet_id: string
           weight: number
@@ -116,6 +118,7 @@ export type Database = {
           created_at?: string
           gender?: string
           id?: number
+          images?: string
           neutered?: boolean
           pet_id?: string
           weight?: number

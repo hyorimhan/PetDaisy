@@ -37,6 +37,9 @@ function Select({ label, options = [] }: SelectProps) {
         </div>
         {isOpen && <Option options={options} handleSelect={handleSelect} />}
       </div>
+      {selectedOption === null && (
+        <p className="text-[12px] text-red-5">옵션을 선택해주세요.</p>
+      )}
     </>
   );
 }

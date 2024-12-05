@@ -1,8 +1,8 @@
-'use client';
-import Button from '@/components/common/Button/Button';
-import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@/constants/auth';
-import { handleLogin } from '@/service/auth';
-import { FieldErrors, useForm } from 'react-hook-form';
+"use client";
+import Button from "@/components/common/Button/Button";
+import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from "@/constants/auth";
+import { handleLogin } from "@/service/auth";
+import { FieldErrors, useForm } from "react-hook-form";
 
 type loginDataType = {
   email: string;
@@ -31,13 +31,13 @@ function LoginForm() {
       >
         <div>
           <label htmlFor="email">아이디</label>
-          <input type="email" {...register('email', EMAIL_VALIDATION())} />
+          <input type="email" {...register("email", EMAIL_VALIDATION())} />
         </div>
         <div>
           <label htmlFor="password">비밀번호</label>
           <input
             type="password"
-            {...register('password', PASSWORD_VALIDATION())}
+            {...register("password", PASSWORD_VALIDATION())}
           />
         </div>
         <Button

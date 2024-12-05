@@ -7,7 +7,7 @@ import {
 import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const supabase = createClient();
+  const supabase = await createClient();
   try {
     const { email, password } = await request.json();
     const { data: user, error } = await supabase.auth.signInWithPassword({

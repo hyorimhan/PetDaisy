@@ -42,3 +42,23 @@ export const loginUserInfo = async () => {
   const { data: userInfo } = await supabase.auth.getUser();
   return userInfo;
 };
+
+export const logout = async () => {
+  const response = await fetch("/api/auth/logout", {
+    method: "DELETE",
+  });
+  return response.json();
+};
+
+export const signInWithKakao = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "kakao",
+    options: {
+      queryParams: {
+        access_type: "offline",
+        prompt: "login",
+      },
+      redirectTo: `${window.location.origin}/api/auth/kakao`,
+    },
+  });
+};

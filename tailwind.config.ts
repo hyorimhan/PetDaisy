@@ -23,7 +23,7 @@ const config: Config = {
           1: "#F5F3FF",
           2: "#E1DCFF",
           3: "#CBC2FF",
-          4: "#A595FF",
+          4: "#A596FF",
           5: "#7E6AF0",
         },
         pink: {

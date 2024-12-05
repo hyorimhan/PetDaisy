@@ -7,11 +7,12 @@ import Logo from "@/components/common/Logo/Logo";
 import Page from "@/components/common/Page/Page";
 import AppDescription from "@/components/features/main/AppDescription";
 import useUploadImages from "@/hooks/useUploadImages";
+import { signInWithKakao } from "@/service/auth";
 import { uploadPetImages } from "@/service/petProfile";
-import useMdoalStore from "@/zustand/modalStore";
+import useModalStore from "@/zustand/modalStore";
 
 const MainPage = () => {
-  const openModal = useMdoalStore((state) => state.openModal);
+  const openModal = useModalStore((state) => state.openModal);
   const handleOpenModal = () => {
     openModal({
       type: "success",
@@ -69,6 +70,7 @@ const MainPage = () => {
             types="lg"
             textColor="text-gray-2"
             outlineColor="border-gray-2"
+            onClick={signInWithKakao}
           />
           <Button
             content="구글 로그인하기"

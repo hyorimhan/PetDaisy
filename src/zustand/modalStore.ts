@@ -26,7 +26,7 @@ interface ModalStore {
   closeModal: () => void;
 }
 
-const useMdoalStore = create<ModalStore>((set) => ({
+const useModalStore = create<ModalStore>((set) => ({
   isOpen: false,
   modalType: null,
   modalTitle: "",
@@ -66,4 +66,4 @@ const useMdoalStore = create<ModalStore>((set) => ({
     }),
 }));
 
-export default useMdoalStore;
+export default useModalStore;

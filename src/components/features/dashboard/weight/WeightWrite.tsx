@@ -47,36 +47,43 @@ function WeightWrite() {
   // };
   return (
     <div>
-      <span>몸무게 등록</span>
+      <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light ">
+        몸무게 등록
+      </div>
       <form onSubmit={handleSubmit(handleWeight)}>
-        <Input
-          label="날짜"
-          type="date"
-          error={errors.date}
-          {...register("date", WEIGHT_DATE_VALIDATION())}
-        />
-        <Input
-          label="몸무게"
-          type="text"
-          error={errors.weight}
-          unit="kg"
-          {...register("weight", WEIGHT_VALIDATION())}
-        />
-        <Button
-          type="submit"
-          bgColor="bg-main-4"
-          content="등록하기"
-          textColor="text-white"
-          types="lg"
-        />
-        <Button
-          type="button"
-          bgColor="bg-main-4"
-          content="취소하기"
-          textColor="text-white"
-          types="lg"
-          href={"/dashboard/weightList"}
-        />
+        <div className="space-y-5 ">
+          {" "}
+          <Input
+            label="날짜"
+            type="date"
+            error={errors.date}
+            {...register("date", WEIGHT_DATE_VALIDATION())}
+          />
+          <Input
+            label="몸무게"
+            type="text"
+            error={errors.weight}
+            unit="kg"
+            {...register("weight", WEIGHT_VALIDATION())}
+          />
+        </div>
+        <div className="mt-[1.875rem] space-y-[.625rem]">
+          <Button
+            type="submit"
+            bgColor="bg-main-4 "
+            content="등록하기"
+            textColor="text-white "
+            types="lg"
+          />
+          <Button
+            type="button"
+            bgColor="bg-gray-1"
+            content="취소하기"
+            textColor="text-gray-3"
+            types="lg"
+            href={"/dashboard/weightList"}
+          />
+        </div>
       </form>
     </div>
   );

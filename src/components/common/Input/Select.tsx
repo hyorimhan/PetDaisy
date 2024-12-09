@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import {
+  FieldError,
   FieldValues,
   Path,
   PathValue,
@@ -18,6 +19,7 @@ interface SelectProps<TFieldValues extends FieldValues> {
   label: string;
   options: OptionProps<TFieldValues>[];
   name: Path<TFieldValues>;
+  error?: FieldError;
   register: UseFormRegister<TFieldValues>;
   registerOptions?: RegisterOptions<TFieldValues, Path<TFieldValues>>;
 }
@@ -26,6 +28,7 @@ function Select<TFieldValues extends FieldValues>({
   label,
   options = [],
   name,
+  error,
   register,
   registerOptions,
 }: SelectProps<TFieldValues>) {
@@ -43,7 +46,11 @@ function Select<TFieldValues extends FieldValues>({
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="relative flex flex-col gap-1 justify-center bg-white p-[15px] rounded-lg">
+      <div
+        className={`relative flex flex-col gap-1 justify-center bg-white p-[15px] rounded-lg ${
+          error ? "border border-red-5" : "ring-0"
+        }`}
+      >
         <div className="text-[14px] text-gray-3 font-semibold">{label}</div>
         <div
           className="flex justify-between items-center"
@@ -53,7 +60,6 @@ function Select<TFieldValues extends FieldValues>({
             className="text-gray-4"
             {...register(name, {
               ...registerOptions,
-              value: selectedOption,
             })}
           >
             {selectedOption || "선택"}
@@ -69,9 +75,7 @@ function Select<TFieldValues extends FieldValues>({
           <Option options={options} handleSelectOption={handleSelectOption} />
         )}
       </div>
-      {!selectedOption && (
-        <p className="text-[12px] text-red-5">옵션을 선택해주세요.</p>
-      )}
+      {error && <p className="text-[12px] text-red-5">{error.message}</p>}
     </div>
   );
 }

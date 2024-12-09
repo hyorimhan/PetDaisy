@@ -2,7 +2,7 @@ import { ComponentProps, useId } from "react";
 import { FieldError } from "react-hook-form";
 type InputProps = {
   label: string;
-  type: "text" | "password" | "email" | "date";
+  type: "text" | "password" | "email" | "date" | "number";
   error?: FieldError;
   unit?: string;
 } & ComponentProps<"input">;
@@ -23,7 +23,7 @@ function Input({ label, type, error, unit, ...props }: InputProps) {
         </label>
         <div className="flex justify-between items-center">
           <input
-            className="w-full text-[16px] text-gray-4 focus:ring-0 focus-visible:outline-none"
+            className="w-full text-[16px] text-gray-4 focus:ring-0 focus-visible:outline-none forced-colors:bg-white"
             id={inputId}
             type={type}
             {...props}

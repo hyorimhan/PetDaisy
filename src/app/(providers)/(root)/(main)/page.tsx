@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/components/common/Button/Button";
 import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
-
 import Logo from "@/components/common/Logo/Logo";
 import Page from "@/components/common/Page/Page";
 import AppDescription from "@/components/features/main/AppDescription";
@@ -126,7 +125,6 @@ const MainPage = () => {
             handleImageUpload={handleImageUpload}
           />
         </div>
-
         <div className="mt-5 w-full">
           버튼 하나 짜리
           <Button

@@ -1,4 +1,4 @@
-import imageCompression from "browser-image-compression";
+import imageCompression from 'browser-image-compression';
 export async function handleImageCompression(imageFiles: File[]) {
   const options = {
     maxSizeMB: 1,

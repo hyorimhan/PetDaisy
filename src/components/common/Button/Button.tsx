@@ -39,17 +39,6 @@ function Button({
   };
   const activeStyle = "border border-main-5 text-main-5";
 
-  if (href) {
-    return (
-      <Link
-        className={`${bgColor} ${textColor} ${variantStyle[types]}`}
-        href={href}
-      >
-        {content}
-      </Link>
-    );
-  }
-
   if (href && types === "addInfo") {
     return (
       <Link href={href} className={`${variantStyle[types]}`}>
@@ -59,6 +48,17 @@ function Button({
           width={20}
           height={20}
         />
+        {content}
+      </Link>
+    );
+  }
+
+  if (href) {
+    return (
+      <Link
+        className={`${bgColor} ${textColor} ${variantStyle[types]}`}
+        href={href}
+      >
         {content}
       </Link>
     );

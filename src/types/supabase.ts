@@ -12,26 +12,26 @@ export type Database = {
       medical_expenses: {
         Row: {
           created_at: string
-          id: number
-          medical_visit_id: number
-          payment: number
+          id: string
+          medical_visit_id: string
           pet_id: string
+          price: number
           service: string
         }
         Insert: {
           created_at?: string
-          id?: number
-          medical_visit_id: number
-          payment: number
+          id?: string
+          medical_visit_id: string
           pet_id: string
+          price: number
           service: string
         }
         Update: {
           created_at?: string
-          id?: number
-          medical_visit_id?: number
-          payment?: number
+          id?: string
+          medical_visit_id?: string
           pet_id?: string
+          price?: number
           service?: string
         }
         Relationships: [
@@ -56,7 +56,7 @@ export type Database = {
           content: string
           created_at: string
           hospital_name: string
-          id: number
+          id: string
           next_visit_date: string | null
           pet_id: string
           title: string
@@ -66,7 +66,7 @@ export type Database = {
           content: string
           created_at?: string
           hospital_name: string
-          id?: number
+          id?: string
           next_visit_date?: string | null
           pet_id: string
           title: string
@@ -76,7 +76,7 @@ export type Database = {
           content?: string
           created_at?: string
           hospital_name?: string
-          id?: number
+          id?: string
           next_visit_date?: string | null
           pet_id?: string
           title?: string
@@ -94,32 +94,32 @@ export type Database = {
       }
       pet_details: {
         Row: {
+          animal_type: string
           birth_date: string
           created_at: string
           gender: string
-          id: number
-          images: string
-          neutered: boolean
+          id: string
+          neutered: string
           pet_id: string
           weight: number
         }
         Insert: {
+          animal_type: string
           birth_date: string
           created_at?: string
           gender: string
-          id?: number
-          images?: string
-          neutered?: boolean
+          id?: string
+          neutered: string
           pet_id: string
           weight: number
         }
         Update: {
+          animal_type?: string
           birth_date?: string
           created_at?: string
           gender?: string
-          id?: number
-          images?: string
-          neutered?: boolean
+          id?: string
+          neutered?: string
           pet_id?: string
           weight?: number
         }
@@ -164,30 +164,30 @@ export type Database = {
       }
       symptoms: {
         Row: {
+          content: string
           created_at: string
-          description: string
-          id: number
-          image: string | null
+          id: string
+          images: string | null
           pet_id: string
-          symptoms_date: string
+          symptom_date: string
           title: string
         }
         Insert: {
+          content: string
           created_at?: string
-          description: string
-          id?: number
-          image?: string | null
+          id?: string
+          images?: string | null
           pet_id: string
-          symptoms_date: string
+          symptom_date: string
           title: string
         }
         Update: {
+          content?: string
           created_at?: string
-          description?: string
-          id?: number
-          image?: string | null
+          id?: string
+          images?: string | null
           pet_id?: string
-          symptoms_date?: string
+          symptom_date?: string
           title?: string
         }
         Relationships: [
@@ -222,8 +222,8 @@ export type Database = {
         Row: {
           created_at: string
           hospital_name: string
-          id: number
-          note: string
+          id: string
+          note: string | null
           pet_id: string
           vaccination_date: string
           vaccine_name: string
@@ -231,8 +231,8 @@ export type Database = {
         Insert: {
           created_at?: string
           hospital_name: string
-          id?: number
-          note: string
+          id?: string
+          note?: string | null
           pet_id: string
           vaccination_date: string
           vaccine_name: string
@@ -240,8 +240,8 @@ export type Database = {
         Update: {
           created_at?: string
           hospital_name?: string
-          id?: number
-          note?: string
+          id?: string
+          note?: string | null
           pet_id?: string
           vaccination_date?: string
           vaccine_name?: string
@@ -259,21 +259,21 @@ export type Database = {
       weight_records: {
         Row: {
           created_at: string
-          id: number
+          id: string
           measured_at: string
           pet_id: string
           weight: number
         }
         Insert: {
           created_at?: string
-          id?: number
+          id?: string
           measured_at: string
           pet_id: string
           weight: number
         }
         Update: {
           created_at?: string
-          id?: number
+          id?: string
           measured_at?: string
           pet_id?: string
           weight?: number

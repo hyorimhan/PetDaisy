@@ -1,13 +1,12 @@
 "use client";
 import Button from "@/components/common/Button/Button";
 import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
-import Input from "@/components/common/Input/Input";
-import Select from "@/components/common/Input/Select";
+
 import Logo from "@/components/common/Logo/Logo";
 import Page from "@/components/common/Page/Page";
 import AppDescription from "@/components/features/main/AppDescription";
 import useUploadImages from "@/hooks/useUploadImages";
-import { signInWithKakao } from "@/service/auth";
+import { signInWithGoogle, signInWithKakao } from "@/service/auth";
 import { uploadPetImages } from "@/service/petProfile";
 import useModalStore from "@/zustand/modalStore";
 
@@ -72,11 +71,13 @@ const MainPage = () => {
             outlineColor="border-gray-2"
             onClick={signInWithKakao}
           />
+
           <Button
             content="구글 로그인하기"
             types="lg"
             textColor="text-gray-2"
             outlineColor="border-gray-2"
+            onClick={signInWithGoogle}
           />
         </div>
         <div className="mt-5 w-full flex flex-col gap-3">
@@ -125,20 +126,7 @@ const MainPage = () => {
             handleImageUpload={handleImageUpload}
           />
         </div>
-        <div className="mt-5 w-full flex flex-col gap-3">
-          인풋 예시
-          <Input label="아이디" type="text" />
-          <Input label="아이디" type="text" invalid={true} />
-          <Input label="아이디" type="text" invalid={true} unit="kg" />
-          <Select
-            label="중성화 여부"
-            options={[
-              { key: 1, value: "옵션1" },
-              { key: 2, value: "옵션2" },
-              { key: 3, value: "옵션3" },
-            ]}
-          />
-        </div>
+
         <div className="mt-5 w-full">
           버튼 하나 짜리
           <Button

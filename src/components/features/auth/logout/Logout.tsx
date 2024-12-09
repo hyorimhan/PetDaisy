@@ -1,22 +1,51 @@
 "use client";
 import { logout } from "@/service/auth";
+import useModalStore from "@/zustand/modalStore";
 import { useAuthStore } from "@/zustand/useAuthStore";
+import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function Logout() {
   const { saveUser } = useAuthStore();
-  const logoutFunc = async () => {
-    const response = await logout();
-    if (response.error) {
-      alert(response.error);
-    }
-    saveUser(null);
-    alert(response.message);
-  };
+  const router = useRouter();
+  const openModal = useModalStore((state) => state.openModal);
+
+  const logoutMutation = useMutation({
+    mutationFn: logout,
+    onSuccess: (response) => {
+      saveUser(null);
+      openModal({
+        type: "success",
+        title: "로그아웃 성공",
+        content: response.message,
+        onConfirm: () => {
+          router.replace("/");
+        },
+      });
+    },
+    onError: (error) => {
+      openModal({
+        type: "error",
+        title: "로그아웃 실패",
+        content: error.message,
+        onConfirm: () => {
+          router.replace("/");
+        },
+      });
+    },
+  });
+  // const logoutFunc = async () => {
+  //   const response = await logout();
+  //   if (response.error) {
+  //     alert(response.error);
+  //   }
+  //   saveUser(null);
+  //   alert(response.message);
+  // };
   return (
-    <button onClick={() => logoutFunc()}>
-      {" "}
+    <button onClick={() => logoutMutation.mutate()}>
       <Image
         src={"/icon/login.svg"}
         alt="home"

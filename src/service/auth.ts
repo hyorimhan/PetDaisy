@@ -62,3 +62,15 @@ export const signInWithKakao = async () => {
     },
   });
 };
+export const signInWithGoogle = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      queryParams: {
+        access_type: "offline",
+        prompt: "login",
+      },
+      redirectTo: `${window.location.origin}/api/auth/google`,
+    },
+  });
+};

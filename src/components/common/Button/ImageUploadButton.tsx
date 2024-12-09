@@ -2,9 +2,9 @@ import Image from "next/image";
 
 interface ImageUploadButtonProps {
   content: string;
-  error: string | null;
-  imagePaths: string[];
-  handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string | null;
+  imagePaths?: string[];
+  handleImageUpload?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function ImageUploadButton({

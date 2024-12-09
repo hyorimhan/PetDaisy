@@ -16,6 +16,6 @@ export function handleNetworkError() {
   return NextResponse.json({ error: "네트워크 오류가 발생했습니다" });
 }
 
-export function handleSuccess(message: string, data?: unknown) {
+export function handleSuccess(message?: string, data?: unknown) {
   return NextResponse.json({ message, data });
 }

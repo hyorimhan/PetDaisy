@@ -1,7 +1,13 @@
-import React from 'react';
+import Page from "@/components/common/Page/Page";
+import SymptomDetail from "@/components/features/dashboard/symptoms/SymptomDetail";
+import React from "react";
 
-const page = () => {
-  return <div>page</div>;
+const SymptomDetailPage = () => {
+  return (
+    <Page>
+      <SymptomDetail />
+    </Page>
+  );
 };
 
-export default page;
+export default SymptomDetailPage;

@@ -1,10 +1,10 @@
 "use client";
 import Modal from "@/components/common/Modal/Modal";
-import useMdoalStore from "@/zustand/modalStore";
+import useModalStore from "@/zustand/modalStore";
 import { PropsWithChildren } from "react";
 
 function ModalProvider({ children }: PropsWithChildren) {
-  const isOpen = useMdoalStore((state) => state.isOpen);
+  const isOpen = useModalStore((state) => state.isOpen);
   return (
     <div>
       {children}

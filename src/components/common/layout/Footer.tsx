@@ -6,7 +6,7 @@ import React from "react";
 function Footer() {
   return (
     <div className="relative flex text-main-4 justify-end items-center bg-white w-[360px] md:w-[600px] mx-auto px-3 h-[3.75rem]">
-      <Link href={"/"} className="absolute left-1/2 -translate-x-1/2">
+      <Link href={"/dashboard"} className="absolute left-1/2 -translate-x-1/2">
         <Image
           src={"/icon/home.svg"}
           alt="home"

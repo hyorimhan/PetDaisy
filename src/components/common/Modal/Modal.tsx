@@ -1,6 +1,6 @@
-import useMdoalStore from "@/zustand/modalStore";
 import Image from "next/image";
 import Button from "../Button/Button";
+import useModalStore from "@/zustand/modalStore";
 
 function Modal() {
   const {
@@ -11,7 +11,7 @@ function Modal() {
     isTwoButton,
     onConfirm,
     onCancel,
-  } = useMdoalStore((state) => state);
+  } = useModalStore((state) => state);
 
   const IconByType = {
     success: "/img/icon/success.svg",

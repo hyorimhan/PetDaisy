@@ -1,7 +1,13 @@
-import React from 'react';
+import Page from "@/components/common/Page/Page";
+import WeightWrite from "@/components/features/dashboard/weight/WeightWrite";
+import React from "react";
 
-const page = () => {
-  return <div>page</div>;
+const WeightWritePage = () => {
+  return (
+    <Page>
+      <WeightWrite />
+    </Page>
+  );
 };
 
-export default page;
+export default WeightWritePage;

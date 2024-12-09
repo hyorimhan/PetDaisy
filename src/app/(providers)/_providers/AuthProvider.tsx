@@ -5,7 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { PropsWithChildren, useEffect } from "react";
 
 function AuthProvider({ children }: Readonly<PropsWithChildren>) {
-  const { saveUser, user } = useAuthStore();
+  const { saveUser } = useAuthStore();
+
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
     queryFn: loginUserInfo,
@@ -16,6 +17,7 @@ function AuthProvider({ children }: Readonly<PropsWithChildren>) {
       saveUser(userInfo.user);
     }
   }, [saveUser, userInfo]);
+
   return <div>{children}</div>;
 }
 

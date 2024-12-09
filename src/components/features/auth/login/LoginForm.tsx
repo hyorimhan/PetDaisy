@@ -2,6 +2,9 @@
 import Button from "@/components/common/Button/Button";
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from "@/constants/auth";
 import { handleLogin } from "@/service/auth";
+import useModalStore from "@/zustand/modalStore";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { FieldErrors, useForm } from "react-hook-form";
 
 type loginDataType = {
@@ -10,23 +13,48 @@ type loginDataType = {
 };
 
 function LoginForm() {
+  const router = useRouter();
+  const openModal = useModalStore((state) => state.openModal);
+
   const { register, handleSubmit } = useForm<loginDataType>();
-  const loginSubmit = async (data: loginDataType) => {
-    const response = await handleLogin(data);
-    if (response) {
-      alert(response.message);
-    }
-  };
+
+  const loginMutation = useMutation({
+    mutationFn: handleLogin,
+    onSuccess: () => {
+      openModal({
+        type: "success",
+        title: "로그인 성공",
+        content: "로그인에 성공했습니다.",
+        onConfirm: () => {
+          router.replace("/dashboard");
+        },
+      });
+    },
+    onError: (error) => {
+      openModal({
+        type: "error",
+        title: "로그인 실패",
+        content: "로그인에 실패했습니다.",
+        onConfirm: () => {
+          alert(error.message);
+        },
+      });
+    },
+  });
 
   const handleError = (errors: FieldErrors) => {
     Object.values(errors).forEach((error) => {
       if (error) return alert(error.message);
     });
   };
+
   return (
     <div>
       <form
-        onSubmit={handleSubmit(loginSubmit, handleError)}
+        onSubmit={handleSubmit(
+          (data) => loginMutation.mutate(data),
+          handleError
+        )}
         className="pt-[3.125rem] space-y-5"
       >
         <div>

@@ -1,7 +1,13 @@
-import React from 'react';
+import Page from "@/components/common/Page/Page";
+import WeightList from "@/components/features/dashboard/weight/WeightList";
+import React from "react";
 
-const page = () => {
-  return <div>page</div>;
+const WeightListPage = () => {
+  return (
+    <Page>
+      <WeightList />
+    </Page>
+  );
 };
 
-export default page;
+export default WeightListPage;

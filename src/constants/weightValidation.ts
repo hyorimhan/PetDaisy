@@ -1,4 +1,4 @@
-export const WEIGHT_DATE_VALIDATION = () => ({
+export const DATE_VALIDATION = () => ({
   required: "날짜를 등록해주세요",
 });
 

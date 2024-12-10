@@ -2,7 +2,7 @@
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
 import {
-  WEIGHT_DATE_VALIDATION,
+  DATE_VALIDATION,
   WEIGHT_VALIDATION,
 } from "@/constants/weightValidation";
 import { registerWeight } from "@/service/weight";
@@ -53,7 +53,7 @@ function WeightWrite() {
             label="날짜"
             type="date"
             error={errors.date}
-            {...register("date", WEIGHT_DATE_VALIDATION())}
+            {...register("date", DATE_VALIDATION())}
           />
           <Input
             label="몸무게"

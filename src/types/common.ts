@@ -1,5 +1,5 @@
 export type paramsType = {
   params: {
-    id: string;
+    id?: string;
   };
 };

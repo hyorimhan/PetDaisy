@@ -19,7 +19,7 @@ import { useAuthStore } from "@/zustand/useAuthStore";
 import useModalStore from "@/zustand/useModalStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import SelectAnimalType from "./SelectAnimalType";
 
@@ -43,24 +43,23 @@ function PetRegistrationForm() {
       uploadFn: uploadPetImages,
     });
 
-  useEffect(() => {
-    console.log({ uploadImageURLs });
-  }, [uploadImageURLs]);
-
   const handleWeightChange = (e: ChangeEvent<HTMLInputElement>) => {
     const formatValue = handleFixedNumber(e);
-    setValue("weight", isNaN(formatValue) ? 0 : formatValue); //
+    setValue(
+      "weight",
+      isNaN(formatValue) ? 0 : formatValue < 0 ? 0 : formatValue
+    ); //
   };
 
   const { mutate: registPet } = useMutation({
     mutationFn: (petData: PetDetails) => registPetProfile(petData),
     onSettled: () =>
-      queryCLient.invalidateQueries({ queryKey: ["petProfile", user?.id] }),
+      queryCLient.invalidateQueries({ queryKey: ["petList", user?.id] }),
     onSuccess: (response) => {
       openModal({
         type: "success",
-        title: "회원가입 성공",
-        content: response.masseage,
+        title: "반려동물 등록 성공",
+        content: "반려동물이 성공적으로 등록 되었습니다.",
         onConfirm: () => {
           router.replace("/dashboard");
         },
@@ -69,9 +68,11 @@ function PetRegistrationForm() {
     onError: (error) => {
       openModal({
         type: "error",
-        title: "회원가입 실패",
+        title: "반려동물 등록 실패",
         content: error.message,
-        onConfirm: () => {},
+        onConfirm: () => {
+          router.replace("/dashboard");
+        },
       });
     },
   });

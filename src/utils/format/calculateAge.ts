@@ -9,12 +9,13 @@ export const calculateAge = (birthdate: Date) => {
   if (diff < 0) {
     return "0개월";
   }
+
   const totalMonths = ageYears * 12 + ageMonths;
 
   if (totalMonths <= 12) {
     return `${totalMonths}개월`;
   } else {
     const displayYears = Math.floor(totalMonths / 12);
-    return `${displayYears}살`;
+    return `만 ${displayYears}살`;
   }
 };

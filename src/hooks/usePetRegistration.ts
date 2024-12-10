@@ -16,7 +16,7 @@ export const usePetRegistration = (userId: string) => {
     onSuccess: () => {
       openModal({
         type: "success",
-        title: "반려동물 등록 성공",
+        title: "등록 성공",
         content: "반려동물이 성공적으로 등록 되었습니다.",
         onConfirm: () => router.replace("/dashboard"),
       });
@@ -24,7 +24,7 @@ export const usePetRegistration = (userId: string) => {
     onError: (error) => {
       openModal({
         type: "error",
-        title: "반려동물 등록 실패",
+        title: "등록 실패",
         content: error.message,
         onConfirm: () => router.replace("/dashboard"),
       });

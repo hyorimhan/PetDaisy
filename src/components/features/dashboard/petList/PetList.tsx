@@ -12,7 +12,7 @@ import PetListBox from "./PetListBox";
 
 function PetList() {
   const petId = usePetStore((state) => state.petId);
-  const savePetId = usePetStore((state) => state.savePetId);
+  const savePet = usePetStore((state) => state.savePet);
 
   const user = useAuthStore((state) => state.user);
   const userId = user?.id as string;
@@ -32,12 +32,12 @@ function PetList() {
 
   useEffect(() => {
     if (pets.length > 0 && !petId) {
-      savePetId(pets[0].id);
+      savePet(pets[0].id, pets[0].name);
     }
-  }, [pets, petId, savePetId]);
+  }, [pets, petId, savePet]);
 
-  const handleSelectPet = (petId: string) => {
-    savePetId(petId);
+  const handleSelectPet = (petId: string, petName: string) => {
+    savePet(petId, petName);
   };
 
   if (isPending)
@@ -64,7 +64,7 @@ function PetList() {
               type="button"
               outlineColor="border-main-2"
               textColor="text-main-3"
-              onClick={() => handleSelectPet(pet.id)}
+              onClick={() => handleSelectPet(pet.id, pet.name)}
               isActive={petId === pet.id}
             />
           </li>

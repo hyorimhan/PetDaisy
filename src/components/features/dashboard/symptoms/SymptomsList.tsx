@@ -1,6 +1,5 @@
 import Button from "@/components/common/Button/Button";
 import Link from "next/link";
-import React from "react";
 
 function SymptomsList() {
   return (

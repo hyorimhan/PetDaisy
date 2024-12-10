@@ -5,7 +5,7 @@ import {
   PASSWORD_VALIDATION,
 } from "@/constants/authValidation";
 import { handleLogin } from "@/service/auth";
-import useModalStore from "@/zustand/modalStore";
+import useModalStore from "@/zustand/useModalStore";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { FieldErrors, useForm } from "react-hook-form";

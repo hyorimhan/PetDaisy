@@ -1,13 +1,23 @@
 "use client";
 import Button from "@/components/common/Button/Button";
 import { DOG, PET_TYPES } from "@/constants/pet";
-import { useState } from "react";
+import { PetRegistrationType } from "@/types/petProfile";
+import { useEffect, useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
 
-function SelectAnimalType() {
-  const [isActive, setIsActive] = useState(false);
+interface SelectAnimalTypeProps {
+  setValue: UseFormSetValue<PetRegistrationType>;
+}
+function SelectAnimalType({ setValue }: SelectAnimalTypeProps) {
+  const [isActive, setIsActive] = useState(true);
   const [selectAnimalType, setSelectAnimalType] = useState(DOG);
 
+  useEffect(() => {
+    setValue("animalType", selectAnimalType);
+  }, [selectAnimalType]);
+
   const handleSelectAnimalType = (type: string) => {
+    setValue("animalType", type);
     setSelectAnimalType(type);
     setIsActive(true);
   };

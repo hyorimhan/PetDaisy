@@ -5,11 +5,21 @@ import Loading from "@/components/common/Loading/Loading";
 import { getPetList } from "@/service/petList";
 import { PetListType } from "@/types/petProfile";
 import { useAuthStore } from "@/zustand/useAuthStore";
+import { usePetStore } from "@/zustand/usePetStore";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import PetListBox from "./PetListBox";
 
 function PetList() {
+  const petId = usePetStore((state) => state.petId);
+  const savePetId = usePetStore((state) => state.savePetId);
+
   const user = useAuthStore((state) => state.user);
   const userId = user?.id as string;
+
+  // const [isActive, setIsActive] = useState(true);
+  // const [selectAnimal, setSelectAnimal] = useState(petId);
+
   const {
     data: pets = [],
     isPending,
@@ -20,11 +30,31 @@ function PetList() {
     enabled: !!userId,
   });
 
-  if (isPending) return <Loading />;
-  if (isError) return <Error />;
+  useEffect(() => {
+    if (pets.length > 0 && !petId) {
+      savePetId(pets[0].id);
+    }
+  }, [pets, petId, savePetId]);
+
+  const handleSelectPet = (petId: string) => {
+    savePetId(petId);
+  };
+
+  if (isPending)
+    return (
+      <PetListBox>
+        <Loading />
+      </PetListBox>
+    );
+  if (isError)
+    return (
+      <PetListBox>
+        <Error />
+      </PetListBox>
+    );
 
   return (
-    <div className="bg-main-1 w-[360px] md:w-[600px] mx-auto p-3">
+    <PetListBox>
       <ul className="flex items-center gap-1">
         {pets.map((pet) => (
           <li key={pet.id}>
@@ -32,13 +62,25 @@ function PetList() {
               content={pet.name}
               types="sm"
               type="button"
-              outlineColor="border-main-3"
-              textColor="text-main-4"
+              outlineColor="border-main-2"
+              textColor="text-main-3"
+              onClick={() => handleSelectPet(pet.id)}
+              isActive={petId === pet.id}
             />
           </li>
         ))}
+        <li>
+          <Button
+            content="+등록"
+            types="sm"
+            type="button"
+            bgColor="bg-gray-1"
+            textColor="text-gray-3"
+            href="/dashboard/pet-registration"
+          />
+        </li>
       </ul>
-    </div>
+    </PetListBox>
   );
 }
 

@@ -11,15 +11,10 @@ export async function GET(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
 
   try {
-    if (!params.id) {
-      handleError("사용자 ID가 전달되지 않았습니다.");
-      return;
-    }
-
     const userId = params.id;
     const { data, error: petListError } = await supabase
       .from("pet_list")
-      .select()
+      .select("*")
       .eq("user_id", userId);
 
     if (!data) {

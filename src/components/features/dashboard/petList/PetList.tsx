@@ -17,9 +17,6 @@ function PetList() {
   const user = useAuthStore((state) => state.user);
   const userId = user?.id as string;
 
-  // const [isActive, setIsActive] = useState(true);
-  // const [selectAnimal, setSelectAnimal] = useState(petId);
-
   const {
     data: pets = [],
     isPending,

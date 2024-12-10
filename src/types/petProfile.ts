@@ -14,6 +14,7 @@ type PetDetailData = Omit<
   "id" | "created_at" | "pet_id"
 >;
 type PetName = Pick<Tables<"pet_list">, "name" | "user_id">;
-export type PetProfile = PetDetailData & PetName;
+export type PetDetails = PetDetailData & PetName;
 
 export type PetListType = Tables<"pet_list">[];
+export type PetProfileType = PetDetails & { pet_list: { name: string } };

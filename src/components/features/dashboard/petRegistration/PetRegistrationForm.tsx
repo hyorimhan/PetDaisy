@@ -13,17 +13,18 @@ import {
 } from "@/constants/petRegistrationValidation";
 import useUploadImages from "@/hooks/useUploadImages";
 import { registPetProfile, uploadPetImages } from "@/service/petProfile";
-import { PetProfile, PetRegistrationType } from "@/types/petProfile";
+import { PetDetails, PetRegistrationType } from "@/types/petProfile";
 import { handleFixedNumber } from "@/utils/format/fixedNumber";
 import { useAuthStore } from "@/zustand/useAuthStore";
 import useModalStore from "@/zustand/useModalStore";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import SelectAnimalType from "./SelectAnimalType";
 
 function PetRegistrationForm() {
+  const queryCLient = useQueryClient();
   const router = useRouter();
   const openModal = useModalStore((state) => state.openModal);
   const user = useAuthStore((state) => state.user);
@@ -42,13 +43,19 @@ function PetRegistrationForm() {
       uploadFn: uploadPetImages,
     });
 
+  useEffect(() => {
+    console.log({ uploadImageURLs });
+  }, [uploadImageURLs]);
+
   const handleWeightChange = (e: ChangeEvent<HTMLInputElement>) => {
     const formatValue = handleFixedNumber(e);
     setValue("weight", isNaN(formatValue) ? 0 : formatValue); //
   };
 
   const { mutate: registPet } = useMutation({
-    mutationFn: (petData: PetProfile) => registPetProfile(petData),
+    mutationFn: (petData: PetDetails) => registPetProfile(petData),
+    onSettled: () =>
+      queryCLient.invalidateQueries({ queryKey: ["petProfile", user?.id] }),
     onSuccess: (response) => {
       openModal({
         type: "success",
@@ -78,7 +85,9 @@ function PetRegistrationForm() {
       weight: data.weight,
       neutered: data.neutered,
       images:
-        uploadImageURLs.length !== 0 ? uploadImageURLs : [DEFAULT_PET_IMAGE],
+        uploadImageURLs.length !== 0
+          ? JSON.stringify(uploadImageURLs)
+          : JSON.stringify([DEFAULT_PET_IMAGE]),
       animal_type: data.animalType,
     };
     registPet(petData);
@@ -121,6 +130,7 @@ function PetRegistrationForm() {
         label="생일"
         type="date"
         error={errors.birth}
+        max={new Date().toISOString().split("T")[0]}
         {...register("birth", PET_BIRTH_VALIDATION())}
       />
       <Input

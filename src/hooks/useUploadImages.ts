@@ -16,18 +16,23 @@ export default function useUploadImages({ type, uploadFn }: UploadImagesProps) {
     mutationFn: async (newImageFile: File) => {
       const formData = new FormData();
       formData.append("file", newImageFile);
-      const data = await uploadFn(formData);
-      const imagePath = await data.json();
-      setUploadImageURLs((prev) => [
-        ...prev,
-        `https://ldkycewtchhtokppnajz.supabase.co/storage/v1/object/public/${type}/${imagePath.imageURL}`,
-      ]);
+
+      const response = await uploadFn(formData);
+      const data = await response.json();
+
+      const newImageURL = `https://ldkycewtchhtokppnajz.supabase.co/storage/v1/object/public/${type}/${data.imageURL}`;
+
+      setUploadImageURLs((prev) => [...prev, newImageURL]);
+
+      return newImageURL;
     },
   });
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const files = e.target.files;
+
+    setUploadImageURLs([]);
 
     if (!files || files.length > 3) {
       setImageUploadError("이미지는 최대 3개까지 업로드 가능합니다.");

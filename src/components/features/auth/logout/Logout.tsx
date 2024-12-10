@@ -1,11 +1,10 @@
 "use client";
 import { logout } from "@/service/auth";
-import useModalStore from "@/zustand/modalStore";
 import { useAuthStore } from "@/zustand/useAuthStore";
+import useModalStore from "@/zustand/useModalStore";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 function Logout() {
   const { saveUser } = useAuthStore();

@@ -27,9 +27,9 @@ export const PET_WEIGHT_VALIDATION = () => ({
 });
 
 export const PET_GENDER_VALIDATION = () => ({
-  required: "날짜를 선택해주세요.",
+  required: "옵션을 선택해주세요.",
 });
 
 export const PET_NEUTERED_VALIDATION = () => ({
-  required: "날짜를 선택해주세요.",
+  required: "옵션을 선택해주세요.",
 });

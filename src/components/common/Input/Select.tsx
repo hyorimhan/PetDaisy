@@ -22,6 +22,10 @@ interface SelectProps<TFieldValues extends FieldValues> {
   error?: FieldError;
   register: UseFormRegister<TFieldValues>;
   registerOptions?: RegisterOptions<TFieldValues, Path<TFieldValues>>;
+  setValue: (
+    name: Path<TFieldValues>,
+    value: PathValue<TFieldValues, Path<TFieldValues>>
+  ) => void;
 }
 
 function Select<TFieldValues extends FieldValues>({
@@ -31,6 +35,7 @@ function Select<TFieldValues extends FieldValues>({
   error,
   register,
   registerOptions,
+  setValue,
 }: SelectProps<TFieldValues>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<
@@ -40,6 +45,7 @@ function Select<TFieldValues extends FieldValues>({
   const handleSelectOption = (
     option: PathValue<TFieldValues, Path<TFieldValues>>
   ) => {
+    setValue(name, option);
     setSelectedOption(option);
     setIsOpen(false);
   };
@@ -60,6 +66,7 @@ function Select<TFieldValues extends FieldValues>({
             className="text-gray-4"
             {...register(name, {
               ...registerOptions,
+              value: selectedOption,
             })}
           >
             {selectedOption || "선택"}

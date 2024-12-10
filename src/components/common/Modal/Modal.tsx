@@ -1,6 +1,6 @@
+import useModalStore from "@/zustand/useModalStore";
 import Image from "next/image";
 import Button from "../Button/Button";
-import useModalStore from "@/zustand/modalStore";
 
 function Modal() {
   const {

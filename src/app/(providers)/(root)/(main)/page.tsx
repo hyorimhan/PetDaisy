@@ -7,7 +7,7 @@ import AppDescription from "@/components/features/main/AppDescription";
 import useUploadImages from "@/hooks/useUploadImages";
 import { signInWithGoogle, signInWithKakao } from "@/service/auth";
 import { uploadPetImages } from "@/service/petProfile";
-import useModalStore from "@/zustand/modalStore";
+import useModalStore from "@/zustand/useModalStore";
 
 const MainPage = () => {
   const openModal = useModalStore((state) => state.openModal);

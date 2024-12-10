@@ -10,7 +10,7 @@ interface ImageUploadButtonProps {
 function ImageUploadButton({
   content,
   error,
-  imagePaths,
+  imagePaths = [],
   handleImageUpload,
 }: ImageUploadButtonProps) {
   return (

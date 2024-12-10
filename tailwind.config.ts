@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       boxShadow: {
-        "input-shadow": "1px 1px 8px 1px rgba(0, 0, 0, 0.03);",
+        shadow: "1px 1px 8px 1px rgba(0, 0, 0, 0.03);",
       },
       backgroundImage: {
         "gradient-1": "linear-gradient(180deg, #ECF9FF 0%, #F5F4FF 100%)",

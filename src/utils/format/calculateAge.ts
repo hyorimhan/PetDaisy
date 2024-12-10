@@ -17,5 +17,6 @@ export const calculateAge = (birthdate: Date) => {
   } else {
     const displayYears = Math.floor(totalMonths / 12);
     return `만 ${displayYears}살`;
+
   }
 };

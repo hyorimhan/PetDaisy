@@ -32,3 +32,17 @@ input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+/* 
+.custom-swiper-pagination .custom-bullet-default{
+  background-color: ;
+} */
+
+@layer utilities {
+  .swiper-pagination > .swiper-pagination-bullet {
+    @apply z-10 w-2 h-2 rounded-full bg-white opacity-100;
+  }
+
+  .swiper-pagination > .swiper-pagination-bullet.active {
+    @apply bg-main-5;
+  }
+}

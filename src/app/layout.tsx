@@ -5,6 +5,10 @@ import ModalProvider from "./(providers)/_providers/ModalProvider";
 import QueryProvider from "./(providers)/_providers/QueryProvider";
 import "./globals.css";
 
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 export default function RootLayout({
   children,
 }: Readonly<{

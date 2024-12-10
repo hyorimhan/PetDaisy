@@ -4,7 +4,7 @@ import Link from "next/link";
 function SymptomsList() {
   return (
     <div>
-      <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light ">
+      <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light">
         관찰 기록
       </div>
       <Button

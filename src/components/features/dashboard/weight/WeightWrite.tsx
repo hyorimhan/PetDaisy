@@ -6,7 +6,10 @@ import {
   WEIGHT_VALIDATION,
 } from "@/constants/weightValidation";
 import { registerWeight } from "@/service/weight";
+import useModalStore from "@/zustand/useModalStore";
+import { usePetStore } from "@/zustand/usePetStore";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -16,21 +19,37 @@ type weightFormType = {
 };
 
 function WeightWrite() {
+  const { petId } = usePetStore();
+  const { openModal } = useModalStore();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    reset,
+
     formState: { errors },
   } = useForm<weightFormType>();
 
   const weightMutation = useMutation({
     mutationFn: registerWeight,
     onSuccess: (data) => {
-      alert(data.message);
-      reset();
+      openModal({
+        type: "success",
+        title: "몸무게 등록",
+        content: data.message,
+        onConfirm: () => {
+          router.replace("/dashboard/weightList");
+        },
+      });
     },
     onError: (error) => {
-      alert(error.message);
+      openModal({
+        type: "error",
+        title: "몸무게 등록",
+        content: error.message,
+        onConfirm: () => {
+          router.replace("/dashboard/weightList");
+        },
+      });
     },
   });
 
@@ -38,7 +57,7 @@ function WeightWrite() {
     weightMutation.mutate({
       weight: data.weight,
       date: data.date,
-      pet_id: "pet_id",
+      pet_id: petId ?? "",
     });
   };
 

@@ -9,7 +9,7 @@ import {
 
 export async function GET(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const post_id = params.id;
+  const post_id = params.post_id;
   try {
     const { data, error } = await supabase
       .from("symptoms")
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest, { params }: paramsType) {
 
 export async function DELETE(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const post_id = params.id;
+  const post_id = params.post_id;
   try {
     const { error } = await supabase
       .from("symptoms")
@@ -45,7 +45,7 @@ export async function DELETE(request: NextRequest, { params }: paramsType) {
 
 export async function PATCH(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const post_id = params.id;
+  const post_id = params.post_id;
   const { date, content, title, images } = await request.json();
   try {
     const { data, error } = await supabase

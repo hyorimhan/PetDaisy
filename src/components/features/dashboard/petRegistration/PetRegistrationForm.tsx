@@ -1,41 +1,18 @@
 "use client";
-import Button from "@/components/common/Button/Button";
-import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
-import Input from "@/components/common/Input/Input";
-import Select from "@/components/common/Input/Select";
-import { DEFAULT_PET_IMAGE, GENDER_TYPES, NEUTERED } from "@/constants/pet";
-import {
-  PET_BIRTH_VALIDATION,
-  PET_GENDER_VALIDATION,
-  PET_NAME_VALIDATION,
-  PET_NEUTERED_VALIDATION,
-  PET_WEIGHT_VALIDATION,
-} from "@/constants/petRegistrationValidation";
+import { DEFAULT_PET_IMAGE } from "@/constants/pet";
+import { usePetRegistration } from "@/hooks/usePetRegistration";
+import { usePetRegistrationForm } from "@/hooks/usePetRegistrationForm";
 import useUploadImages from "@/hooks/useUploadImages";
-import { registPetProfile, uploadPetImages } from "@/service/petProfile";
-import { PetDetails, PetRegistrationType } from "@/types/petProfile";
-import { handleFixedNumber } from "@/utils/format/fixedNumber";
+
+import { uploadPetImages } from "@/service/petProfile";
+import { PetRegistrationType } from "@/types/petProfile";
 import { useAuthStore } from "@/zustand/useAuthStore";
-import useModalStore from "@/zustand/useModalStore";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, useEffect } from "react";
-import { FieldErrors, useForm } from "react-hook-form";
-import SelectAnimalType from "./SelectAnimalType";
+import { FieldErrors } from "react-hook-form";
+import FormField from "./FormField";
 
 function PetRegistrationForm() {
-  const queryCLient = useQueryClient();
-  const router = useRouter();
-  const openModal = useModalStore((state) => state.openModal);
-  const user = useAuthStore((state) => state.user);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<PetRegistrationType>();
+  const user = useAuthStore((state) => state.user);
 
   const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
     useUploadImages({
@@ -43,38 +20,17 @@ function PetRegistrationForm() {
       uploadFn: uploadPetImages,
     });
 
-  useEffect(() => {
-    console.log({ uploadImageURLs });
-  }, [uploadImageURLs]);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    errors,
+    handleWeightChange,
+  } = usePetRegistrationForm();
 
-  const handleWeightChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const formatValue = handleFixedNumber(e);
-    setValue("weight", isNaN(formatValue) ? 0 : formatValue); //
-  };
+  const { mutate: registPet } = usePetRegistration(user?.id as string);
 
-  const { mutate: registPet } = useMutation({
-    mutationFn: (petData: PetDetails) => registPetProfile(petData),
-    onSettled: () =>
-      queryCLient.invalidateQueries({ queryKey: ["petProfile", user?.id] }),
-    onSuccess: (response) => {
-      openModal({
-        type: "success",
-        title: "회원가입 성공",
-        content: response.masseage,
-        onConfirm: () => {
-          router.replace("/dashboard");
-        },
-      });
-    },
-    onError: (error) => {
-      openModal({
-        type: "error",
-        title: "회원가입 실패",
-        content: error.message,
-        onConfirm: () => {},
-      });
-    },
-  });
 
   const handleAnimalRegist = (data: PetRegistrationType) => {
     const petData = {
@@ -104,59 +60,15 @@ function PetRegistrationForm() {
       className="flex flex-col gap-5 pb-[130px]"
       onSubmit={handleSubmit((data) => handleAnimalRegist(data), handleError)}
     >
-      <ImageUploadButton
-        content="사진 선택"
+      <FormField
+        register={register}
+        errors={errors}
+        setValue={setValue}
+        watch={watch}
+        handleWeightChange={handleWeightChange}
         imagePaths={imagePaths}
-        error={imageUploadError}
+        imageUploadError={imageUploadError}
         handleImageUpload={handleImageUpload}
-      />
-      <SelectAnimalType setValue={setValue} />
-      <Input
-        label="이름"
-        type="text"
-        error={errors.name}
-        {...register("name", PET_NAME_VALIDATION())}
-      />
-      <Select
-        label="성별"
-        options={GENDER_TYPES}
-        name="gender"
-        register={register}
-        error={errors.gender}
-        registerOptions={PET_GENDER_VALIDATION()}
-        setValue={setValue}
-      />
-      <Input
-        label="생일"
-        type="date"
-        error={errors.birth}
-        max={new Date().toISOString().split("T")[0]}
-        {...register("birth", PET_BIRTH_VALIDATION())}
-      />
-      <Input
-        label="몸무게"
-        type="number"
-        unit="kg"
-        error={errors.weight}
-        {...register("weight", PET_WEIGHT_VALIDATION())}
-        onChange={handleWeightChange}
-        value={watch("weight") || ""}
-      />
-      <Select
-        label="중성화 여부"
-        options={NEUTERED}
-        name="neutered"
-        register={register}
-        error={errors.neutered}
-        registerOptions={PET_NEUTERED_VALIDATION()}
-        setValue={setValue}
-      />
-      <Button
-        content="등록하기"
-        type="submit"
-        bgColor="bg-main-5"
-        textColor="text-white"
-        types="lg"
       />
     </form>
   );

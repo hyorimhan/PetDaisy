@@ -1,7 +1,10 @@
 "use client";
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
-import { WEIGHT_DATE_VALIDATION, WEIGHT_VALIDATION } from "@/constants/weight";
+import {
+  WEIGHT_DATE_VALIDATION,
+  WEIGHT_VALIDATION,
+} from "@/constants/weightValidation";
 import { registerWeight } from "@/service/weight";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
@@ -39,12 +42,6 @@ function WeightWrite() {
     });
   };
 
-  // const handleRegisterWeight = async ({ weight, date, pet_id }) => {
-  //   const response = await registerWeight({ weight, date, pet_id });
-  //   if (response) {
-  //     alert(response.message);
-  //   }
-  // };
   return (
     <div>
       <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light ">
@@ -52,7 +49,6 @@ function WeightWrite() {
       </div>
       <form onSubmit={handleSubmit(handleWeight)}>
         <div className="space-y-5 ">
-          {" "}
           <Input
             label="날짜"
             type="date"

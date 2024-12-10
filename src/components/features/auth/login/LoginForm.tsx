@@ -1,6 +1,9 @@
 "use client";
 import Button from "@/components/common/Button/Button";
-import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from "@/constants/auth";
+import {
+  EMAIL_VALIDATION,
+  PASSWORD_VALIDATION,
+} from "@/constants/authValidation";
 import { handleLogin } from "@/service/auth";
 import useModalStore from "@/zustand/modalStore";
 import { useMutation } from "@tanstack/react-query";

@@ -3,7 +3,7 @@ import Button from "@/components/common/Button/Button";
 import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Input from "@/components/common/Input/Input";
 import Select from "@/components/common/Input/Select";
-import { GENDER_TYPES, IS_NEUTERED } from "@/constants/pet";
+import { DEFAULT_PET_IMAGE, GENDER_TYPES, NEUTERED } from "@/constants/pet";
 import {
   PET_BIRTH_VALIDATION,
   PET_GENDER_VALIDATION,
@@ -13,22 +13,21 @@ import {
 } from "@/constants/petRegistrationValidation";
 import useUploadImages from "@/hooks/useUploadImages";
 import { registPetProfile, uploadPetImages } from "@/service/petProfile";
-import { PetProfile } from "@/types/petProfile";
+import { PetProfile, PetRegistrationType } from "@/types/petProfile";
 import { handleFixedNumber } from "@/utils/format/fixedNumber";
+import { useAuthStore } from "@/zustand/useAuthStore";
+import useModalStore from "@/zustand/useModalStore";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { ChangeEvent } from "react";
-import { useForm } from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 import SelectAnimalType from "./SelectAnimalType";
 
-type PetRegistrationType = {
-  name: string;
-  gender: string;
-  birth: string;
-  weight: number;
-  isNeutered: boolean;
-};
-
 function PetRegistrationForm() {
+  const router = useRouter();
+  const openModal = useModalStore((state) => state.openModal);
+  const user = useAuthStore((state) => state.user);
+
   const {
     register,
     handleSubmit,
@@ -50,25 +49,51 @@ function PetRegistrationForm() {
 
   const { mutate: registPet } = useMutation({
     mutationFn: (petData: PetProfile) => registPetProfile(petData),
+    onSuccess: (response) => {
+      openModal({
+        type: "success",
+        title: "회원가입 성공",
+        content: response.masseage,
+        onConfirm: () => {
+          router.replace("/dashboard");
+        },
+      });
+    },
+    onError: (error) => {
+      openModal({
+        type: "error",
+        title: "회원가입 실패",
+        content: error.message,
+        onConfirm: () => {},
+      });
+    },
   });
 
-  const handleAnimalRegist = () => {
+  const handleAnimalRegist = (data: PetRegistrationType) => {
     const petData = {
-      name: watch("name"),
-      gender: watch("gender"),
-      birth_date: watch("birth"),
-      weight: watch("weight"),
-      neutered: watch("isNeutered"),
-      images: JSON.stringify(uploadImageURLs),
+      user_id: user?.id as string,
+      name: data.name,
+      gender: data.gender,
+      birth_date: data.birth,
+      weight: data.weight,
+      neutered: data.neutered,
+      images:
+        uploadImageURLs.length !== 0 ? uploadImageURLs : [DEFAULT_PET_IMAGE],
+      animal_type: data.animalType,
     };
-
     registPet(petData);
+  };
+
+  const handleError = (errors: FieldErrors) => {
+    Object.values(errors).forEach((error) => {
+      if (error?.message) alert(error.message);
+    });
   };
 
   return (
     <form
       className="flex flex-col gap-5 pb-[130px]"
-      onSubmit={handleSubmit(handleAnimalRegist)}
+      onSubmit={handleSubmit((data) => handleAnimalRegist(data), handleError)}
     >
       <ImageUploadButton
         content="사진 선택"
@@ -76,7 +101,7 @@ function PetRegistrationForm() {
         error={imageUploadError}
         handleImageUpload={handleImageUpload}
       />
-      <SelectAnimalType />
+      <SelectAnimalType setValue={setValue} />
       <Input
         label="이름"
         type="text"
@@ -90,6 +115,7 @@ function PetRegistrationForm() {
         register={register}
         error={errors.gender}
         registerOptions={PET_GENDER_VALIDATION()}
+        setValue={setValue}
       />
       <Input
         label="생일"
@@ -108,11 +134,12 @@ function PetRegistrationForm() {
       />
       <Select
         label="중성화 여부"
-        options={IS_NEUTERED}
-        name="isNeutered"
+        options={NEUTERED}
+        name="neutered"
         register={register}
-        error={errors.isNeutered}
+        error={errors.neutered}
         registerOptions={PET_NEUTERED_VALIDATION()}
+        setValue={setValue}
       />
       <Button
         content="등록하기"

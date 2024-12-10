@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   try {
     const response = await request.json();
     const { nickname, email, password } = response;
-    const { error: joinError } = await supabase.auth.signUp({
+    const { data, error: joinError } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -22,12 +22,13 @@ export async function POST(request: NextRequest) {
         },
       },
     });
+    console.log("data", data);
 
     if (joinError) return handleJoinError(joinError.message);
 
     const { error: userError } = await supabase
       .from("user")
-      .insert({ nickname: nickname });
+      .insert({ nickname: nickname, id: data?.user?.id });
 
     if (userError) return handleError(userError.message);
 

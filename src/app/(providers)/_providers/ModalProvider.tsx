@@ -1,6 +1,6 @@
 "use client";
 import Modal from "@/components/common/Modal/Modal";
-import useModalStore from "@/zustand/modalStore";
+import useModalStore from "@/zustand/useModalStore";
 import { PropsWithChildren } from "react";
 
 function ModalProvider({ children }: PropsWithChildren) {

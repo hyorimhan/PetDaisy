@@ -2,15 +2,15 @@ import { getMedicalExpensesByPetId } from "@/service/medical";
 import { MedicalExpenses } from "@/types/medical";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetMedicalExpenses(petId: string, visitId: string) {
+export function useGetMedicalExpenses(visitId: string) {
   const {
     data: medicalExpenses = [],
     isPending,
     isError,
   } = useQuery<MedicalExpenses[]>({
-    queryKey: ["medicalExpenses", petId, visitId],
-    queryFn: () => getMedicalExpensesByPetId(petId, visitId),
-    enabled: !!petId && !!visitId,
+    queryKey: ["medicalExpenses", visitId],
+    queryFn: () => getMedicalExpensesByPetId(visitId),
+    enabled: !!visitId,
     staleTime: 1000 * 60 * 5,
   });
 

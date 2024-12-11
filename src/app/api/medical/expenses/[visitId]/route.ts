@@ -8,16 +8,15 @@ import { NextRequest } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { petId: string; visitId: string } }
+  { params }: { params: { visitId: string } }
 ) {
   const supabase = await createClient();
-  const { petId, visitId } = await params;
+  const { visitId } = await params;
 
   try {
     const { data, error: petListError } = await supabase
       .from("medical_expenses")
       .select("*")
-      .eq("pet_id", petId)
       .eq("medical_visit_id", visitId);
 
     if (petListError) {

@@ -1,3 +1,7 @@
 export function calculateTotal(items: number[]) {
-  return items.reduce((acc, item) => acc + item, 0).toLocaleString();
+  const total = items.reduce((acc, item) => acc + item, 0);
+  if (total > 999999999) {
+    return 999999999;
+  }
+  return total;
 }

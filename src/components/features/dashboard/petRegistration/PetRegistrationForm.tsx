@@ -3,6 +3,7 @@ import { DEFAULT_PET_IMAGE } from "@/constants/pet";
 import { usePetRegistration } from "@/hooks/usePetRegistration";
 import { usePetRegistrationForm } from "@/hooks/usePetRegistrationForm";
 import useUploadImages from "@/hooks/useUploadImages";
+
 import { uploadPetImages } from "@/service/petProfile";
 import { PetRegistrationType } from "@/types/petProfile";
 import { useAuthStore } from "@/zustand/useAuthStore";
@@ -10,6 +11,7 @@ import { FieldErrors } from "react-hook-form";
 import FormField from "./FormField";
 
 function PetRegistrationForm() {
+
   const user = useAuthStore((state) => state.user);
 
   const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
@@ -28,6 +30,7 @@ function PetRegistrationForm() {
   } = usePetRegistrationForm();
 
   const { mutate: registPet } = usePetRegistration(user?.id as string);
+
 
   const handleAnimalRegist = (data: PetRegistrationType) => {
     const petData = {

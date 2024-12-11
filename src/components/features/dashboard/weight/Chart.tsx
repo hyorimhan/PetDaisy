@@ -10,7 +10,7 @@ import {
   XAxis,
   Line,
 } from "recharts";
-import { weightDataType, weightTableType } from "./WeightList";
+import { weightDataType } from "./WeightList";
 
 function Chart() {
   const { petId } = usePetStore();
@@ -25,10 +25,13 @@ function Chart() {
   if (isLoading) {
     return "로딩중";
   }
-  const recentData = weightData?.data.slice(-10).map((weight) => ({
-    date: weight.measured_at.slice(5, 10),
-    weight: weight.weight,
-  }));
+  const recentData = weightData?.data
+    .slice(-10)
+    .reverse()
+    .map((weight) => ({
+      date: weight.measured_at.slice(5, 10),
+      weight: weight.weight,
+    }));
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart

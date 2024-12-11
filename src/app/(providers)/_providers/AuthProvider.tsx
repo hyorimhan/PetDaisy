@@ -10,7 +10,7 @@ import { PropsWithChildren, useEffect } from "react";
 
 function AuthProvider({ children }: Readonly<PropsWithChildren>) {
   const { saveUser } = useAuthStore();
-  const { petId, savePetId } = usePetStore();
+  const { petId, savePet } = usePetStore();
   const pathname = usePathname();
   const router = useRouter();
   console.log("상위 pet_id", petId);
@@ -41,9 +41,9 @@ function AuthProvider({ children }: Readonly<PropsWithChildren>) {
 
   useEffect(() => {
     if (pets.length > 0 && !petId) {
-      savePetId(pets[0].id);
+      savePet(pets[0].id, pets[0].name);
     }
-  }, [pets, petId, savePetId]);
+  }, [pets, petId, savePet]);
 
   return <div>{children}</div>;
 }

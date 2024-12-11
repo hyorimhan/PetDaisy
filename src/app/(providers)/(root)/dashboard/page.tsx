@@ -1,4 +1,5 @@
 import Page from "@/components/common/Page/Page";
+import LastMedical from "@/components/features/dashboard/medical/LastMedical";
 import Medical from "@/components/features/dashboard/medical/Medical";
 import PetList from "@/components/features/dashboard/petList/PetList";
 import PetProfile from "@/components/features/dashboard/petProfile/PetProfile";
@@ -12,6 +13,7 @@ const DashboardPage = () => {
       <Page>
         <div className="space-y-3">
           <PetProfile />
+          <LastMedical />
           <Medical />
           <Weight />
           <Symptoms />

@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
 import Chart from "./Chart";
 import Button from "@/components/common/Button/Button";
-import { useQuery } from "@tanstack/react-query";
 import { usePetStore } from "@/zustand/usePetStore";
-import { getWeightList } from "@/service/weight";
 import ReactPaginate from "react-paginate";
+import useGetWeight from "@/hooks/chart/useGetChart";
+import usePagination from "@/hooks/paginate/usePagination";
+import Loading from "@/components/common/Loading/Loading";
 
 export type weightTableType = {
   id: string;
@@ -22,25 +22,18 @@ export type weightDataType = {
 };
 function WeightList() {
   const { petId } = usePetStore();
-  const limit = 10;
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const page = currentPage + 1;
-  const { data: weightData, isLoading } = useQuery<weightDataType>({
-    queryKey: ["weightData", petId],
-    queryFn: () => {
-      if (!petId) throw new Error();
-      return getWeightList(petId, page, limit);
-    },
-    enabled: !!petId,
-  });
-  if (isLoading) {
-    return "로딩중";
-  }
-  const handlePageClick = (selectedPage: { selected: number }) => {
-    setCurrentPage(selectedPage.selected);
-  };
+  const { page, limit, handlePageClick, currentPage } = usePagination();
+  const { weightData, isLoading } = useGetWeight(petId ?? "", page, limit);
 
-  const pageCount = Math.ceil((weightData?.count ?? 0) / limit);
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const formatWeightChange = (change: number) => {
+    if (change === 0) return "";
+    if (change > 0) return `+${change}`;
+    return change;
+  };
 
   return (
     <div>
@@ -60,23 +53,29 @@ function WeightList() {
           <span>증감량</span>
         </div>
         <div>
-          {weightData?.data.map((weight) => (
-            <div
-              key={weight.id}
-              className="flex justify-around pt-3 text-gray-4 opacity-90 "
-            >
-              <span>{weight.measured_at}</span>
-              <span>{weight.weight}kg</span>
-              <span></span>
-            </div>
-          ))}
+          {weightData?.data.map((weight, index) => {
+            const prevWeight = weightData.data[index + 1]?.weight;
+            let weightChange = prevWeight
+              ? +(weight.weight - prevWeight).toFixed(1)
+              : 0;
+            return (
+              <div
+                key={weight.id}
+                className="flex justify-around pt-3 text-gray-4 opacity-90 "
+              >
+                <span>{weight.measured_at}</span>
+                <span>{weight.weight}kg</span>
+                <span>{formatWeightChange(weightChange)}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
       <ReactPaginate
         previousLabel={"이전"}
         nextLabel={"다음"}
         breakLabel={"..."}
-        pageCount={pageCount}
+        pageCount={Math.ceil((weightData?.count ?? 0) / limit)}
         forcePage={currentPage}
         onPageChange={handlePageClick}
         containerClassName={"flex justify-center space-x-3 text-sm mt-10"}

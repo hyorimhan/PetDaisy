@@ -3,9 +3,10 @@ export const getWeightList = async (
   page?: number,
   limit?: number
 ) => {
-  const response = await fetch(
-    `/api/weight/${pet_id}?page=${page}&limit=${limit}`
-  );
+  const baseUrl = `/api/weight/${pet_id}`;
+  const url =
+    page && limit ? `${baseUrl}?page=${page}&limit=${limit}` : baseUrl;
+  const response = await fetch(url);
   const result = await response.json();
   return result.data;
 };

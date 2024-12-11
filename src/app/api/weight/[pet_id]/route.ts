@@ -10,10 +10,23 @@ import { getPaginationParams } from "@/utils/paginate/pagination";
 
 export async function GET(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const pet_id = params.pet_id;
+  const { pet_id } = await params;
   const searchParams = request.nextUrl.searchParams;
   const { page, limit, from, to } = getPaginationParams(searchParams);
   try {
+    if (!searchParams.get("page") || !searchParams.get("limit")) {
+      const { data: allWeightData, error: allDataError } = await supabase
+        .from("weight_records")
+        .select("*")
+        .eq("pet_id", pet_id)
+        .order("measured_at", { ascending: false });
+
+      if (allDataError) {
+        return handleError(allDataError.message);
+      }
+      return handleSuccess(undefined, { data: allWeightData });
+    }
+
     const { data, error, count } = await supabase
       .from("weight_records")
       .select("*", { count: "exact" })
@@ -31,7 +44,7 @@ export async function GET(request: NextRequest, { params }: paramsType) {
 
 export async function POST(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const pet_id = params.pet_id;
+  const { pet_id } = await params;
 
   try {
     const response = await request.json();

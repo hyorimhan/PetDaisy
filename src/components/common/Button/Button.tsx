@@ -55,14 +55,12 @@ function Button({
 
   if (href) {
     return (
-      <div className="w-full">
-        <Link
-          href={href}
-          className={`block ${bgColor} ${textColor} ${variantStyle[types]}`}
-        >
-          {content}
-        </Link>
-      </div>
+      <Link
+        href={href}
+        className={`block ${bgColor} ${textColor} ${variantStyle[types]}`}
+      >
+        {content}
+      </Link>
     );
   }
 

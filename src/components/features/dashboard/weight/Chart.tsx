@@ -1,7 +1,5 @@
 "use client";
-import { getWeightList } from "@/service/weight";
 import { usePetStore } from "@/zustand/usePetStore";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import {
   ResponsiveContainer,
@@ -10,18 +8,11 @@ import {
   XAxis,
   Line,
 } from "recharts";
-import { weightDataType } from "./WeightList";
+import useGetWeight from "@/hooks/chart/useGetChart";
 
 function Chart() {
   const { petId } = usePetStore();
-  const { data: weightData, isLoading } = useQuery<weightDataType>({
-    queryKey: ["weightData", petId],
-    queryFn: () => {
-      if (!petId) throw new Error();
-      return getWeightList(petId);
-    },
-    enabled: !!petId,
-  });
+  const { weightData, isLoading } = useGetWeight(petId ?? "");
   if (isLoading) {
     return "로딩중";
   }
@@ -32,6 +23,7 @@ function Chart() {
       date: weight.measured_at.slice(5, 10),
       weight: weight.weight,
     }));
+  console.log(weightData);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart

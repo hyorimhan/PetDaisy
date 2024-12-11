@@ -7,7 +7,6 @@ import { PetListType } from "@/types/petProfile";
 import { useAuthStore } from "@/zustand/useAuthStore";
 import { usePetStore } from "@/zustand/usePetStore";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import PetListBox from "./PetListBox";
 
 function PetList() {
@@ -26,12 +25,6 @@ function PetList() {
     queryFn: () => getPetList(userId),
     enabled: !!userId,
   });
-
-  useEffect(() => {
-    if (pets.length > 0 && !petId) {
-      savePet(pets[0].id, pets[0].name);
-    }
-  }, [pets, petId, savePet]);
 
   const handleSelectPet = (petId: string, petName: string) => {
     savePet(petId, petName);
@@ -52,9 +45,9 @@ function PetList() {
 
   return (
     <PetListBox>
-      <ul className="flex items-center gap-1">
+      <ul className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
         {pets.map((pet) => (
-          <li key={pet.id}>
+          <li key={pet.id} className="shrink-0">
             <Button
               content={pet.name}
               types="sm"
@@ -66,7 +59,7 @@ function PetList() {
             />
           </li>
         ))}
-        <li>
+        <li className="shrink-0">
           <Button
             content="+등록"
             types="sm"

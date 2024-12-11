@@ -1,18 +1,25 @@
+"use client";
 import Card from "@/components/common/Card/Card";
-import Link from "next/link";
+import CardTitle from "@/components/common/Card/CardTitle";
+import { useGetMedicalVisitLists } from "@/hooks/useGetMedicaVisitlLists";
+import { usePetStore } from "@/zustand/usePetStore";
+import MedicalCard from "./MedicalCard";
 
 function Medical() {
+  const petId = usePetStore((state) => state.petId) as string;
+  const { medicalLists } = useGetMedicalVisitLists(petId);
+  const latestMedicalList = medicalLists.slice(0, 3);
+
   return (
     <Card>
-      <div className="flex items-center justify-between">
-        <h3 className="text-[16px] text-main-5">진료 기록</h3>
-        <Link
-          href="/dashboard/medicalDetail"
-          className="text-[12px] text-gray-3 shrink-0"
-        >
-          자세히 보기
-        </Link>
-      </div>
+      <CardTitle title="진료 기록" link="/dashboard/medicalList" />
+      <ul className="mt-2 flex flex-col gap-2">
+        {latestMedicalList.map((list) => (
+          <li key={list.id}>
+            <MedicalCard list={list} />
+          </li>
+        ))}
+      </ul>
     </Card>
   );
 }

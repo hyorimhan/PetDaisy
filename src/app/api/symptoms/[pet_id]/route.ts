@@ -9,7 +9,7 @@ import {
 
 export async function GET(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const pet_id = params.pet_id;
+  const pet_id = await params.pet_id;
   try {
     const { data, error } = await supabase
       .from("symptoms")
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest, { params }: paramsType) {
 
 export async function POST(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const pet_id = params.pet_id;
+  const pet_id = await params.pet_id;
   try {
     const formData = await request.formData();
     const title = formData.get("title");

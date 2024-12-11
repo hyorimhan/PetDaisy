@@ -1,11 +1,13 @@
 "use client";
 import Button from "@/components/common/Button/Button";
+import Input from "@/components/common/Input/Input";
 import {
-  EMAIL_VALIDATION,
   NICKNAME_VALIDATION,
-  PASSWORD_CONFIRM_VALIDATION,
+  EMAIL_VALIDATION,
   PASSWORD_VALIDATION,
-} from "@/constants/auth";
+  PASSWORD_CONFIRM_VALIDATION,
+} from "@/constants/authValidation";
+
 import { handleJoin } from "@/service/auth";
 import useModalStore from "@/zustand/useModalStore";
 import { useMutation } from "@tanstack/react-query";
@@ -20,7 +22,14 @@ type joinFormDataType = {
 };
 
 function JoinForm() {
-  const { register, handleSubmit, watch } = useForm<joinFormDataType>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<joinFormDataType>({
+    mode: "onChange",
+  });
   const password = watch("password");
   const router = useRouter();
   const openModal = useModalStore((state) => state.openModal);
@@ -54,49 +63,59 @@ function JoinForm() {
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit(
-          (data) => joinMutation.mutate(data),
-          handleError
-        )}
-        className="space-y-5 pt-[3.125rem]"
-      >
-        <div>
-          <label htmlFor="nickname">닉네임</label>
-          <input type="text" {...register("nickname", NICKNAME_VALIDATION())} />
-        </div>
-        <div>
-          <label htmlFor="email">아이디</label>
-          <input type="email" {...register("email", EMAIL_VALIDATION())} />
-        </div>
-        <div>
-          <label htmlFor="password">비밀번호</label>
-          <input
-            type="password"
-            {...register("password", PASSWORD_VALIDATION())}
-          />
-        </div>
-        <div>
-          <label htmlFor="passwordConfirm">비밀번호 확인</label>
-          <input
-            type="password"
-            {...register(
-              "passwordConfirm",
-              PASSWORD_CONFIRM_VALIDATION(password)
-            )}
-          />
-        </div>
-
-        <Button
-          content="회원가입"
-          types="lg"
-          textColor="text-white"
-          bgColor="bg-blue-4"
-          type="submit"
+    <form
+      onSubmit={handleSubmit((data) => joinMutation.mutate(data), handleError)}
+      className="space-y-5 pt-[3.125rem] w-full"
+    >
+      <div>
+        <Input
+          label="닉네임"
+          type="text"
+          {...register("nickname", NICKNAME_VALIDATION())}
         />
-      </form>
-    </div>
+        {errors.nickname && (
+          <p className="text-red-5 text-sm mt-1">{errors.nickname.message}</p>
+        )}
+      </div>
+      <div>
+        <Input
+          label="아이디"
+          type="email"
+          {...register("email", EMAIL_VALIDATION())}
+        />
+      </div>
+      <div>
+        <Input
+          label="비밀번호"
+          type="password"
+          {...register("password", PASSWORD_VALIDATION())}
+          className="font-serif w-full"
+        />
+      </div>
+      <div>
+        <Input
+          label="비밀번호 확인"
+          type="password"
+          {...register(
+            "passwordConfirm",
+            PASSWORD_CONFIRM_VALIDATION(password)
+          )}
+          className="font-serif w-full"
+        />
+        {errors.passwordConfirm && (
+          <p className="text-red-5 text-sm mt-1">
+            {errors.passwordConfirm.message}
+          </p>
+        )}
+      </div>
+      <Button
+        content="회원가입"
+        types="lg"
+        textColor="text-white"
+        bgColor="bg-blue-4"
+        type="submit"
+      />
+    </form>
   );
 }
 

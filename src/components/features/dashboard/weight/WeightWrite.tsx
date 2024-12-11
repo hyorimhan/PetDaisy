@@ -1,9 +1,15 @@
 "use client";
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
-import { WEIGHT_DATE_VALIDATION, WEIGHT_VALIDATION } from "@/constants/weight";
+import {
+  DATE_VALIDATION,
+  WEIGHT_VALIDATION,
+} from "@/constants/weightValidation";
 import { registerWeight } from "@/service/weight";
+import useModalStore from "@/zustand/useModalStore";
+import { usePetStore } from "@/zustand/usePetStore";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -13,21 +19,37 @@ type weightFormType = {
 };
 
 function WeightWrite() {
+  const { petId } = usePetStore();
+  const { openModal } = useModalStore();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    reset,
+
     formState: { errors },
   } = useForm<weightFormType>();
 
   const weightMutation = useMutation({
     mutationFn: registerWeight,
     onSuccess: (data) => {
-      alert(data.message);
-      reset();
+      openModal({
+        type: "success",
+        title: "몸무게 등록",
+        content: data.message,
+        onConfirm: () => {
+          router.replace("/dashboard/weightList");
+        },
+      });
     },
     onError: (error) => {
-      alert(error.message);
+      openModal({
+        type: "error",
+        title: "몸무게 등록",
+        content: error.message,
+        onConfirm: () => {
+          router.replace("/dashboard/weightList");
+        },
+      });
     },
   });
 
@@ -35,16 +57,10 @@ function WeightWrite() {
     weightMutation.mutate({
       weight: data.weight,
       date: data.date,
-      pet_id: "pet_id",
+      pet_id: petId ?? "",
     });
   };
 
-  // const handleRegisterWeight = async ({ weight, date, pet_id }) => {
-  //   const response = await registerWeight({ weight, date, pet_id });
-  //   if (response) {
-  //     alert(response.message);
-  //   }
-  // };
   return (
     <div>
       <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light ">
@@ -52,12 +68,11 @@ function WeightWrite() {
       </div>
       <form onSubmit={handleSubmit(handleWeight)}>
         <div className="space-y-5 ">
-          {" "}
           <Input
             label="날짜"
             type="date"
             error={errors.date}
-            {...register("date", WEIGHT_DATE_VALIDATION())}
+            {...register("date", DATE_VALIDATION())}
           />
           <Input
             label="몸무게"

@@ -35,7 +35,7 @@ function Button({
     md: "w-full py-4 rounded-lg text-[14px]",
     lg: "w-full py-5 text-[20px] rounded-lg text-center",
     addInfo:
-      "w-full py-[10px] text-[14px] rounded-lg flex items-center justify-center border border-main-3 bg-white gap-[7px] text-main-3",
+      "w-full py-[10px] text-[14px] rounded-lg flex items-center justify-center border border-main-3 bg-white gap-[7px] text-main-4",
   };
   const activeStyle = "border border-main-5 text-main-5";
 

@@ -12,7 +12,7 @@ function DetailAction({ visitId }: { visitId: string }) {
         bgColor="bg-yellow-5"
         content="수정하기"
         textColor="text-white"
-        href={""}
+        href={`/dashboard/medicalWrite/${visitId}`}
       />
       <Button
         types="lg"

@@ -8,21 +8,20 @@ import { NextRequest } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { petId: string } }
+  { params }: { params: { visitId: string } }
 ) {
   const supabase = await createClient();
-  const { petId } = await params;
+  const { visitId } = await params;
 
   try {
-    const { data, error } = await supabase
-      .from("medical_visits")
+    const { data, error: petListError } = await supabase
+      .from("medical_expenses")
       .select("*")
-      .eq("pet_id", petId)
-      .order("visit_date", { ascending: false });
+      .eq("medical_visit_id", visitId);
 
-    if (error) {
+    if (petListError) {
       return handleError(
-        `진료 정보를 가져오는데 실패했습니다. ${error.message}`
+        `진료 비용 정보를 가져오는데 실패했습니다. ${petListError.message}`
       );
     }
 

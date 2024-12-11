@@ -14,14 +14,14 @@ export async function GET(
   const { userId } = await params;
 
   try {
-    const { data, error: petListError } = await supabase
+    const { data, error } = await supabase
       .from("pet_list")
       .select("*")
       .eq("user_id", userId);
 
-    if (petListError) {
+    if (error) {
       return handleError(
-        `반려동물 정보를 가져오는데 실패했습니다. ${petListError.message}`
+        `반려동물 정보를 가져오는데 실패했습니다. ${error.message}`
       );
     }
 

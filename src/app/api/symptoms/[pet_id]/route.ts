@@ -5,11 +5,11 @@ import {
   handleError,
   handleNetworkError,
   handleSuccess,
-} from "@/utils/api/error/api";
+} from "@/utils/error/api";
 
 export async function GET(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const pet_id = await params.pet_id;
+  const { pet_id } = await params;
   try {
     const { data, error } = await supabase
       .from("symptoms")
@@ -27,13 +27,17 @@ export async function GET(request: NextRequest, { params }: paramsType) {
 
 export async function POST(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const pet_id = await params.pet_id;
+  const { pet_id } = await params;
   try {
     const formData = await request.formData();
     const title = formData.get("title");
-    const description = formData.get("description");
-    const date = formData.get("date");
-    const image = formData.get("image") as File;
+    const content = formData.get("content");
+    const symptom_date = formData.get("symptom_date");
+    const image = formData.get("images") as File;
+    console.log("title", title);
+    console.log("content", content);
+
+    console.log("formData", formData);
 
     const { data: imageData, error: imageError } = await supabase.storage
       .from("symptoms")
@@ -47,9 +51,9 @@ export async function POST(request: NextRequest, { params }: paramsType) {
       .from("symptoms")
       .insert({
         title,
-        description,
-        symptoms_date: date,
-        image: imageData.path,
+        content,
+        symptom_date,
+        images: imageData.path,
         pet_id,
       })
       .select("*");

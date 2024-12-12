@@ -7,12 +7,10 @@ import {
   PASSWORD_VALIDATION,
   PASSWORD_CONFIRM_VALIDATION,
 } from "@/constants/authValidation";
+import { useJoinMutation } from "@/hooks/auth/useJoinMutation";
+import { formError } from "@/utils/error/form";
 
-import { handleJoin } from "@/service/auth";
-import useModalStore from "@/zustand/useModalStore";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { FieldErrors, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 type joinFormDataType = {
   nickname: string;
@@ -31,40 +29,13 @@ function JoinForm() {
     mode: "onChange",
   });
   const password = watch("password");
-  const router = useRouter();
-  const openModal = useModalStore((state) => state.openModal);
 
-  const joinMutation = useMutation({
-    mutationFn: handleJoin,
-    onSuccess: (response) => {
-      openModal({
-        type: "success",
-        title: "회원가입 성공",
-        content: response.message,
-        onConfirm: () => {
-          router.replace("/dashboard");
-        },
-      });
-    },
-    onError: (error) => {
-      openModal({
-        type: "error",
-        title: "회원가입 실패",
-        content: error.message,
-        onConfirm: () => {},
-      });
-    },
-  });
+  const joinMutation = useJoinMutation();
 
-  const handleError = (errors: FieldErrors) => {
-    Object.values(errors).forEach((error) => {
-      if (error?.message) alert(error.message);
-    });
-  };
-
+  formError(errors);
   return (
     <form
-      onSubmit={handleSubmit((data) => joinMutation.mutate(data), handleError)}
+      onSubmit={handleSubmit((data) => joinMutation.mutate(data), formError)}
       className="space-y-5 pt-[3.125rem] w-full"
     >
       <div>

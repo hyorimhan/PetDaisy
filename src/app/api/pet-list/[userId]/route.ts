@@ -17,7 +17,8 @@ export async function GET(
     const { data, error } = await supabase
       .from("pet_list")
       .select("*")
-      .eq("user_id", userId);
+      .eq("user_id", userId)
+      .order("created_at", { ascending: true });
 
     if (error) {
       return handleError(

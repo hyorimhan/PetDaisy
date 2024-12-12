@@ -6,8 +6,9 @@ type InputProps = {
   error?: FieldError;
   unit?: string;
   placeholder?: string;
-} & ComponentProps<"input"> &
-  ComponentProps<"textarea">;
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+} & Omit<ComponentProps<"input">, "onChange"> &
+  Omit<ComponentProps<"textarea">, "onChange">;
 function Input({
   label,
   type,
@@ -18,7 +19,7 @@ function Input({
 }: InputProps) {
   const inputId = useId();
   return (
-    <div className="flex flex-col gap-1">
+    <div className="w-full flex flex-col gap-1">
       <div
         className={`flex flex-col gap-1 justify-center bg-white p-[15px] rounded-lg ${
           error ? "border border-red-5" : "ring-0"
@@ -34,7 +35,7 @@ function Input({
           <textarea
             placeholder={placeholder}
             {...props}
-            className="resize-none scrollbar-hide focus:ring-0 focus-visible:outline-none forced-colors:bg-white"
+            className="resize-none scrollbar-hide focus:ring-0 focus-visible:outline-none forced-colors:bg-white text-gray-4"
             cols={30}
             rows={4}
             maxLength={501}

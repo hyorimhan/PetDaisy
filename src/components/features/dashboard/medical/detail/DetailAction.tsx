@@ -21,6 +21,13 @@ function DetailAction({ visitId }: { visitId: string }) {
         content="삭제하기"
         onClick={() => handleDeleteVisit(visitId)}
       />
+      <Button
+        types="lg"
+        bgColor="bg-gray-1"
+        textColor="text-gray-3"
+        content="목록으로 이동"
+        href="/dashboard/medicalList"
+      />
     </div>
   );
 }

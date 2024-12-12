@@ -11,7 +11,6 @@ import { FieldErrors } from "react-hook-form";
 import FormField from "./FormField";
 
 function PetRegistrationForm() {
-
   const user = useAuthStore((state) => state.user);
 
   const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
@@ -30,7 +29,6 @@ function PetRegistrationForm() {
   } = usePetRegistrationForm();
 
   const { mutate: registPet } = usePetRegistration(user?.id as string);
-
 
   const handleAnimalRegist = (data: PetRegistrationType) => {
     const petData = {

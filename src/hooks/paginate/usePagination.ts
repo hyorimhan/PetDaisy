@@ -6,14 +6,14 @@ export function usePagination() {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const page = currentPage + 1;
 
-  const handlePageClick = (selectedPage: { selected: number }) => {
+  const onPageChange = (selectedPage: { selected: number }) => {
     setCurrentPage(selectedPage.selected);
   };
 
   return {
     page,
     limit,
-    handlePageClick,
+    onPageChange,
     currentPage,
   };
 }

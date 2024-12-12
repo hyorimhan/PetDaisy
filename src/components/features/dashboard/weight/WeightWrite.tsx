@@ -5,11 +5,8 @@ import {
   DATE_VALIDATION,
   WEIGHT_VALIDATION,
 } from "@/constants/weightValidation";
-import { registerWeight } from "@/service/weight";
-import useModalStore from "@/zustand/useModalStore";
+import { useRegistWeight } from "@/hooks/weight/useRegistWeight";
 import { usePetStore } from "@/zustand/usePetStore";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -20,8 +17,7 @@ type weightFormType = {
 
 function WeightWrite() {
   const { petId } = usePetStore();
-  const { openModal } = useModalStore();
-  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -29,29 +25,7 @@ function WeightWrite() {
     formState: { errors },
   } = useForm<weightFormType>();
 
-  const weightMutation = useMutation({
-    mutationFn: registerWeight,
-    onSuccess: (data) => {
-      openModal({
-        type: "success",
-        title: "몸무게 등록",
-        content: data.message,
-        onConfirm: () => {
-          router.replace("/dashboard/weightList");
-        },
-      });
-    },
-    onError: (error) => {
-      openModal({
-        type: "error",
-        title: "몸무게 등록",
-        content: error.message,
-        onConfirm: () => {
-          router.replace("/dashboard/weightList");
-        },
-      });
-    },
-  });
+  const weightMutation = useRegistWeight();
 
   const handleWeight = (data: weightFormType) => {
     weightMutation.mutate({

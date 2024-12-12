@@ -3,7 +3,7 @@ import {
   handleError,
   handleNetworkError,
   handleSuccess,
-} from "@/utils/api/error/api";
+} from "@/utils/error/api";
 
 export async function DELETE() {
   const supabase = await createClient();

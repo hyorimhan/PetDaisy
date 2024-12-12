@@ -5,11 +5,10 @@ import {
   EMAIL_VALIDATION,
   PASSWORD_VALIDATION,
 } from "@/constants/authValidation";
-import { handleLogin } from "@/service/auth";
-import useModalStore from "@/zustand/useModalStore";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { FieldErrors, useForm } from "react-hook-form";
+import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
+import { formError } from "@/utils/error/form";
+
+import { useForm } from "react-hook-form";
 
 type loginDataType = {
   email: string;
@@ -17,44 +16,18 @@ type loginDataType = {
 };
 
 function LoginForm() {
-  const router = useRouter();
-  const openModal = useModalStore((state) => state.openModal);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<loginDataType>();
 
-  const { register, handleSubmit } = useForm<loginDataType>();
-
-  const loginMutation = useMutation({
-    mutationFn: handleLogin,
-    onSuccess: () => {
-      openModal({
-        type: "success",
-        title: "로그인 성공",
-        content: "로그인에 성공했습니다.",
-        onConfirm: () => {
-          router.replace("/dashboard");
-        },
-      });
-    },
-    onError: (error) => {
-      openModal({
-        type: "error",
-        title: "로그인 실패",
-        content: "로그인에 실패했습니다.",
-        onConfirm: () => {
-          alert(error.message);
-        },
-      });
-    },
-  });
-
-  const handleError = (errors: FieldErrors) => {
-    Object.values(errors).forEach((error) => {
-      if (error) return alert(error.message);
-    });
-  };
+  const loginMutation = useLoginMutation();
+  formError(errors);
 
   return (
     <form
-      onSubmit={handleSubmit((data) => loginMutation.mutate(data), handleError)}
+      onSubmit={handleSubmit((data) => loginMutation.mutate(data), formError)}
       className="pt-[3.125rem] space-y-5 w-full"
     >
       <div>

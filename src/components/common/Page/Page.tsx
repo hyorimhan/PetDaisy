@@ -11,8 +11,12 @@ function Page({ children }: Readonly<PropsWithChildren>) {
   return (
     <div
       className={`${
-        details?.animal_type === DOG ? "bg-gradient-2" : "bg-gradient-3"
-      } w-[360px] md:w-[600px] mx-auto p-3 min-h-screen`}
+        !petId
+          ? "bg-gradient-1"
+          : details?.animal_type === DOG
+          ? "bg-gradient-2"
+          : "bg-gradient-3"
+      } w-[360px] md:w-[600px] mx-auto p-3 pb-[120px]`}
     >
       {children}
     </div>

@@ -39,6 +39,23 @@ function Button({
   };
   const activeStyle = "border border-main-5 text-main-5";
 
+  if (!href && types === "addInfo") {
+    return (
+      <button
+        className={`${variantStyle[types]}`}
+        {...(props as ComponentProps<"button">)}
+      >
+        <Image
+          src="/img/icon/add.svg"
+          alt="플러스 아이콘"
+          width={20}
+          height={20}
+        />
+        {content}
+      </button>
+    );
+  }
+
   if (href && types === "addInfo") {
     return (
       <Link href={href} className={`${variantStyle[types]}`}>

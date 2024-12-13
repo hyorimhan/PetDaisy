@@ -1,19 +1,6 @@
 "use client";
-<<<<<<< HEAD
-import { usePetStore } from "@/zustand/usePetStore";
-import React from "react";
-import {
-  ResponsiveContainer,
-  LineChart,
-  CartesianGrid,
-  XAxis,
-  Line,
-} from "recharts";
-import useGetWeight from "@/hooks/weight/useGetWeight";
-=======
->>>>>>> 8fd5984208f285a8a0e64194f0873417a1977c41
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
-import useGetWeight from "@/hooks/chart/useGetChart";
+import useGetWeight from "@/hooks/weight/useGetWeight";
 import { usePetStore } from "@/zustand/usePetStore";
 import {
   CartesianGrid,

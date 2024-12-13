@@ -2,13 +2,28 @@
 import Card from "@/components/common/Card/Card";
 import Empty from "@/components/common/Empty/Empty";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
+import PaginateBtn from "@/components/common/paginate/PaginateBtn";
+import { useSearchByDate } from "@/hooks/medical/useSearchByDate";
+import usePagination from "@/hooks/paginate/usePagination";
 import { useGetMedicalVisitLists } from "@/hooks/useGetMedicaVisitlLists";
+import { MedicalVisits } from "@/types/medical";
 import { usePetStore } from "@/zustand/usePetStore";
 import MedicalCard from "./MedicalCard";
-
+import SearchByMonth from "./SearchByMonth";
 function MedicalList() {
   const petId = usePetStore((state) => state.petId) as string;
-  const { medicalLists, isPending, isError } = useGetMedicalVisitLists(petId);
+  const { page, limit, onPageChange, currentPage } = usePagination();
+  const { medicalLists, isPending, isError } = useGetMedicalVisitLists(
+    petId ?? "",
+    page,
+    limit
+  );
+
+  const { searchResults, handleSearch } = useSearchByDate(petId);
+
+  const displayData = (searchResults ||
+    medicalLists?.data ||
+    []) as MedicalVisits;
 
   return (
     <QueryStateHandler
@@ -16,17 +31,21 @@ function MedicalList() {
       isPending={isPending}
       isError={isError}
     >
+      <SearchByMonth onSearch={handleSearch} />
       <Card>
-        {medicalLists.length === 0 && (
-          <Empty content="진료 기록 정보가 없습니다." />
-        )}
+        {!displayData.length && <Empty content="진료 기록 정보가 없습니다." />}
         <ul className="flex flex-col gap-2">
-          {medicalLists.map((list) => (
+          {displayData.map((list) => (
             <li key={list.id}>
               <MedicalCard list={list} />
             </li>
           ))}
         </ul>
+        <PaginateBtn
+          pageCount={Math.ceil((medicalLists?.count ?? 0) / limit)}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        />
       </Card>
     </QueryStateHandler>
   );

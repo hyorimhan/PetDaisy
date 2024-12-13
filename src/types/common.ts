@@ -5,3 +5,8 @@ export type paramsType = {
     post_id?: string;
   };
 };
+
+export type SearchDateType = {
+  year: number;
+  month: number;
+};

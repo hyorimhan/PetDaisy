@@ -14,6 +14,12 @@ export async function getMedicalVisitLists(
   return result.data;
 }
 
+export async function getMedicalVisitById(petId: string) {
+  const response = await fetch(`/api/medical/visits/${petId}`);
+  const result = await response.json();
+  return result.data;
+}
+
 export async function getMedicalVisitsByMonth(
   petId: string,
   year: number | null,

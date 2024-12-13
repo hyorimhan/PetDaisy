@@ -1,15 +1,14 @@
 "use client";
-import { usePetStore } from "@/zustand/usePetStore";
-import React from "react";
-import {
-  ResponsiveContainer,
-  LineChart,
-  CartesianGrid,
-  XAxis,
-  Line,
-} from "recharts";
-import useGetWeight from "@/hooks/chart/useGetChart";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
+import useGetWeight from "@/hooks/chart/useGetChart";
+import { usePetStore } from "@/zustand/usePetStore";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  XAxis,
+} from "recharts";
 
 function Chart() {
   const { petId } = usePetStore();
@@ -27,7 +26,7 @@ function Chart() {
     return (
       <div className="w-full h-full flex items-center justify-center">
         <div className="text-center p-6">
-          <p className="text-lg text-gray-600">몸무게를 추가해주세요</p>
+          <p className="text-lg text-gray-4">몸무게를 추가해주세요</p>
         </div>
       </div>
     );

@@ -10,7 +10,7 @@ function Detail({ details }: { details: MedicalVisits }) {
           <span>{details.hospital_name}</span>
         </div>
         <h4 className="text-[20px]">{details.title}</h4>
-        <p className="text-gray-4">{details.content}</p>
+        <p className="text-gray-4 whitespace-pre-line">{details.content}</p>
         {details.next_visit_date && (
           <div className="mt-5">
             <h5 className="text-[12px] text-gray-3">다음 진료 일정</h5>

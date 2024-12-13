@@ -7,10 +7,10 @@ import ModalProvider from "./(providers)/_providers/ModalProvider";
 import QueryProvider from "./(providers)/_providers/QueryProvider";
 import "./globals.css";
 
+import { usePathname } from "next/navigation";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -21,11 +21,7 @@ export default function RootLayout({
   const dashboard = pathname === "/dashboard";
   return (
     <html lang="ko">
-      <body
-        className={`min-h-screen ${
-          !dashboard ? "overflow-hidden" : "overflow-auto"
-        }`}
-      >
+      <body className="min-h-screen">
         <QueryProvider>
           <AuthProvider>
             <ModalProvider>
@@ -33,11 +29,7 @@ export default function RootLayout({
                 <div className="fixed top-0 left-0 right-0 z-50">
                   <Header />
                 </div>
-                <main
-                  className={`pt-[59px] pb-[60px] ${
-                    !dashboard ? "overflow-hidden" : "overflow-auto"
-                  }`}
-                >
+                <main className="pt-[59px] pb-[60px] overflow-scroll scrollbar-hide min-h-screen">
                   {children}
                 </main>
                 <div className="fixed bottom-0 left-0 right-0 z-50">

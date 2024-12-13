@@ -41,3 +41,18 @@ export async function deleteMedicalVisit(visitId: string) {
   const result = await response.json();
   return result.message;
 }
+
+export async function updateMedicalVisit(
+  data: MedicalFormValues,
+  petId: string
+) {
+  const response = await fetch(`/api/medical/visits/${petId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  return result;
+}

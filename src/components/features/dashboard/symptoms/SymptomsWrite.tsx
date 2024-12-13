@@ -1,4 +1,5 @@
 "use client";
+
 import Button from "@/components/common/Button/Button";
 import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Input from "@/components/common/Input/Input";
@@ -11,7 +12,6 @@ import { useSymptomsMutation } from "@/hooks/symptoms/useSymptomsMutation";
 import useUploadImages from "@/hooks/useUploadImages";
 import { symptomsUpload } from "@/service/symptoms";
 import { usePetStore } from "@/zustand/usePetStore";
-
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -35,18 +35,23 @@ function SymptomsWrite() {
   const symptomsMutation = useSymptomsMutation();
 
   const handleSymptoms = (data: formDataType) => {
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("content", data.content);
-    formData.append("symptom_date", data.symptom_date);
-    formData.append("pet_id", petId!);
-    uploadImageURLs.forEach((image) => formData.append("images", image));
-    symptomsMutation.mutate(formData);
-  };
+    try {
+      const symptomsData = {
+        title: data.title,
+        content: data.content,
+        symptom_date: data.symptom_date,
+        pet_id: petId!,
+        images: JSON.stringify(uploadImageURLs.map((url) => `${url}`)),
+      };
 
+      symptomsMutation.mutate(symptomsData);
+    } catch (error) {
+      console.error("증상 등록 중 오류 발생:", error);
+    }
+  };
   return (
     <div>
-      <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light ">
+      <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light">
         관찰 기록
       </div>
       <form onSubmit={handleSubmit(handleSymptoms)}>
@@ -78,11 +83,16 @@ function SymptomsWrite() {
         </div>
         <div className="mt-[1.875rem] space-y-[.625rem]">
           <Button
-            content="등록하기"
+            content={
+              imagePaths.length > 0 && uploadImageURLs.length === 0
+                ? "이미지 업로드중"
+                : "등록하기"
+            }
             types="lg"
             textColor="text-white"
             bgColor="bg-main-5"
             type="submit"
+            disabled={imagePaths.length > 0 && uploadImageURLs.length === 0}
           />
           <Button
             content="취소하기"

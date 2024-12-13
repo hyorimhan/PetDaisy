@@ -2,12 +2,12 @@
 import Chart from "./Chart";
 import Button from "@/components/common/Button/Button";
 import { usePetStore } from "@/zustand/usePetStore";
-import useGetWeight from "@/hooks/chart/useGetChart";
+import useGetWeight from "@/hooks/weight/useGetWeight";
 import usePagination from "@/hooks/paginate/usePagination";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import Card from "@/components/common/Card/Card";
-import useDeleteMutation from "@/hooks/weight/useDeleteMutation";
 import PaginateBtn from "@/components/common/paginate/PaginateBtn";
+import useDeleteMutation from "@/hooks/weight/useDeleteMutation";
 
 export type weightTableType = {
   id: string;
@@ -30,7 +30,7 @@ function WeightList() {
     page,
     limit
   );
-  const deleteMutation = useDeleteMutation();
+  const handleDelete = useDeleteMutation();
 
   const formatWeightChange = (change: number) => {
     if (change === 0) return "변화없음";
@@ -83,7 +83,9 @@ function WeightList() {
                     <span className={weightChangeColor(weightChange)}>
                       {formatWeightChange(weightChange)}
                     </span>
-                    <button onClick={() => deleteMutation.mutate(weight.id)}>
+                    <button
+                      onClick={() => handleDelete.handleDeleteWeight(weight.id)}
+                    >
                       x
                     </button>
                   </div>

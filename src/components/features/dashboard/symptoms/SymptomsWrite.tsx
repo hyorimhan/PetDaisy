@@ -31,7 +31,8 @@ function SymptomsWrite() {
       type: "symptoms",
       uploadFn: symptomsUpload,
     });
-
+  console.log("uploadImageURLs:", uploadImageURLs);
+  console.log("imagePaths:", imagePaths);
   const symptomsMutation = useSymptomsMutation();
 
   const handleSymptoms = (data: formDataType) => {
@@ -40,7 +41,10 @@ function SymptomsWrite() {
     formData.append("content", data.content);
     formData.append("symptom_date", data.symptom_date);
     formData.append("pet_id", petId!);
-    uploadImageURLs.forEach((image) => formData.append("images", image));
+    formData.append(
+      "images",
+      uploadImageURLs.length !== 0 ? JSON.stringify(uploadImageURLs) : ""
+    );
     symptomsMutation.mutate(formData);
   };
 

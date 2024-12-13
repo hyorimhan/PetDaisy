@@ -33,15 +33,12 @@ export async function POST(request: NextRequest, { params }: paramsType) {
     const title = formData.get("title");
     const content = formData.get("content");
     const symptom_date = formData.get("symptom_date");
-    const image = formData.get("images") as File;
-    console.log("title", title);
-    console.log("content", content);
-
-    console.log("formData", formData);
-
+    const images = formData.get("images");
+    const imageUrls = images ? JSON.parse(images as string) : [];
+    console.log(imageUrls);
     const { data: imageData, error: imageError } = await supabase.storage
       .from("symptoms")
-      .upload(`images/${Date.now()}.webp`, image);
+      .upload(`images/${Date.now()}.webp`, imageUrls);
 
     if (imageError) {
       return handleError("이미지 등록에 실패했습니다");

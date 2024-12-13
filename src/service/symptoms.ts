@@ -11,3 +11,9 @@ export const getSymptomsList = async (pet_id: string) => {
   const result = await response.json();
   return result.data;
 };
+
+export const getSymptomsDetail = async (pet_id: string, post_id: string) => {
+  const response = await fetch(`/api/symptoms/${pet_id}/${post_id}`);
+  const result = await response.json();
+  return result.data;
+};

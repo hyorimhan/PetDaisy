@@ -3,13 +3,12 @@ import Button from "@/components/common/Button/Button";
 import Card from "@/components/common/Card/Card";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetSymptoms from "@/hooks/symptoms/useGetSymptoms";
+import Image from "next/image";
 import Link from "next/link";
 
 function SymptomsList() {
   const { symptomsData, isPending, isError } = useGetSymptoms();
-  console.log("로딩 상태:", isPending);
-  console.log("에러 상태:", isError);
-  console.log("데이터:", symptomsData);
+
   return (
     <QueryStateHandler
       data={symptomsData}
@@ -24,22 +23,37 @@ function SymptomsList() {
         types="addInfo"
         href={"/dashboard/symptomsWrite"}
       />
-
-      <Card>
-        <div>
-          {symptomsData?.map((symptom) => (
-            <Link
-              href={`/dashboard/symptomsDetail/${symptom.id}`}
-              key={symptom.id}
-            >
-              {symptom.title}
-            </Link>
-          ))}
-        </div>
-        {/* <Link href={"/dashboard/symptomsDetail"}>
-          <div className="w-full h-[65px] bg-main-1 rounded-lg">1</div>
-        </Link> */}
-      </Card>
+      <div className="pt-3 ">
+        <Card>
+          <div className="h-[600px]">
+            {symptomsData?.map((symptom) => (
+              <div className="bg-main-1 p-3 rounded-lg mb-2" key={symptom.id}>
+                <Link
+                  href={`/dashboard/symptomsDetail/${symptom.id}`}
+                  className="flex flex-col"
+                >
+                  <span className="text-gray-3 text-xs">
+                    {symptom.symptom_date}
+                  </span>
+                  <span className="mt-2">{symptom.title}</span>
+                </Link>
+                {/* {symptom.images && (
+                  <Image
+                    src={
+                      Array.isArray(symptom.images)
+                        ? symptom.images.map((image) => image)
+                        : symptom?.images[0]
+                    }
+                    alt="symptomImg"
+                    width={100}
+                    height={100}
+                  />
+                )} */}
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
     </QueryStateHandler>
   );
 }

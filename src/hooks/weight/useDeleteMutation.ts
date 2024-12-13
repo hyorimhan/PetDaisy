@@ -9,7 +9,7 @@ function useDeleteMutation() {
   const { openModal } = useModalStore();
   const router = useRouter();
   const queryClient = useQueryClient();
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: (weightId: string) => deleteWeight(weightId, petId ?? ""),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
@@ -35,6 +35,22 @@ function useDeleteMutation() {
       });
     },
   });
+
+  const handleDeleteWeight = (weightId: string) => {
+    openModal({
+      type: "warning",
+      title: "삭제하시겠습니까?",
+      content: "해당 데이터를 삭제합니다",
+      isTwoButton: true,
+      onConfirm: () => {
+        mutation.mutate(weightId);
+      },
+      onCancel: () => {
+        router.replace("/dashboard/weightList");
+      },
+    });
+  };
+  return { handleDeleteWeight };
 }
 
 export default useDeleteMutation;

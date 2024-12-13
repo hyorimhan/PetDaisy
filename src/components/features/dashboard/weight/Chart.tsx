@@ -8,7 +8,7 @@ import {
   XAxis,
   Line,
 } from "recharts";
-import useGetWeight from "@/hooks/chart/useGetChart";
+import useGetWeight from "@/hooks/weight/useGetWeight";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 
 function Chart() {

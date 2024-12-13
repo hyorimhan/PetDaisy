@@ -101,7 +101,7 @@ export type Database = {
           id: string;
           neutered: string;
           pet_id: string;
-          weight: number;
+          weight: string;
           images: string;
         };
         Insert: {
@@ -112,7 +112,7 @@ export type Database = {
           id?: string;
           neutered: string;
           pet_id: string;
-          weight: number;
+          weight: string;
           images: string;
         };
         Update: {
@@ -123,7 +123,7 @@ export type Database = {
           id?: string;
           neutered?: string;
           pet_id?: string;
-          weight?: number;
+          weight?: string;
           images?: string;
         };
         Relationships: [

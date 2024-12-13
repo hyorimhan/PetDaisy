@@ -16,6 +16,7 @@ function ExpenseFormFieldItem({
   error,
 }: ExpenseFormFieldItemProps) {
   const { register } = useFormContext();
+  const { setValue } = useFormContext();
 
   const handleRemoveItem = (index: number) => {
     if (index > 0) {
@@ -23,6 +24,12 @@ function ExpenseFormFieldItem({
     }
   };
 
+  const handlePriceChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    setValue(`expenses.${index}.price`, value);
+  };
   return (
     <div className="relative">
       <div className="w-full flex items-start gap-3">
@@ -44,6 +51,7 @@ function ExpenseFormFieldItem({
           )}
           unit="원"
           error={error.expenses?.[index]?.price}
+          onChange={(e) => handlePriceChange(e)}
         />
       </div>
       {index > 0 && (

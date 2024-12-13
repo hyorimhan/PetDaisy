@@ -11,6 +11,7 @@ import {
   PET_WEIGHT_VALIDATION,
 } from "@/constants/petRegistrationValidation";
 import { PetRegistrationType } from "@/types/petProfile";
+import { handleFixedWeight } from "@/utils/format/fixedWeight";
 import { ChangeEvent } from "react";
 import {
   FieldErrors,
@@ -25,7 +26,6 @@ interface FormFieldsProps {
   errors: FieldErrors<PetRegistrationType>;
   setValue: UseFormSetValue<PetRegistrationType>;
   watch: UseFormWatch<PetRegistrationType>;
-  handleWeightChange: (e: ChangeEvent<HTMLInputElement>) => void;
   imagePaths: string[];
   imageUploadError: string | null;
   handleImageUpload: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -36,11 +36,14 @@ function FormField({
   errors,
   setValue,
   watch,
-  handleWeightChange,
   imagePaths,
   imageUploadError,
   handleImageUpload,
 }: FormFieldsProps) {
+  const handleSetWeight = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = handleFixedWeight(e);
+    setValue("weight", value);
+  };
   return (
     <>
       <ImageUploadButton
@@ -78,7 +81,7 @@ function FormField({
         unit="kg"
         error={errors.weight}
         {...register("weight", PET_WEIGHT_VALIDATION())}
-        onChange={handleWeightChange}
+        onChange={handleSetWeight}
         value={watch("weight") || ""}
       />
       <Select

@@ -34,7 +34,7 @@ function MedicalCard({ list }: MedicalCardProps) {
         </div>
         <div className="flex justify-between items-center text-[16px]">
           <h4 className="line-clamp-2">{list.title}</h4>
-          <span className="text-red-4">{totalPrice}</span>
+          <span className="text-red-4">{totalPrice}원</span>
         </div>
       </Link>
     </QueryStateHandler>

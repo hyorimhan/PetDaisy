@@ -1,3 +1,4 @@
+"use client";
 import Button from "@/components/common/Button/Button";
 import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Input from "@/components/common/Input/Input";

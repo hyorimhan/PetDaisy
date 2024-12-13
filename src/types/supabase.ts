@@ -99,10 +99,10 @@ export type Database = {
           created_at: string;
           gender: string;
           id: string;
+          images: string;
           neutered: string;
           pet_id: string;
           weight: string;
-          images: string;
         };
         Insert: {
           animal_type: string;
@@ -110,10 +110,10 @@ export type Database = {
           created_at?: string;
           gender: string;
           id?: string;
+          images: string;
           neutered: string;
           pet_id: string;
           weight: string;
-          images: string;
         };
         Update: {
           animal_type?: string;
@@ -121,10 +121,10 @@ export type Database = {
           created_at?: string;
           gender?: string;
           id?: string;
+          images?: string;
           neutered?: string;
           pet_id?: string;
           weight?: string;
-          images?: string;
         };
         Relationships: [
           {
@@ -265,21 +265,21 @@ export type Database = {
           id: string;
           measured_at: string;
           pet_id: string;
-          weight: number;
+          weight: string;
         };
         Insert: {
           created_at?: string;
           id?: string;
           measured_at: string;
           pet_id: string;
-          weight: number;
+          weight: string;
         };
         Update: {
           created_at?: string;
           id?: string;
           measured_at?: string;
           pet_id?: string;
-          weight?: number;
+          weight?: string;
         };
         Relationships: [
           {

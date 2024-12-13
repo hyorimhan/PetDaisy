@@ -27,7 +27,9 @@ function ExpenseFormFieldItem({
   const handlePriceChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const value = e.target.value.replace(/[^0-9]/g, "");
+    const value = e.target.value
+      .replace(/^0+|[^0-9]/g, "")
+      .replace(/^0+(\d)/, "$1");
     setValue(`expenses.${index}.price`, value);
   };
   return (

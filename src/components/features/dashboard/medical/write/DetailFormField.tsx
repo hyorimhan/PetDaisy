@@ -1,3 +1,4 @@
+"use client";
 import Input from "@/components/common/Input/Input";
 import {
   MEDICAL_CONTENT_VALIDATION,

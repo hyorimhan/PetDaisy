@@ -1,11 +1,11 @@
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import { useGetMedicalExpenses } from "@/hooks/useGetMedicalExpenses";
-import { MedicalVisits } from "@/types/medical";
+import { MedicalVisit } from "@/types/medical";
 import { calculateTotal } from "@/utils/format/calculateTotal";
 import Link from "next/link";
 
 interface MedicalCardProps {
-  list: MedicalVisits;
+  list: MedicalVisit;
 }
 function MedicalCard({ list }: MedicalCardProps) {
   const { medicalExpenses, isPending, isError } = useGetMedicalExpenses(

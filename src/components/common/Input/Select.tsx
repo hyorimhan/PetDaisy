@@ -26,6 +26,7 @@ interface SelectProps<TFieldValues extends FieldValues> {
     name: Path<TFieldValues>,
     value: PathValue<TFieldValues, Path<TFieldValues>>
   ) => void;
+  onChange?: (value: PathValue<TFieldValues, Path<TFieldValues>>) => void;
 }
 
 function Select<TFieldValues extends FieldValues>({
@@ -36,6 +37,7 @@ function Select<TFieldValues extends FieldValues>({
   register,
   registerOptions,
   setValue,
+  onChange,
 }: SelectProps<TFieldValues>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<
@@ -48,10 +50,15 @@ function Select<TFieldValues extends FieldValues>({
     setValue(name, option);
     setSelectedOption(option);
     setIsOpen(false);
+
+    if (onChange) {
+      console.log("Select onChange called with:", option);
+      onChange(option);
+    }
   };
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="w-full flex flex-col gap-1">
       <div
         className={`relative flex flex-col gap-1 justify-center bg-white p-[15px] rounded-lg ${
           error ? "border border-red-5" : "ring-0"

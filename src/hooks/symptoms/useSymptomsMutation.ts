@@ -1,4 +1,4 @@
-import { symptomsUpload } from "@/service/symptoms";
+import { symptomsRegist } from "@/service/symptoms";
 import useModalStore from "@/zustand/useModalStore";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,7 @@ export const useSymptomsMutation = () => {
   const openModal = useModalStore((state) => state.openModal);
 
   return useMutation({
-    mutationFn: symptomsUpload,
+    mutationFn: symptomsRegist,
     onSuccess: () => {
       openModal({
         type: "success",

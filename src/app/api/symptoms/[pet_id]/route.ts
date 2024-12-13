@@ -28,32 +28,20 @@ export async function GET(request: NextRequest, { params }: paramsType) {
 export async function POST(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
   const { pet_id } = await params;
+
   try {
-    const formData = await request.formData();
-    const title = formData.get("title");
-    const content = formData.get("content");
-    const symptom_date = formData.get("symptom_date");
-    const image = formData.get("images") as File;
-    console.log("title", title);
-    console.log("content", content);
+    const formData = await request.json();
 
-    console.log("formData", formData);
-
-    const { data: imageData, error: imageError } = await supabase.storage
-      .from("symptoms")
-      .upload(`images/${Date.now()}.webp`, image);
-
-    if (imageError) {
-      return handleError("이미지 등록에 실패했습니다");
-    }
+    const images = formData.images;
+    const imageUrls = images ? JSON.parse(images as string) : [];
 
     const { data, error } = await supabase
       .from("symptoms")
       .insert({
-        title,
-        content,
-        symptom_date,
-        images: imageData.path,
+        title: formData.title,
+        content: formData.content,
+        symptom_date: formData.symptom_date,
+        images: imageUrls,
         pet_id,
       })
       .select("*");
@@ -62,7 +50,7 @@ export async function POST(request: NextRequest, { params }: paramsType) {
       return handleError(error.message);
     }
     return handleSuccess(undefined, data);
-  } catch {
+  } catch (error) {
     return handleNetworkError();
   }
 }

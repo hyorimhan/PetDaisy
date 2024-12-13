@@ -1,6 +1,6 @@
 "use client";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
-import useGetWeight from "@/hooks/chart/useGetChart";
+import useGetWeight from "@/hooks/weight/useGetWeight";
 import { usePetStore } from "@/zustand/usePetStore";
 import {
   CartesianGrid,

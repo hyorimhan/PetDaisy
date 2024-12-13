@@ -9,7 +9,7 @@ import MedicalCard from "./MedicalCard";
 function Medical() {
   const petId = usePetStore((state) => state.petId) as string;
   const { medicalLists } = useGetMedicalVisitLists(petId);
-  const latestMedicalList = medicalLists.slice(0, 3);
+  const latestMedicalList = medicalLists?.data.slice(0, 3) || [];
 
   return (
     <Card>

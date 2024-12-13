@@ -29,12 +29,7 @@ export default function RootLayout({
                 <div className="fixed top-0 left-0 right-0 z-50">
                   <Header />
                 </div>
-                <main
-                  className={`pt-[59px] pb-[60px] ${
-                    //!dashboard ? "overflow-hidden" : "overflow-auto"
-                    "overflow-scroll scrollbar-hide min-h-screen"
-                  }`}
-                >
+                <main className="pt-[59px] pb-[60px] overflow-scroll scrollbar-hide min-h-screen">
                   {children}
                 </main>
                 <div className="fixed bottom-0 left-0 right-0 z-50">

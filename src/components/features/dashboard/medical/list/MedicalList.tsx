@@ -10,9 +10,6 @@ function MedicalList() {
   const petId = usePetStore((state) => state.petId) as string;
   const { medicalLists, isPending, isError } = useGetMedicalVisitLists(petId);
 
-  if (medicalLists.length === 0)
-    return <Empty content="진료 기록 정보가 없습니다." />;
-
   return (
     <QueryStateHandler
       data={medicalLists}
@@ -20,6 +17,9 @@ function MedicalList() {
       isError={isError}
     >
       <Card>
+        {medicalLists.length === 0 && (
+          <Empty content="진료 기록 정보가 없습니다." />
+        )}
         <ul className="flex flex-col gap-2">
           {medicalLists.map((list) => (
             <li key={list.id}>

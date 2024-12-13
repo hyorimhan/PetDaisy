@@ -3,7 +3,6 @@ import Button from "@/components/common/Button/Button";
 import Card from "@/components/common/Card/Card";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetSymptoms from "@/hooks/symptoms/useGetSymptoms";
-import Image from "next/image";
 import Link from "next/link";
 
 function SymptomsList() {

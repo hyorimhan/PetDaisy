@@ -1,8 +1,22 @@
+import { formDataType } from "@/components/features/dashboard/symptoms/SymptomsWrite";
+
 export const symptomsUpload = async (formData: FormData) => {
-  const response = await fetch(`/api/symptoms/${formData.get("pet_id")}`, {
+  const response = await fetch(`/api/symptoms/image`, {
     method: "POST",
     body: formData,
   });
+  return response;
+};
+
+export const symptomsRegist = async (data: formDataType) => {
+  const response = await fetch(`/api/symptoms/${data.pet_id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
   return response.json();
 };
 

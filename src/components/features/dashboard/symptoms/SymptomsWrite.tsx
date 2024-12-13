@@ -7,68 +7,54 @@ import {
   TITLE_VALIDATION,
 } from "@/constants/symptomsValidation";
 import { DATE_VALIDATION } from "@/constants/weightValidation";
+import { useSymptomsMutation } from "@/hooks/symptoms/useSymptomsMutation";
 import useUploadImages from "@/hooks/useUploadImages";
 import { symptomsUpload } from "@/service/symptoms";
-import useModalStore from "@/zustand/useModalStore";
-import { useMutation } from "@tanstack/react-query";
-import router from "next/router";
+import { usePetStore } from "@/zustand/usePetStore";
+
 import React from "react";
 import { useForm } from "react-hook-form";
 
+export type formDataType = {
+  title: string;
+  content: string;
+  symptom_date: string;
+  pet_id: string;
+  images?: string;
+};
+
 function SymptomsWrite() {
-  const { register, handleSubmit } = useForm();
-  const { openModal } = useModalStore();
+  const { petId } = usePetStore();
+  const { register, handleSubmit } = useForm<formDataType>();
   const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
     useUploadImages({
       type: "symptoms",
       uploadFn: symptomsUpload,
     });
 
-  const symptomsMutation = useMutation({
-    mutationFn: symptomsUpload,
-    onSuccess: () => {
-      openModal({
-        type: "success",
-        title: "관찰 기록",
-        content: "등록에 성공했습니다.",
-        onConfirm: () => {
-          router.replace("/dashboard");
-        },
-      });
-    },
-    onError: () => {
-      openModal({
-        type: "error",
-        title: "오류",
-        content: "등록에 실패했습니다",
-        onConfirm: () => {
-          router.replace("/dashboard");
-        },
-      });
-    },
-  });
+  const symptomsMutation = useSymptomsMutation();
 
-  const handleSymptoms = (data) => {
+  const handleSymptoms = (data: formDataType) => {
     const formData = new FormData();
     formData.append("title", data.title);
-    formData.append("description", data.content);
-    formData.append("date", data.date);
-    formData.append("pet_id", data.pet_id);
-    uploadImageURLs.forEach((image) => formData.append("image", image));
+    formData.append("content", data.content);
+    formData.append("symptom_date", data.symptom_date);
+    formData.append("pet_id", petId!);
+    uploadImageURLs.forEach((image) => formData.append("images", image));
     symptomsMutation.mutate(formData);
   };
 
   return (
     <div>
       <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light ">
-        진료 기록
+        관찰 기록
       </div>
       <form onSubmit={handleSubmit(handleSymptoms)}>
         <div className="space-y-3">
           <Input
             label="날짜"
             type="date"
-            {...register("date", DATE_VALIDATION())}
+            {...register("symptom_date", DATE_VALIDATION())}
           />
           <Input
             label="제목"

@@ -9,6 +9,7 @@ import { PetRegistrationType } from "@/types/petProfile";
 import { useAuthStore } from "@/zustand/useAuthStore";
 import { FieldErrors } from "react-hook-form";
 import FormField from "./FormField";
+import { formError } from "@/utils/error/form";
 
 function PetRegistrationForm() {
   const user = useAuthStore((state) => state.user);
@@ -47,16 +48,12 @@ function PetRegistrationForm() {
     registPet(petData);
   };
 
-  const handleError = (errors: FieldErrors) => {
-    Object.values(errors).forEach((error) => {
-      if (error?.message) alert(error.message);
-    });
-  };
+  formError(errors);
 
   return (
     <form
       className="flex flex-col gap-5 pb-[130px]"
-      onSubmit={handleSubmit((data) => handleAnimalRegist(data), handleError)}
+      onSubmit={handleSubmit((data) => handleAnimalRegist(data), formError)}
     >
       <FormField
         register={register}

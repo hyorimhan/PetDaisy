@@ -1,15 +1,15 @@
 import { NextRequest } from "next/server";
 import { createClient } from "@/supabase/server";
-import { paramsType } from "../../../../types/common";
+import { paramsType } from "../../../../../types/common";
 import {
   handleError,
   handleNetworkError,
   handleSuccess,
-} from "@/utils/api/error/api";
+} from "@/utils/error/api";
 
 export async function GET(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const post_id = params.post_id;
+  const { post_id } = await params;
   try {
     const { data, error } = await supabase
       .from("symptoms")
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest, { params }: paramsType) {
 
 export async function DELETE(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const post_id = params.post_id;
+  const { post_id } = await params;
   try {
     const { error } = await supabase
       .from("symptoms")
@@ -45,7 +45,7 @@ export async function DELETE(request: NextRequest, { params }: paramsType) {
 
 export async function PATCH(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
-  const post_id = params.post_id;
+  const { post_id } = await params;
   const { date, content, title, images } = await request.json();
   try {
     const { data, error } = await supabase

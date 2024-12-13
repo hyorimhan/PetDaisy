@@ -1,12 +1,13 @@
 import { createClient } from "@/supabase/server";
+
+import { NextRequest } from "next/server";
+import { paramsType } from "../../../../types/common";
+import { getPaginationParams } from "@/utils/paginate/pagination";
 import {
   handleError,
   handleNetworkError,
   handleSuccess,
-} from "@/utils/api/error/api";
-import { NextRequest } from "next/server";
-import { paramsType } from "../../../../types/common";
-import { getPaginationParams } from "@/utils/paginate/pagination";
+} from "@/utils/error/api";
 
 export async function GET(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();

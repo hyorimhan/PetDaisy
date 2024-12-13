@@ -27,3 +27,10 @@ export const registerWeight = async ({
   });
   return response.json();
 };
+
+export const deleteWeight = async (post_id: string, pet_id: string) => {
+  const response = await fetch(`/api/weight/${pet_id}/${post_id}`, {
+    method: "DELETE",
+  });
+  return response.json();
+};

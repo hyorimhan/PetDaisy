@@ -33,7 +33,7 @@ function MedicalCard({ list }: MedicalCardProps) {
           <span>{list.hospital_name}</span>
         </div>
         <div className="flex justify-between items-center text-[16px]">
-          <h4>{list.title}</h4>
+          <h4 className="line-clamp-2">{list.title}</h4>
           <span className="text-red-4">{totalPrice}</span>
         </div>
       </Link>

@@ -1,5 +1,6 @@
 "use client";
 import Card from "@/components/common/Card/Card";
+import Empty from "@/components/common/Empty/Empty";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import { useGetMedicalVisitLists } from "@/hooks/useGetMedicaVisitlLists";
 import { usePetStore } from "@/zustand/usePetStore";
@@ -8,6 +9,9 @@ import MedicalCard from "./MedicalCard";
 function MedicalList() {
   const petId = usePetStore((state) => state.petId) as string;
   const { medicalLists, isPending, isError } = useGetMedicalVisitLists(petId);
+
+  if (medicalLists.length === 0)
+    return <Empty content="진료 기록 정보가 없습니다." />;
 
   return (
     <QueryStateHandler

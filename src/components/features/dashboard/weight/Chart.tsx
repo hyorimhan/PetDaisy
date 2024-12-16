@@ -1,18 +1,13 @@
 "use client";
+
+
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetWeight from "@/hooks/weight/useGetWeight";
-import { usePetStore } from "@/zustand/usePetStore";
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  XAxis,
-} from "recharts";
+import { ResponsiveContainer, LineChart, XAxis, Line } from "recharts";
+
 
 function Chart() {
-  const { petId } = usePetStore();
-  const { weightData, isPending, isError } = useGetWeight(petId ?? "");
+  const { weightData, isPending, isError } = useGetWeight();
 
   const recentData = weightData?.data
     .slice(-10)
@@ -42,8 +37,7 @@ function Chart() {
           data={recentData}
           margin={{ top: 30, right: 30, left: 20, bottom: 5 }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" dy={10} tick={{ fontSize: 12 }} interval={0} />
+          <XAxis dataKey="date" dy={10} tick={{ fontSize: 12 }} interval={0} />{" "}
           <Line
             type="monotone"
             dataKey="weight"

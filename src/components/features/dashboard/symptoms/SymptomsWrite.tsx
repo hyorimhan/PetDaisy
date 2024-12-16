@@ -8,6 +8,7 @@ import {
   TITLE_VALIDATION,
 } from "@/constants/symptomsValidation";
 import { DATE_VALIDATION } from "@/constants/weightValidation";
+import useSymptomsEditMutation from "@/hooks/symptoms/useSymptomsEditMutation";
 import { useSymptomsMutation } from "@/hooks/symptoms/useSymptomsMutation";
 import useUploadImages from "@/hooks/useUploadImages";
 import { symptomsUpload } from "@/service/symptoms";
@@ -21,18 +22,33 @@ export type formDataType = {
   symptom_date: string;
   pet_id: string;
   images?: string;
+  id?: string;
+  post_id?: string;
 };
 
-function SymptomsWrite() {
+function SymptomsWrite({
+  isEdit = false,
+  defaultValue,
+}: Readonly<{
+  isEdit?: boolean;
+  defaultValue?: formDataType;
+}>) {
   const { petId } = usePetStore();
-  const { register, handleSubmit } = useForm<formDataType>();
+  const { register, handleSubmit } = useForm<formDataType>({
+    defaultValues: defaultValue,
+  });
+  const initialImg = defaultValue?.images
+    ? JSON.parse(defaultValue.images)
+    : [];
   const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
     useUploadImages({
       type: "symptoms",
       uploadFn: symptomsUpload,
+      initialPath: initialImg,
     });
 
   const symptomsMutation = useSymptomsMutation();
+  const symptomsEditMutation = useSymptomsEditMutation();
 
   const handleSymptoms = (data: formDataType) => {
     try {
@@ -41,10 +57,20 @@ function SymptomsWrite() {
         content: data.content,
         symptom_date: data.symptom_date,
         pet_id: petId!,
-        images: JSON.stringify(uploadImageURLs.map((url) => `${url}`)),
+        images:
+          uploadImageURLs.length > 0
+            ? JSON.stringify(uploadImageURLs.map((url) => `${url}`))
+            : defaultValue?.images ?? "[]",
       };
 
-      symptomsMutation.mutate(symptomsData);
+      if (isEdit) {
+        symptomsEditMutation.mutate({
+          post_id: defaultValue?.id,
+          ...symptomsData,
+        });
+      } else {
+        symptomsMutation.mutate(symptomsData);
+      }
     } catch (error) {
       console.error("증상 등록 중 오류 발생:", error);
     }
@@ -86,6 +112,8 @@ function SymptomsWrite() {
             content={
               imagePaths.length > 0 && uploadImageURLs.length === 0
                 ? "이미지 업로드중"
+                : isEdit
+                ? "수정하기"
                 : "등록하기"
             }
             types="lg"

@@ -2,12 +2,15 @@
 import Button from "@/components/common/Button/Button";
 import Card from "@/components/common/Card/Card";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
+
+import PaginateBtn from "@/components/common/paginate/PaginateBtn";
+import usePagination from "@/hooks/paginate/usePagination";
 import useGetSymptoms from "@/hooks/symptoms/useGetSymptoms";
 import Link from "next/link";
 
 function SymptomsList() {
-  const { symptomsData, isPending, isError } = useGetSymptoms();
-
+  const { page, limit, onPageChange, currentPage } = usePagination();
+  const { symptomsData, isPending, isError } = useGetSymptoms(page, limit);
   return (
     <QueryStateHandler
       data={symptomsData}
@@ -25,7 +28,7 @@ function SymptomsList() {
       <div className="pt-3 ">
         <Card>
           <div className="h-[600px]">
-            {symptomsData?.map((symptom) => (
+            {symptomsData?.data.map((symptom) => (
               <div className="bg-main-1 p-3 rounded-lg mb-2" key={symptom.id}>
                 <Link
                   href={`/dashboard/symptomsDetail/${symptom.id}`}
@@ -36,23 +39,16 @@ function SymptomsList() {
                   </span>
                   <span className="mt-2">{symptom.title}</span>
                 </Link>
-                {/* {symptom.images && (
-                  <Image
-                    src={
-                      Array.isArray(symptom.images)
-                        ? symptom.images.map((image) => image)
-                        : symptom?.images[0]
-                    }
-                    alt="symptomImg"
-                    width={100}
-                    height={100}
-                  />
-                )} */}
               </div>
             ))}
           </div>
         </Card>
       </div>
+      <PaginateBtn
+        pageCount={Math.ceil((symptomsData?.count ?? 0) / limit)}
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+      />
     </QueryStateHandler>
   );
 }

@@ -6,10 +6,15 @@ import { useState } from "react";
 interface UploadImagesProps {
   type: "pet-profiles" | "symptoms";
   uploadFn: (formData: FormData) => Promise<Response>;
+  initialPath?: string[];
 }
-export default function useUploadImages({ type, uploadFn }: UploadImagesProps) {
+export default function useUploadImages({
+  type,
+  uploadFn,
+  initialPath = [],
+}: UploadImagesProps) {
   const [uploadImageURLs, setUploadImageURLs] = useState<string[]>([]);
-  const [imagePaths, setImagePaths] = useState<string[]>([]);
+  const [imagePaths, setImagePaths] = useState<string[]>(initialPath);
   const [imageUploadError, setImageUploadError] = useState<string | null>(null);
 
   const { mutate: uploadNewImageFile } = useMutation({

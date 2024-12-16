@@ -221,6 +221,7 @@ export type Database = {
         };
         Relationships: [];
       };
+
       vaccinations: {
         Row: {
           created_at: string;
@@ -228,9 +229,9 @@ export type Database = {
           id: string;
           note: string | null;
           pet_id: string;
+          price: number;
           vaccination_date: string;
           vaccine_name: string;
-          price: number;
         };
         Insert: {
           created_at?: string;
@@ -238,9 +239,9 @@ export type Database = {
           id?: string;
           note?: string | null;
           pet_id: string;
+          price: number;
           vaccination_date: string;
           vaccine_name: string;
-          price: number;
         };
         Update: {
           created_at?: string;
@@ -248,9 +249,9 @@ export type Database = {
           id?: string;
           note?: string | null;
           pet_id?: string;
+          price?: number;
           vaccination_date?: string;
           vaccine_name?: string;
-          price: number;
         };
         Relationships: [
           {

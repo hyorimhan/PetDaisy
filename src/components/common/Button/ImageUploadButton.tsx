@@ -42,7 +42,7 @@ function ImageUploadButton({
         <ul className="w-full grid grid-cols-3 gap-2">
           {imagePaths.map((path) => (
             <li
-              key={path}
+              key={path.split("/").pop()}
               className="relative flex justify-center items-center bg-white w-full h-[110px] md:h-[200px]"
             >
               <Image

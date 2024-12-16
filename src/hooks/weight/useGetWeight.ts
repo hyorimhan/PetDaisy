@@ -1,8 +1,22 @@
-import { weightDataType } from "@/components/features/dashboard/weight/WeightList";
 import { getWeightList } from "@/service/weight";
+import { usePetStore } from "@/zustand/usePetStore";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetWeight(petId: string, page?: number, limit?: number) {
+export type weightTableType = {
+  id: string;
+  pet_id: string;
+  weight: number;
+  measured_at: string;
+};
+
+export type weightDataType = {
+  data: weightTableType[];
+  count: number;
+  page: number;
+  limit: number;
+};
+export function useGetWeight(page?: number, limit?: number) {
+  const { petId } = usePetStore();
   const {
     data: weightData,
     isPending,

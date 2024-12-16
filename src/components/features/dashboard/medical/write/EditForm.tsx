@@ -1,8 +1,8 @@
 "use client";
 import Button from "@/components/common/Button/Button";
 import PageTitle from "@/components/common/Page/PageTitle";
-import { useGetMedicalDetail } from "@/hooks/useGetMedicalDetail";
-import { useGetMedicalExpenses } from "@/hooks/useGetMedicalExpenses";
+import { useGetMedicalDetail } from "@/hooks/medical/useGetMedicalDetail";
+import { useGetMedicalExpenses } from "@/hooks/medical/useGetMedicalExpenses";
 import { updateMedicalVisit } from "@/service/medical";
 import { MedicalFormValues } from "@/types/medical";
 import useModalStore from "@/zustand/useModalStore";

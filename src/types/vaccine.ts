@@ -5,3 +5,11 @@ export type VaccineType = (typeof VACCINE_TYPE)[keyof typeof VACCINE_TYPE];
 
 export type Vaccination = Tables<"vaccinations">;
 export type Vaccinations = Vaccination[];
+
+export type VaccineFormData = {
+  vaccineDate: string;
+  hospitalName: string;
+  vaccineName: VaccineType;
+  note: string;
+  price: number;
+};

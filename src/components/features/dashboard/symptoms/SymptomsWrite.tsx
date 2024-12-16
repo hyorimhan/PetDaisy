@@ -8,12 +8,11 @@ import {
   TITLE_VALIDATION,
 } from "@/constants/symptomsValidation";
 import { DATE_VALIDATION } from "@/constants/weightValidation";
+import useUploadImages from "@/hooks/common/useUploadImages";
 import useSymptomsEditMutation from "@/hooks/symptoms/useSymptomsEditMutation";
 import { useSymptomsMutation } from "@/hooks/symptoms/useSymptomsMutation";
-import useUploadImages from "@/hooks/useUploadImages";
 import { symptomsUpload } from "@/service/symptoms";
 import { usePetStore } from "@/zustand/usePetStore";
-import React from "react";
 import { useForm } from "react-hook-form";
 
 export type formDataType = {

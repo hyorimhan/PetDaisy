@@ -17,7 +17,7 @@ function VaccineCard({ vaccination }: VaccineCardProps) {
           <span className="text-red-4">{vaccination.price}원</span>
         </div>
         <p className="text-[14px] text-gray-3">{vaccination.note}</p>
-        <VaccineAction />
+        <VaccineAction vaccineId={vaccination.id} />
       </div>
     </div>
   );

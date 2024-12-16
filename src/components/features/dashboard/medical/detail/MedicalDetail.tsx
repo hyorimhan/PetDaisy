@@ -1,6 +1,6 @@
 "use client";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
-import { useGetMedicalDetail } from "@/hooks/useGetMedicalDetail";
+import { useGetMedicalDetail } from "@/hooks/medical/useGetMedicalDetail";
 import Detail from "./Detail";
 
 function MedicalDetail({ visitId }: { visitId: string }) {

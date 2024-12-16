@@ -1,7 +1,7 @@
 "use client";
 import Card from "@/components/common/Card/Card";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
-import { useGetMedicalExpenses } from "@/hooks/useGetMedicalExpenses";
+import { useGetMedicalExpenses } from "@/hooks/medical/useGetMedicalExpenses";
 import { calculateTotal } from "@/utils/format/calculateTotal";
 
 function ExpenseList({ visitId }: { visitId: string }) {

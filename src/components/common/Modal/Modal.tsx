@@ -24,7 +24,7 @@ function Modal() {
       className="fixed bg-black/40 left-0 top-0 right-0 bottom-0 flex justify-center items-center"
       onClick={closeModal}
     >
-      <div className="w-[280px] py-[30px] px-[20px] bg-white rounded-lg flex flex-col items-center gap-[15px]">
+      <div className="w-[300px] py-[20px] px-[20px] bg-white rounded-lg flex flex-col items-center gap-[15px]">
         <div className="flex flex-col items-center gap-[10px]">
           {modalType && (
             <Image
@@ -65,13 +65,15 @@ function Modal() {
             />
           </div>
         ) : (
-          <Button
-            content="확인"
-            types="lg"
-            bgColor="bg-gray-4"
-            textColor="text-white"
-            onClick={onConfirm}
-          />
+          onConfirm && (
+            <Button
+              content="확인"
+              types="lg"
+              bgColor="bg-gray-4"
+              textColor="text-white"
+              onClick={onConfirm}
+            />
+          )
         )}
       </div>
     </div>

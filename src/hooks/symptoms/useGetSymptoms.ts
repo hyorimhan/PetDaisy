@@ -10,15 +10,23 @@ export type symptomsDataType = {
   content: string;
   images?: string;
 };
-function useGetSymptoms() {
+
+export type symptomsPaginateType = {
+  data: symptomsDataType[];
+  page: number;
+  limit: number;
+  count: number;
+};
+
+function useGetSymptoms(page?: number, limit?: number) {
   const { petId } = usePetStore();
   const {
     data: symptomsData,
     isPending,
     isError,
-  } = useQuery<symptomsDataType[]>({
-    queryKey: ["symptomsData", petId],
-    queryFn: () => getSymptomsList(petId ?? ""),
+  } = useQuery<symptomsPaginateType>({
+    queryKey: ["symptomsData", petId, page, limit],
+    queryFn: () => getSymptomsList(petId ?? "", page, limit),
     enabled: !!petId,
   });
   return {

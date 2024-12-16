@@ -11,7 +11,6 @@ export function useGetPetProfile(petId: string) {
     queryKey: ["petProfile", petId],
     queryFn: () => getPetProfile(petId),
     enabled: !!petId,
-    staleTime: 1000 * 60 * 60 * 24,
   });
 
   return { details, isPending, isError };

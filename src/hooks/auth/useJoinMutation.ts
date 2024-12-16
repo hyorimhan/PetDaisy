@@ -10,6 +10,15 @@ export const useJoinMutation = () => {
   return useMutation({
     mutationFn: handleJoin,
     onSuccess: (response) => {
+      if (response.message === "이미 가입된 이메일입니다") {
+        openModal({
+          type: "error",
+          title: "회원가입 실패",
+          content: response.message,
+          onConfirm: () => {},
+        });
+        return;
+      }
       openModal({
         type: "success",
         title: "회원가입 성공",

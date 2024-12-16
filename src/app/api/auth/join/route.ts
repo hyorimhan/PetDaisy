@@ -12,7 +12,8 @@ export async function POST(request: NextRequest) {
 
   try {
     const response = await request.json();
-    const { nickname, email, password } = response;
+    const { email, password, nickname } = response;
+
     const { data, error: joinError } = await supabase.auth.signUp({
       email,
       password,
@@ -22,16 +23,25 @@ export async function POST(request: NextRequest) {
         },
       },
     });
-    console.log("data", data);
 
     if (joinError) return handleJoinError(joinError.message);
 
-    const { error: userError } = await supabase
+    const { data: existingUserData } = await supabase
       .from("user")
-      .insert({ nickname: nickname, id: data?.user?.id });
+      .select()
+      .eq("id", data?.user?.id)
+      .single();
+
+    if (existingUserData) {
+      return handleError("이미 존재하는 사용자입니다");
+    }
+
+    const { error: userError } = await supabase.from("user").insert({
+      nickname: nickname,
+      id: data?.user?.id,
+    });
 
     if (userError) return handleError(userError.message);
-
     return handleSuccess("회원가입 되었습니다");
   } catch {
     return handleNetworkError();

@@ -1,4 +1,5 @@
 import { createClient } from "@/supabase/server";
+import { MedicalExpenses } from "@/types/medical";
 import {
   handleError,
   handleNetworkError,
@@ -52,6 +53,118 @@ export async function GET(
     }
 
     return handleSuccess(undefined, { data, count, page, limit });
+  } catch (error) {
+    return handleNetworkError();
+  }
+}
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { petId: string } }
+) {
+  const supabase = await createClient();
+  const data = await request.json();
+  const { petId } = await params;
+  try {
+    const { data: medicalVisitData, error: medicalVisitError } = await supabase
+      .from("medical_visits")
+      .insert({
+        title: data.title,
+        visit_date: data.visitDate,
+        hospital_name: data.hospitalName,
+        content: data.content,
+        next_visit_date: data.nextVisitDate,
+        pet_id: petId,
+      })
+      .select("id")
+      .single();
+
+    if (medicalVisitError) {
+      return handleError(
+        `진료 정보를 등록하는데 실패했습니다. ${medicalVisitError.message}`
+      );
+    }
+
+    const expensesData = data.expenses.map((expense: MedicalExpenses) => ({
+      medical_visit_id: medicalVisitData.id,
+      service: expense.service,
+      price: expense.price,
+      pet_id: petId,
+    }));
+
+    const { data: medicalExpensesData, error: expensesError } = await supabase
+      .from("medical_expenses")
+      .insert(expensesData);
+
+    if (expensesError) {
+      return handleError(
+        `병원비 정보를 등록하는데 실패했습니다. ${expensesError.message}`
+      );
+    }
+
+    return handleSuccess(undefined, medicalExpensesData);
+  } catch (error) {
+    return handleNetworkError();
+  }
+}
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { petId: string } }
+) {
+  const supabase = await createClient();
+  const data = await request.json();
+  const { petId } = await params;
+  try {
+    const { data: medicalVisitData, error: medicalVisitError } = await supabase
+      .from("medical_visits")
+      .update({
+        title: data.title,
+        visit_date: data.visitDate,
+        hospital_name: data.hospitalName,
+        content: data.content,
+        next_visit_date: data.nextVisitDate,
+        pet_id: petId,
+      })
+      .eq("id", data.id)
+      .select("id")
+      .single();
+
+    if (medicalVisitError) {
+      return handleError(
+        `진료 정보를 수정하는데 실패했습니다. ${medicalVisitError.message}`
+      );
+    }
+
+    const { error: deleteError } = await supabase
+      .from("medical_expenses")
+      .delete()
+      .eq("medical_visit_id", data.id);
+
+    if (deleteError) {
+      return handleError(
+        `기존 병원비 정보를 삭제하는데 실패했습니다. ${deleteError.message}`
+      );
+    }
+
+    const expensesData = data.expenses.map((expense: MedicalExpenses) => ({
+      medical_visit_id: medicalVisitData.id,
+      service: expense.service,
+      price: expense.price,
+      pet_id: petId,
+    }));
+
+    const { data: medicalExpensesData, error: expensesError } = await supabase
+      .from("medical_expenses")
+      .insert(expensesData)
+      .select("*");
+
+    if (expensesError) {
+      return handleError(
+        `새로운 병원비 정보를 등록하는데 실패했습니다. ${expensesError.message}`
+      );
+    }
+
+    return handleSuccess("진료 정보가 수정되었습니다", null);
   } catch (error) {
     return handleNetworkError();
   }

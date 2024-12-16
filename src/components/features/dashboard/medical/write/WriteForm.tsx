@@ -3,6 +3,7 @@ import Button from "@/components/common/Button/Button";
 import PageTitle from "@/components/common/Page/PageTitle";
 import { addMedicalVisit } from "@/service/medical";
 import { MedicalFormValues } from "@/types/medical";
+import useModalStore from "@/zustand/useModalStore";
 import { usePetStore } from "@/zustand/usePetStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -14,6 +15,7 @@ function WriteForm() {
   const route = useRouter();
   const queryClient = useQueryClient();
   const petId = usePetStore((state) => state.petId) as string;
+  const openModal = useModalStore((state) => state.openModal);
   const method = useForm({
     defaultValues: {
       title: "",
@@ -40,8 +42,16 @@ function WriteForm() {
 
   const { mutate: addMedical } = useMutation({
     mutationFn: (data: MedicalFormValues) => addMedicalVisit(data, petId),
-    onSuccess: () =>
+    onSettled: () =>
       queryClient.invalidateQueries({ queryKey: ["medicalList"] }),
+    onSuccess: () => {
+      openModal({
+        type: "success",
+        title: "진료 기록 등록",
+        content: "진료 기록이 성공적으로 등록되었습니다.",
+        onConfirm: () => route.push("/dashboard/medicalList"),
+      });
+    },
   });
 
   const onSubmit = () => {
@@ -57,7 +67,6 @@ function WriteForm() {
     };
 
     addMedical(submissionData);
-    route.push("/dashboard/medicalList");
   };
   return (
     <FormProvider {...method}>

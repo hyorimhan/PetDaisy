@@ -12,7 +12,7 @@ export const usePetRegistration = (userId: string) => {
   return useMutation({
     mutationFn: (petData: PetDetails) => registPetProfile(petData),
     onSettled: () =>
-      queryClient.invalidateQueries({ queryKey: ["petList", userId] }),
+      queryClient.invalidateQueries({ queryKey: ["petProfile"] }),
     onSuccess: () => {
       openModal({
         type: "success",

@@ -1,9 +1,34 @@
 import { MedicalFormValues } from "@/types/medical";
 
-export async function getMedicalVisitLists(petId: string) {
+export async function getMedicalVisitLists(
+  petId: string,
+  page?: number,
+  limit?: number
+) {
+  const url =
+    page && limit
+      ? `/api/medical/visits/${petId}?page=${page}&limit=${limit}`
+      : `/api/medical/visits/${petId}`;
+  const response = await fetch(url);
+  const result = await response.json();
+  return result.data;
+}
+
+export async function getMedicalVisitById(petId: string) {
   const response = await fetch(`/api/medical/visits/${petId}`);
-  const data = await response.json();
-  return data.data;
+  const result = await response.json();
+  return result.data;
+}
+
+export async function getMedicalVisitsByMonth(
+  petId: string,
+  year: number | null,
+  month: number | null
+) {
+  const url = `/api/medical/visits/${petId}?year=${year}&month=${month}`;
+  const response = await fetch(url);
+  const result = await response.json();
+  return result.data;
 }
 
 export async function getMedicalExpensesByPetId(visitId: string) {

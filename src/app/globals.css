@@ -45,4 +45,8 @@ input::-webkit-outer-spin-button {
   .swiper-pagination > .swiper-pagination-bullet.active {
     @apply bg-main-5;
   }
+
+  .custom_scrollbar {
+    @apply [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-thumb]:bg-main-5;
+  }
 }

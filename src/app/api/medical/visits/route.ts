@@ -3,7 +3,8 @@ import {
   handleError,
   handleNetworkError,
   handleSuccess,
-} from "@/utils/api/error/api";
+} from "@/utils/error/api";
+
 import { NextRequest } from "next/server";
 
 export async function DELETE(request: NextRequest) {

@@ -1,21 +1,25 @@
 import { getMedicalVisitLists } from "@/service/medical";
-import { MedicalVisits } from "@/types/medical";
 import { useQuery } from "@tanstack/react-query";
+import { MedicalVisitData } from "./../types/medical";
 
-export function useGetMedicalVisitLists(petId: string) {
+export function useGetMedicalVisitLists(
+  petId: string,
+  page?: number,
+  limit?: number
+) {
   const {
-    data: medicalLists = [],
+    data: medicalLists,
     isPending,
     isError,
-  } = useQuery<MedicalVisits[]>({
-    queryKey: ["medicalList", petId],
-    queryFn: () => getMedicalVisitLists(petId),
+  } = useQuery<MedicalVisitData>({
+    queryKey: ["medicalList", petId, page, limit],
+    queryFn: () => getMedicalVisitLists(petId, page, limit),
     enabled: !!petId,
     staleTime: 1000 * 60 * 5,
   });
 
   return {
-    medicalLists,
+    medicalLists: medicalLists,
     isPending,
     isError,
   };

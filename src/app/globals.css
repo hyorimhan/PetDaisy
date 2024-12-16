@@ -52,4 +52,7 @@ input::-webkit-outer-spin-button {
   .custom_scrollbar {
     @apply [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-thumb]:bg-main-5;
   }
+  .pretendard {
+    font-family: "Pretendard-Regular", sans-serif;
+  }
 }

@@ -1,6 +1,6 @@
 "use client";
 import { DOG } from "@/constants/pet";
-import { useGetPetProfile } from "@/hooks/useGetPetProfile";
+import { useGetPetProfile } from "@/hooks/profile/useGetPetProfile";
 import { usePetStore } from "@/zustand/usePetStore";
 import { PropsWithChildren } from "react";
 

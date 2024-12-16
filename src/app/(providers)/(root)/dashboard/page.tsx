@@ -6,7 +6,7 @@ import Medical from "@/components/features/dashboard/medical/list/Medical";
 import PetList from "@/components/features/dashboard/petList/PetList";
 import PetProfile from "@/components/features/dashboard/petProfile/PetProfile";
 import Symptoms from "@/components/features/dashboard/symptoms/Symptoms";
-import Vaccine from "@/components/features/dashboard/vaccine/Vaccine";
+import Vaccine from "@/components/features/dashboard/vaccine/list/Vaccine";
 import Weight from "@/components/features/dashboard/weight/Weight";
 import { useAuthStore } from "@/zustand/useAuthStore";
 import { usePetStore } from "@/zustand/usePetStore";

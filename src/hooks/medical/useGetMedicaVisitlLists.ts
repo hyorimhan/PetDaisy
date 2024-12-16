@@ -1,6 +1,6 @@
 import { getMedicalVisitLists } from "@/service/medical";
 import { useQuery } from "@tanstack/react-query";
-import { MedicalVisitData } from "./../types/medical";
+import { MedicalVisitData } from "../../types/medical";
 
 export function useGetMedicalVisitLists(
   petId: string,

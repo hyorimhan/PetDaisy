@@ -1,5 +1,5 @@
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
-import { useGetMedicalExpenses } from "@/hooks/useGetMedicalExpenses";
+import { useGetMedicalExpenses } from "@/hooks/medical/useGetMedicalExpenses";
 import { MedicalVisit } from "@/types/medical";
 import { calculateTotal } from "@/utils/format/calculateTotal";
 import Link from "next/link";

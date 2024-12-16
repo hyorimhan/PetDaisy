@@ -4,7 +4,7 @@ import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Logo from "@/components/common/Logo/Logo";
 import Page from "@/components/common/Page/Page";
 import AppDescription from "@/components/features/main/AppDescription";
-import useUploadImages from "@/hooks/useUploadImages";
+import useUploadImages from "@/hooks/common/useUploadImages";
 import { signInWithGoogle, signInWithKakao } from "@/service/auth";
 import { uploadPetImages } from "@/service/petProfile";
 import useModalStore from "@/zustand/useModalStore";

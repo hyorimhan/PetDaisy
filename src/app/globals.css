@@ -10,21 +10,28 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: "Cafe24Ohsquareair", sans-serif;
 }
-
-/* body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-} */
 
 input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* 그 외(Chrome, Safari, Edge...)의 브라우저용 사용자 정의 스타일 */
+input[type="password"] {
+  font-family: "Pretendard-Regular", sans-serif;
+  opacity: 1;
+  color: black;
+}
+
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
@@ -32,10 +39,6 @@ input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-/* 
-.custom-swiper-pagination .custom-bullet-default{
-  background-color: ;
-} */
 
 @layer utilities {
   .swiper-pagination > .swiper-pagination-bullet {

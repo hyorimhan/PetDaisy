@@ -21,7 +21,7 @@ function Modal() {
 
   return (
     <div
-      className="fixed bg-black/40 left-0 top-0 right-0 bottom-0 flex justify-center items-center"
+      className="z-50 fixed bg-black/40 left-0 top-0 right-0 bottom-0 flex justify-center items-center"
       onClick={closeModal}
     >
       <div className="w-[300px] py-[20px] px-[20px] bg-white rounded-lg flex flex-col items-center gap-[15px]">

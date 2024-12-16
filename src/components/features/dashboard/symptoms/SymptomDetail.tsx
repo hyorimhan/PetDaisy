@@ -6,7 +6,6 @@ import useGetSymptomsDetail from "@/hooks/symptoms/useGetSymptomsDetail";
 import useModalStore from "@/zustand/useModalStore";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 function SymptomDetail({ post_id }: Readonly<{ post_id: string }>) {
   const { symptomsDetail, isError, isPending } = useGetSymptomsDetail(post_id);

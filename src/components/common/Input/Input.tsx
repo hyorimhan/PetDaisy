@@ -35,7 +35,7 @@ function Input({
           <textarea
             placeholder={placeholder}
             {...props}
-            className="resize-none scrollbar-hide focus:ring-0 focus-visible:outline-none forced-colors:bg-white text-gray-4"
+            className="resize-none scrollbar-hide focus:ring-0 focus-visible:outline-none text-gray-4"
             cols={30}
             rows={4}
             maxLength={501}
@@ -44,7 +44,7 @@ function Input({
         ) : (
           <div className="flex justify-between items-center">
             <input
-              className="w-full text-[16px] text-gray-4 focus:ring-0 focus-visible:outline-none forced-colors:bg-white"
+              className="w-full text-[16px] text-gray-4 focus:ring-0 focus-visible:outline-none"
               id={inputId}
               type={type}
               {...props}

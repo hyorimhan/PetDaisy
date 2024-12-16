@@ -12,24 +12,26 @@ function DetailAction({ visitId }: { visitId: string }) {
   const queryClient = useQueryClient();
 
   const openModal = useModalStore((state) => state.openModal);
+  const closeModal = useModalStore((state) => state.closeModal);
 
   const { mutate: deleteVisit } = useMutation({
     mutationFn: (visitId: string) => deleteMedicalVisit(visitId),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["medicalList", petId] }),
-    onSettled: (data) => {
-      openModal({
-        type: "warning",
-        title: "삭제 완료",
-        content: data,
-        onConfirm: () => {
-          router.replace("/dashboard/medicalList");
-        },
-      });
-    },
   });
   const handleDeleteVisit = (visitId: string) => {
-    deleteVisit(visitId);
+    openModal({
+      type: "warning",
+      title: "진료 기록 삭제",
+      content: "해당 진료 기록을 삭제하시겠습니까?",
+      isTwoButton: true,
+      onCancel: () => closeModal(),
+      onConfirm: () => {
+        deleteVisit(visitId);
+        closeModal();
+        router.push("/dashboard/medicalList");
+      },
+    });
   };
   return (
     <div className="flex flex-col gap-[10px] my-[30px]">

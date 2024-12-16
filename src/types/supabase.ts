@@ -221,38 +221,38 @@ export type Database = {
         };
         Relationships: [];
       };
-  
-  vaccinations: {
+
+      vaccinations: {
         Row: {
-          created_at: string
-          hospital_name: string
-          id: string
-          note: string | null
-          pet_id: string
-          price: number
-          vaccination_date: string
-          vaccine_name: string
-        }
+          created_at: string;
+          hospital_name: string;
+          id: string;
+          note: string | null;
+          pet_id: string;
+          price: number;
+          vaccination_date: string;
+          vaccine_name: string;
+        };
         Insert: {
-          created_at?: string
-          hospital_name: string
-          id?: string
-          note?: string | null
-          pet_id: string
-          price: number
-          vaccination_date: string
-          vaccine_name: string
-        }
+          created_at?: string;
+          hospital_name: string;
+          id?: string;
+          note?: string | null;
+          pet_id: string;
+          price: number;
+          vaccination_date: string;
+          vaccine_name: string;
+        };
         Update: {
-          created_at?: string
-          hospital_name?: string
-          id?: string
-          note?: string | null
-          pet_id?: string
-          price?: number
-          vaccination_date?: string
-          vaccine_name?: string
-        }
+          created_at?: string;
+          hospital_name?: string;
+          id?: string;
+          note?: string | null;
+          pet_id?: string;
+          price?: number;
+          vaccination_date?: string;
+          vaccine_name?: string;
+        };
         Relationships: [
           {
             foreignKeyName: "vaccinations_pet_id_fkey";

@@ -19,7 +19,7 @@ function PaginateBtn({
       pageCount={pageCount}
       forcePage={currentPage}
       onPageChange={onPageChange}
-      containerClassName={"flex justify-center space-x-3 text-sm mt-5"}
+      containerClassName={"flex justify-center space-x-3 text-sm mt-4"}
       previousLinkClassName={"text-black focus:outline-none"}
       nextLinkClassName={"text-black   focus:outline-none "}
       pageLinkClassName={

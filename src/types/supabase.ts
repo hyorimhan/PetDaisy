@@ -228,6 +228,7 @@ export type Database = {
           id: string
           note: string | null
           pet_id: string
+          price: number
           vaccination_date: string
           vaccine_name: string
         }
@@ -237,6 +238,7 @@ export type Database = {
           id?: string
           note?: string | null
           pet_id: string
+          price: number
           vaccination_date: string
           vaccine_name: string
         }
@@ -246,6 +248,7 @@ export type Database = {
           id?: string
           note?: string | null
           pet_id?: string
+          price?: number
           vaccination_date?: string
           vaccine_name?: string
         }

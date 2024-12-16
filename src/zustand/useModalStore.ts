@@ -1,12 +1,13 @@
+import { ReactNode } from "react";
 import { create } from "zustand";
 
 type ModalType = "success" | "error" | "warning" | null;
 
 // 모달 옵션을 위한 인터페이스 정의
 interface ModalOptions {
-  type: ModalType;
-  title: string;
-  content: string;
+  type?: ModalType;
+  title?: string;
+  content?: string | ReactNode;
   isTwoButton?: boolean;
   onConfirm?: () => void;
   onCancel?: () => void;
@@ -14,9 +15,9 @@ interface ModalOptions {
 
 interface ModalStore {
   isOpen: boolean;
-  modalType: ModalType;
-  modalTitle: string;
-  modalContent: string;
+  modalType?: ModalType;
+  modalTitle?: string;
+  modalContent?: string | ReactNode;
   isTwoButton: boolean;
   onConfirm?: () => void;
   onCancel?: () => void;

@@ -6,20 +6,35 @@ import {
   handleNetworkError,
   handleSuccess,
 } from "@/utils/error/api";
+import { getPaginationParams } from "@/utils/paginate/pagination";
 
 export async function GET(request: NextRequest, { params }: paramsType) {
   const supabase = await createClient();
   const { pet_id } = await params;
+  const searchParams = request.nextUrl.searchParams;
+  const { page, limit, from, to } = getPaginationParams(searchParams);
   try {
-    const { data, error } = await supabase
+    if (!searchParams.get("page") && !searchParams.get("limit")) {
+      const { data: symptomsAllData, error: allDataError } = await supabase
+        .from("symptoms")
+        .select("*")
+        .eq("pet_id", pet_id);
+      if (allDataError) {
+        return handleError(allDataError.message);
+      }
+      return handleSuccess(undefined, { data: symptomsAllData });
+    }
+    const { data, error, count } = await supabase
       .from("symptoms")
-      .select("*")
-      .eq("pet_id", pet_id);
+      .select("*", { count: "exact" })
+      .eq("pet_id", pet_id)
+      .range(from, to)
+      .order("created_at", { ascending: false });
 
     if (error) {
       return handleError(error.message);
     }
-    return handleSuccess(undefined, data);
+    return handleSuccess(undefined, { data: data, page, limit, count });
   } catch {
     return handleNetworkError();
   }

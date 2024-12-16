@@ -1,13 +1,13 @@
 "use client";
 import Card from "@/components/common/Card/Card";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
-import { useGetMedicalVisitLists } from "@/hooks/useGetMedicaVisitlLists";
+import { useMedicalById } from "@/hooks/medical/useMedicalById";
 import { usePetStore } from "@/zustand/usePetStore";
 
 function LastMedical() {
   const petId = usePetStore((state) => state.petId) as string;
   const name = usePetStore((state) => state.petName);
-  const { medicalLists, isPending, isError } = useGetMedicalVisitLists(petId);
+  const { medicalLists, isPending, isError } = useMedicalById(petId);
 
   return (
     <QueryStateHandler
@@ -17,12 +17,12 @@ function LastMedical() {
     >
       <Card>
         <div className="flex justify-center">
-          {medicalLists?.data ? (
+          {medicalLists ? (
             <div className="text-gray-4">
               <span className="text-main-5">{name}</span>
               {`은(는) `}
               <span className="font-bold text-main-5">
-                {medicalLists.data[0]?.visit_date || ""}
+                {medicalLists[0]?.visit_date || ""}
               </span>
               에 마지막 진료를 봤어요.
             </div>

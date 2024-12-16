@@ -14,7 +14,7 @@ function MedicalList() {
   const petId = usePetStore((state) => state.petId) as string;
   const { page, limit, onPageChange, currentPage } = usePagination();
   const { medicalLists, isPending, isError } = useGetMedicalVisitLists(
-    petId ?? "",
+    petId,
     page,
     limit
   );

@@ -21,7 +21,7 @@ function PetRegistrationForm() {
   const { register, handleSubmit, setValue, watch, errors } =
     usePetRegistrationForm();
 
-  const { mutate: registPet } = usePetRegistration(user?.id as string);
+  const { mutate: registPet } = usePetRegistration();
 
   const handleAnimalRegist = (data: PetRegistrationType) => {
     const petData = {

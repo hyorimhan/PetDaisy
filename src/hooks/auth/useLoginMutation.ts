@@ -10,7 +10,6 @@ export const useLoginMutation = () => {
   return useMutation({
     mutationFn: handleLogin,
     onSuccess: (response) => {
-      console.log("응답", response);
       if (
         response.message === "해당 계정은 존재하지 않습니다. 다시 확인해주세요"
       ) {

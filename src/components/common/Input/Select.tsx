@@ -52,7 +52,6 @@ function Select<TFieldValues extends FieldValues>({
     setIsOpen(false);
 
     if (onChange) {
-      console.log("Select onChange called with:", option);
       onChange(option);
     }
   };

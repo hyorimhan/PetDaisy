@@ -22,8 +22,6 @@ export async function POST(request: NextRequest) {
       images,
     } = data;
 
-    console.log("user_id", user_id);
-
     const { data: petList, error: petListError } = await supabase
       .from("pet_list")
       .insert({ name, user_id })
@@ -52,9 +50,8 @@ export async function POST(request: NextRequest) {
       handleError(`반려동물 등록에 실패했습니다. ${petDetailsError?.message}`);
     }
 
-    return handleSuccess("반려동물 등록이 완료되었습니다.", petDetails);
+    return handleSuccess("반려동물 등록이 완료되었습니다.", petList);
   } catch (error) {
-    console.error(error);
     return handleNetworkError();
   }
 }

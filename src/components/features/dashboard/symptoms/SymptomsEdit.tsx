@@ -1,12 +1,10 @@
 "use client";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetSymptomsDetail from "@/hooks/symptoms/useGetSymptomsDetail";
-import React from "react";
 import SymptomsWrite from "./SymptomsWrite";
 
 function SymptomsEdit({ post_id }: Readonly<{ post_id: string }>) {
   const { symptomsDetail, isPending, isError } = useGetSymptomsDetail(post_id);
-  console.log(symptomsDetail);
   return (
     <QueryStateHandler
       data={symptomsDetail}

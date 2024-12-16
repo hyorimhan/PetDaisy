@@ -16,7 +16,7 @@ function QueryStateHandler<TData>({
   children,
   wrapper = true,
 }: StateHandlerProps<TData>) {
-  if (!data) return <Error />;
+  if (!data) return <Loading />;
 
   if (isPending)
     return wrapper ? (

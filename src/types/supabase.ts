@@ -230,6 +230,7 @@ export type Database = {
           pet_id: string;
           vaccination_date: string;
           vaccine_name: string;
+          price: number;
         };
         Insert: {
           created_at?: string;
@@ -239,6 +240,7 @@ export type Database = {
           pet_id: string;
           vaccination_date: string;
           vaccine_name: string;
+          price: number;
         };
         Update: {
           created_at?: string;
@@ -248,6 +250,7 @@ export type Database = {
           pet_id?: string;
           vaccination_date?: string;
           vaccine_name?: string;
+          price: number;
         };
         Relationships: [
           {

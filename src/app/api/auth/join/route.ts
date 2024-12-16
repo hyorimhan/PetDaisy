@@ -26,16 +26,6 @@ export async function POST(request: NextRequest) {
 
     if (joinError) return handleJoinError(joinError.message);
 
-    const { data: existingUserData } = await supabase
-      .from("user")
-      .select()
-      .eq("id", data?.user?.id)
-      .single();
-
-    if (existingUserData) {
-      return handleError("이미 존재하는 사용자입니다");
-    }
-
     const { error: userError } = await supabase.from("user").insert({
       nickname: nickname,
       id: data?.user?.id,

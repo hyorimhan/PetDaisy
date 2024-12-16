@@ -27,8 +27,8 @@ export async function POST(request: NextRequest) {
     if (joinError) return handleJoinError(joinError.message);
 
     const { error: userError } = await supabase.from("user").insert({
-      nickname: nickname,
       id: data?.user?.id,
+      nickname,
     });
 
     if (userError) return handleError(userError.message);

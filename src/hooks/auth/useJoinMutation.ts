@@ -22,7 +22,7 @@ export const useJoinMutation = () => {
       openModal({
         type: "success",
         title: "회원가입 성공",
-        content: response.message,
+        content: "회원가입에 성공했습니다.",
         onConfirm: () => {
           router.replace("/dashboard");
         },

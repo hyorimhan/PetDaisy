@@ -7,9 +7,7 @@ import useUploadImages from "@/hooks/useUploadImages";
 import { uploadPetImages } from "@/service/petProfile";
 import { PetRegistrationType } from "@/types/petProfile";
 import { useAuthStore } from "@/zustand/useAuthStore";
-import { FieldErrors } from "react-hook-form";
 import FormField from "./FormField";
-import { formError } from "@/utils/error/form";
 
 function PetRegistrationForm() {
   const user = useAuthStore((state) => state.user);
@@ -20,14 +18,8 @@ function PetRegistrationForm() {
       uploadFn: uploadPetImages,
     });
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    errors,
-    handleWeightChange,
-  } = usePetRegistrationForm();
+  const { register, handleSubmit, setValue, watch, errors } =
+    usePetRegistrationForm();
 
   const { mutate: registPet } = usePetRegistration(user?.id as string);
 
@@ -37,7 +29,7 @@ function PetRegistrationForm() {
       name: data.name,
       gender: data.gender,
       birth_date: data.birth,
-      weight: data.weight,
+      weight: String(Number(data.weight).toFixed(2)),
       neutered: data.neutered,
       images:
         uploadImageURLs.length !== 0
@@ -48,19 +40,16 @@ function PetRegistrationForm() {
     registPet(petData);
   };
 
-  formError(errors);
-
   return (
     <form
       className="flex flex-col gap-5 pb-[130px]"
-      onSubmit={handleSubmit((data) => handleAnimalRegist(data), formError)}
+      onSubmit={handleSubmit((data) => handleAnimalRegist(data))}
     >
       <FormField
         register={register}
         errors={errors}
         setValue={setValue}
         watch={watch}
-        handleWeightChange={handleWeightChange}
         imagePaths={imagePaths}
         imageUploadError={imageUploadError}
         handleImageUpload={handleImageUpload}

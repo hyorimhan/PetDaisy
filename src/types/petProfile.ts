@@ -4,7 +4,7 @@ export type PetRegistrationType = {
   name: string;
   gender: string;
   birth: string;
-  weight: number;
+  weight: string;
   neutered: string;
   animalType: string;
 };

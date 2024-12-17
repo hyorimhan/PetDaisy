@@ -26,7 +26,7 @@ export async function GET(
 
       if (error) {
         return handleError(
-          `진료 정보를 가져오는데 실패했습니다. ${error.message}`
+          `예방 접종 정보를 가져오는데 실패했습니다. ${error.message}`
         );
       }
       return handleSuccess(undefined, data);
@@ -36,7 +36,7 @@ export async function GET(
 
     if (error) {
       return handleError(
-        `진료 정보를 가져오는데 실패했습니다. ${error.message}`
+        `예방 접종 정보를 가져오는데 실패했습니다. ${error.message}`
       );
     }
 
@@ -75,7 +75,44 @@ export async function POST(
       );
     }
 
-    console.log(Vaccinations);
+    return handleSuccess(
+      "예방 접종 정보를 성공적으로 추가했습니다.",
+      Vaccinations
+    );
+  } catch (error) {
+    return handleNetworkError();
+  }
+}
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { petId: string } }
+) {
+  const supabase = await createClient();
+
+  const data = await request.json();
+  const { petId } = await params;
+
+  try {
+    const { data: Vaccinations, error } = await supabase
+      .from("vaccinations")
+      .update([
+        {
+          pet_id: petId,
+          vaccination_date: data.vaccineDate,
+          hospital_name: data.hospitalName,
+          vaccine_name: data.vaccineName,
+          note: data.note,
+          price: data.price,
+        },
+      ])
+      .eq("id", data.id);
+
+    if (error) {
+      return handleError(
+        `예방 접종 정보를 추가하는데 실패했습니다. ${error.message}`
+      );
+    }
 
     return handleSuccess(
       "예방 접종 정보를 성공적으로 추가했습니다.",

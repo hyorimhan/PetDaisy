@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FieldError,
   FieldValues,
@@ -27,6 +27,7 @@ interface SelectProps<TFieldValues extends FieldValues> {
     value: PathValue<TFieldValues, Path<TFieldValues>>
   ) => void;
   onChange?: (value: PathValue<TFieldValues, Path<TFieldValues>>) => void;
+  defaultValue?: PathValue<TFieldValues, Path<TFieldValues>>;
 }
 
 function Select<TFieldValues extends FieldValues>({
@@ -38,11 +39,19 @@ function Select<TFieldValues extends FieldValues>({
   registerOptions,
   setValue,
   onChange,
+  defaultValue,
 }: SelectProps<TFieldValues>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<
     PathValue<TFieldValues, Path<TFieldValues>> | undefined
   >(undefined);
+
+  useEffect(() => {
+    if (defaultValue !== undefined) {
+      setValue(name, defaultValue);
+      setSelectedOption(defaultValue);
+    }
+  }, [defaultValue]);
 
   const handleSelectOption = (
     option: PathValue<TFieldValues, Path<TFieldValues>>

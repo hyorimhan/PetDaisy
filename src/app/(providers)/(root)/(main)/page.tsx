@@ -2,7 +2,7 @@
 import Button from "@/components/common/Button/Button";
 import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Logo from "@/components/common/Logo/Logo";
-import Page from "@/components/common/Page/Page";
+import AuthPage from "@/components/common/Page/AuthPage";
 import AppDescription from "@/components/features/main/AppDescription";
 import useUploadImages from "@/hooks/common/useUploadImages";
 import { signInWithGoogle, signInWithKakao } from "@/service/auth";
@@ -44,7 +44,7 @@ const MainPage = () => {
     });
 
   return (
-    <Page>
+    <AuthPage>
       <div className="py-[130px] flex flex-col items-center justify-center">
         <Logo size="lg" />
         <AppDescription />
@@ -146,7 +146,7 @@ const MainPage = () => {
           />
         </div>
       </div>
-    </Page>
+    </AuthPage>
   );
 };
 

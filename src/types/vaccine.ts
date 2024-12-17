@@ -13,3 +13,12 @@ export type VaccineFormData = {
   note: string;
   price: number;
 };
+
+export type UpdataVaccineData = {
+  id: string;
+  vaccineDate: string;
+  hospitalName: string;
+  vaccineName: VaccineType;
+  note: string;
+  price: number;
+};

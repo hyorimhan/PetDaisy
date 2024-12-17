@@ -16,3 +16,25 @@ export async function addVaccination(data: VaccineFormData, petId: string) {
   });
   return response.json();
 }
+
+export async function updateVaccination(data: VaccineFormData, petId: string) {
+  const response = await fetch(`/api/vaccine/${petId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+}
+
+export async function deleteVaccination(vaccineId: string) {
+  const response = await fetch("/api/vaccine/", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(vaccineId),
+  });
+  return response.json();
+}

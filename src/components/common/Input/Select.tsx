@@ -52,7 +52,6 @@ function Select<TFieldValues extends FieldValues>({
     setIsOpen(false);
 
     if (onChange) {
-      console.log("Select onChange called with:", option);
       onChange(option);
     }
   };
@@ -60,7 +59,7 @@ function Select<TFieldValues extends FieldValues>({
   return (
     <div className="w-full flex flex-col gap-1">
       <div
-        className={`relative flex flex-col gap-1 justify-center bg-white p-[15px] rounded-lg ${
+        className={`relative flex flex-col gap-1 justify-center bg-white p-[15px] rounded-lg shadow-shadow ${
           error ? "border border-red-5" : "ring-0"
         }`}
       >

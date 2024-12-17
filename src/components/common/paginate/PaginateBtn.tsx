@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-export type paginateType = {
+export type PaginateType = {
   pageCount: number;
   currentPage: number;
   onPageChange: (selectedPage: { selected: number }) => void;
@@ -10,7 +10,7 @@ function PaginateBtn({
   pageCount,
   currentPage,
   onPageChange,
-}: Readonly<paginateType>) {
+}: Readonly<PaginateType>) {
   return (
     <ReactPaginate
       previousLabel={"이전"}

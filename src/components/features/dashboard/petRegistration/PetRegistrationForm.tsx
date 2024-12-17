@@ -1,8 +1,8 @@
 "use client";
 import { DEFAULT_PET_IMAGE } from "@/constants/pet";
-import { usePetRegistration } from "@/hooks/usePetRegistration";
-import { usePetRegistrationForm } from "@/hooks/usePetRegistrationForm";
-import useUploadImages from "@/hooks/useUploadImages";
+import useUploadImages from "@/hooks/common/useUploadImages";
+import { usePetRegistration } from "@/hooks/profile/usePetRegistration";
+import { usePetRegistrationForm } from "@/hooks/profile/usePetRegistrationForm";
 
 import { uploadPetImages } from "@/service/petProfile";
 import { PetRegistrationType } from "@/types/petProfile";
@@ -21,7 +21,7 @@ function PetRegistrationForm() {
   const { register, handleSubmit, setValue, watch, errors } =
     usePetRegistrationForm();
 
-  const { mutate: registPet } = usePetRegistration(user?.id as string);
+  const { mutate: registPet } = usePetRegistration();
 
   const handleAnimalRegist = (data: PetRegistrationType) => {
     const petData = {

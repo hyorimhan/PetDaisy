@@ -1,10 +1,11 @@
 "use client";
 import Button from "@/components/common/Button/Button";
 import PageTitle from "@/components/common/Page/PageTitle";
-import { useGetMedicalDetail } from "@/hooks/useGetMedicalDetail";
-import { useGetMedicalExpenses } from "@/hooks/useGetMedicalExpenses";
+import { useGetMedicalDetail } from "@/hooks/medical/useGetMedicalDetail";
+import { useGetMedicalExpenses } from "@/hooks/medical/useGetMedicalExpenses";
 import { updateMedicalVisit } from "@/service/medical";
 import { MedicalFormValues } from "@/types/medical";
+import useModalStore from "@/zustand/useModalStore";
 import { usePetStore } from "@/zustand/usePetStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -21,12 +22,14 @@ function EditForm({ visitId }: EditFormProps) {
   const route = useRouter();
   const queryClient = useQueryClient();
   const petId = usePetStore((state) => state.petId) as string;
+  const openModal = useModalStore((state) => state.openModal);
 
   const { details } = useGetMedicalDetail(visitId);
   const { medicalExpenses } = useGetMedicalExpenses(visitId);
 
   const method = useForm({
     defaultValues: {
+      id: "",
       title: "",
       visitDate: "",
       hospitalName: "",
@@ -52,6 +55,7 @@ function EditForm({ visitId }: EditFormProps) {
 
   useEffect(() => {
     if (details) {
+      setValue("id", details.id);
       setValue("title", details.title);
       setValue("visitDate", details.visit_date);
       setValue("hospitalName", details.hospital_name);
@@ -66,8 +70,16 @@ function EditForm({ visitId }: EditFormProps) {
 
   const { mutate: updateMedical } = useMutation({
     mutationFn: (data: MedicalFormValues) => updateMedicalVisit(data, petId),
-    onSuccess: () =>
+    onSettled: () =>
       queryClient.invalidateQueries({ queryKey: ["medicalList"] }),
+    onSuccess: () => {
+      openModal({
+        type: "success",
+        title: "진료 기록 수정",
+        content: "진료 기록이 성공적으로 수정되었습니다.",
+        onConfirm: () => route.push("/dashboard/medicalList"),
+      });
+    },
   });
 
   const onSubmit = () => {
@@ -83,7 +95,6 @@ function EditForm({ visitId }: EditFormProps) {
     };
 
     updateMedical(submissionData);
-    route.push("/dashboard/medicalList");
   };
   return (
     <FormProvider {...method}>

@@ -2,24 +2,24 @@ import { getSymptomsDetail } from "@/service/symptoms";
 import { usePetStore } from "@/zustand/usePetStore";
 import { useQuery } from "@tanstack/react-query";
 
-export type symptomsDetailType = {
-  pet_id: string;
+export type SymptomsDetailType = {
+  petId: string;
   id: string;
   symptom_date: string;
   content: string;
   images?: string;
   title: string;
 };
-function useGetSymptomsDetail(post_id: string) {
+function useGetSymptomsDetail(postId: string) {
   const { petId } = usePetStore();
   const {
     data: symptomsDetail,
     isPending,
     isError,
-  } = useQuery<symptomsDetailType[]>({
-    queryKey: ["symptomsDetail", petId, post_id],
-    queryFn: () => getSymptomsDetail(petId ?? "", post_id),
-    enabled: !!petId && !!post_id,
+  } = useQuery<SymptomsDetailType[]>({
+    queryKey: ["symptomsDetail", petId, postId],
+    queryFn: () => getSymptomsDetail(petId ?? "", postId),
+    enabled: !!petId && !!postId,
   });
 
   return { symptomsDetail, isPending, isError };

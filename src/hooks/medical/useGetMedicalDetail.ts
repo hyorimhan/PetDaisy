@@ -1,5 +1,5 @@
 import { getMedicalDetails } from "@/service/medical";
-import { MedicalVisits } from "@/types/medical";
+import { MedicalVisit } from "@/types/medical";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGetMedicalDetail(visitId: string) {
@@ -7,7 +7,7 @@ export function useGetMedicalDetail(visitId: string) {
     data: details,
     isPending,
     isError,
-  } = useQuery<MedicalVisits>({
+  } = useQuery<MedicalVisit>({
     queryKey: ["medicalDetail", visitId],
     queryFn: () => getMedicalDetails(visitId),
     staleTime: 1000 * 60 * 5,

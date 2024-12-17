@@ -1,4 +1,3 @@
-"use client";
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
 import {
@@ -10,13 +9,14 @@ import {
 import { useJoinMutation } from "@/hooks/auth/useJoinMutation";
 import { formError } from "@/utils/error/form";
 
+import React from "react";
 import { useForm } from "react-hook-form";
 
-type joinFormDataType = {
-  nickname: string;
+type JoinFormDataType = {
   email: string;
   password: string;
   passwordConfirm: string;
+  nickname: string;
 };
 
 function JoinForm() {
@@ -25,14 +25,12 @@ function JoinForm() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<joinFormDataType>({
+  } = useForm<JoinFormDataType>({
     mode: "onChange",
   });
   const password = watch("password");
 
   const joinMutation = useJoinMutation();
-
-  formError(errors);
   return (
     <form
       onSubmit={handleSubmit((data) => joinMutation.mutate(data), formError)}
@@ -43,16 +41,15 @@ function JoinForm() {
           label="닉네임"
           type="text"
           {...register("nickname", NICKNAME_VALIDATION())}
+          error={errors.nickname}
         />
-        {errors.nickname && (
-          <p className="text-red-5 text-sm mt-1">{errors.nickname.message}</p>
-        )}
       </div>
       <div>
         <Input
           label="아이디"
           type="email"
           {...register("email", EMAIL_VALIDATION())}
+          error={errors.email}
         />
       </div>
       <div>
@@ -60,7 +57,7 @@ function JoinForm() {
           label="비밀번호"
           type="password"
           {...register("password", PASSWORD_VALIDATION())}
-          className="font-serif w-full"
+          error={errors.password}
         />
       </div>
       <div>
@@ -71,13 +68,8 @@ function JoinForm() {
             "passwordConfirm",
             PASSWORD_CONFIRM_VALIDATION(password)
           )}
-          className="font-serif w-full"
+          error={errors.passwordConfirm}
         />
-        {errors.passwordConfirm && (
-          <p className="text-red-5 text-sm mt-1">
-            {errors.passwordConfirm.message}
-          </p>
-        )}
       </div>
       <Button
         content="회원가입"

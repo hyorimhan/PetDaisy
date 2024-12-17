@@ -10,7 +10,7 @@ import Link from "next/link";
 function Symptoms() {
   const { symptomsData, isError, isPending } = useGetSymptoms();
   const recentSymptoms = symptomsData?.data.slice(-3).reverse();
-  console.log(symptomsData);
+
   return (
     <QueryStateHandler
       data={symptomsData}

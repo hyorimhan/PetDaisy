@@ -72,7 +72,7 @@ export async function updateMedicalVisit(
   petId: string
 ) {
   const response = await fetch(`/api/medical/visits/${petId}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },

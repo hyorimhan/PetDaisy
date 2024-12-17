@@ -1,21 +1,8 @@
 "use client";
-<<<<<<< HEAD
 
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetWeight from "@/hooks/weight/useGetWeight";
 import { ResponsiveContainer, LineChart, XAxis, Line } from "recharts";
-=======
-import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
-import useGetWeight from "@/hooks/weight/useGetWeight";
-import { usePetStore } from "@/zustand/usePetStore";
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  XAxis,
-} from "recharts";
->>>>>>> ff8f6910b4f3a010cd245a475931676e3d59fb6f
 
 function Chart() {
   const { weightData, isPending, isError } = useGetWeight();

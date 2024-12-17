@@ -10,7 +10,7 @@ import { formError } from "@/utils/error/form";
 
 import { useForm } from "react-hook-form";
 
-type loginDataType = {
+type LoginDataType = {
   email: string;
   password: string;
 };
@@ -20,10 +20,10 @@ function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<loginDataType>();
+  } = useForm<LoginDataType>();
 
   const loginMutation = useLoginMutation();
-  formError(errors);
+  //formError(errors); 알럿이 아니라 에러메세지를 띄워야할 듯함
 
   return (
     <form
@@ -35,6 +35,7 @@ function LoginForm() {
           label="아이디"
           type="email"
           {...register("email", EMAIL_VALIDATION())}
+          error={errors.email}
         />
       </div>
       <div>
@@ -43,6 +44,7 @@ function LoginForm() {
           type="password"
           {...register("password", PASSWORD_VALIDATION())}
           className="font-serif w-full"
+          error={errors.password}
         />
       </div>
       <Button

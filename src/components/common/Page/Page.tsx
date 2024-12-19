@@ -12,7 +12,7 @@ function Page({ children }: Readonly<PropsWithChildren>) {
     <div
       className={`${
         details?.animal_type === DOG ? "bg-gradient-2" : "bg-gradient-3"
-      } w-[360px] md:w-[600px] mx-auto p-3 pb-[120px] min-h-screen`}
+      } w-[360px] md:w-[600px] mx-auto p-3 pb-[80px] min-h-screen`}
     >
       {children}
     </div>

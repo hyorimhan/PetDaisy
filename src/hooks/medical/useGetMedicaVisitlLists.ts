@@ -19,7 +19,7 @@ export function useGetMedicalVisitLists(
   });
 
   return {
-    medicalLists: medicalLists,
+    medicalLists,
     isPending,
     isError,
   };

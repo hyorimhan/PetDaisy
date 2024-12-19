@@ -10,9 +10,6 @@ import { PropsWithChildren, useEffect } from "react";
 function AuthProvider({ children }: Readonly<PropsWithChildren>) {
   const { saveUser } = useAuthStore();
   const { petId, savePet } = usePetStore();
-  // const pathname = usePathname();
-  // const router = useRouter();
-  console.log("상위 pet_id", petId);
 
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],

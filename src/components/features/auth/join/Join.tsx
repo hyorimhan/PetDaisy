@@ -1,5 +1,3 @@
-"use client";
-
 import JoinForm from "./JoinForm";
 
 function Join() {

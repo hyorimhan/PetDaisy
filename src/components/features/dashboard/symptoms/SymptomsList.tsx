@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/components/common/Button/Button";
 import Card from "@/components/common/Card/Card";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 
@@ -18,14 +17,6 @@ function SymptomsList() {
       isPending={isPending}
       isError={isError}
     >
-      <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light">
-        관찰 기록
-      </div>
-      <Button
-        content="관찰 기록 등록"
-        types="addInfo"
-        href={"/dashboard/symptomsWrite"}
-      />
       <div className="pt-3 ">
         <Card>
           <div className="h-[600px]">

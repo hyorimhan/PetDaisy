@@ -36,11 +36,31 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user && !request.nextUrl.pathname.startsWith("/")) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
+  // 대시보드 페이지에 접근하려 할 때
+  if (request.nextUrl.pathname.startsWith("/dashboard")) {
+    if (!user) {
+      const redirectUrl = new URL("/", request.url);
+      return NextResponse.redirect(redirectUrl);
+    }
+  }
+
+  // 로그인/회원가입 페이지에 접근하려 할 때
+  if (
+    request.nextUrl.pathname === "/login" ||
+    request.nextUrl.pathname === "/join"
+  ) {
+    if (user) {
+      const redirectUrl = new URL("/dashboard", request.url);
+      return NextResponse.redirect(redirectUrl);
+    }
+  }
+
+  // 메인 페이지에 접근하려 할 때
+  if (request.nextUrl.pathname === "/") {
+    if (user) {
+      const redirectUrl = new URL("/dashboard", request.url);
+      return NextResponse.redirect(redirectUrl);
+    }
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're

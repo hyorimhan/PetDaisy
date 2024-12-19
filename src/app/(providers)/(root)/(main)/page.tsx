@@ -1,48 +1,11 @@
 "use client";
 import Button from "@/components/common/Button/Button";
-import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Logo from "@/components/common/Logo/Logo";
 import AuthPage from "@/components/common/Page/AuthPage";
 import AppDescription from "@/components/features/main/AppDescription";
-import useUploadImages from "@/hooks/common/useUploadImages";
 import { signInWithGoogle, signInWithKakao } from "@/service/auth";
-import { uploadPetImages } from "@/service/petProfile";
-import useModalStore from "@/zustand/useModalStore";
 
 const MainPage = () => {
-  const openModal = useModalStore((state) => state.openModal);
-  const handleOpenModal = () => {
-    openModal({
-      type: "success",
-      title: "로그인 성공",
-      content: "로그인에 성공했습니다.",
-      onConfirm: () => {
-        alert("확인 버튼 클릭");
-      },
-    });
-  };
-
-  const handleOpenModalTwoButton = () => {
-    openModal({
-      type: "warning",
-      title: "삭제하시겠습니까?",
-      content: "해당 게시글을 삭제합니다",
-      isTwoButton: true,
-      onConfirm: () => {
-        alert("확인 버튼 클릭");
-      },
-      onCancel: () => {
-        alert("취소 버튼 클릭");
-      },
-    });
-  };
-
-  const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
-    useUploadImages({
-      type: "pet-profiles",
-      uploadFn: uploadPetImages,
-    });
-
   return (
     <AuthPage>
       <div className="py-[130px] flex flex-col items-center justify-center">
@@ -77,72 +40,6 @@ const MainPage = () => {
             textColor="text-gray-2"
             outlineColor="border-gray-2"
             onClick={signInWithGoogle}
-          />
-        </div>
-        <div className="mt-5 w-full flex flex-col gap-3">
-          버튼 예시
-          <Button
-            content="type: lg"
-            types="lg"
-            textColor="text-white"
-            bgColor="bg-main-4"
-          />
-          <Button
-            content="type: lg 아웃라인"
-            types="lg"
-            textColor="text-gray-2"
-            outlineColor="border-gray-2"
-          />
-          <Button
-            content="type: md"
-            types="md"
-            textColor="text-white"
-            bgColor="bg-main-4"
-          />
-          <Button
-            content="type: md 아웃라인"
-            types="md"
-            textColor="text-gray-2"
-            outlineColor="border-gray-2"
-          />
-          <Button
-            content="type: sm"
-            types="sm"
-            textColor="text-white"
-            bgColor="bg-main-4"
-          />
-          <Button
-            content="type: sm 아웃라인"
-            types="sm"
-            textColor="text-gray-2"
-            outlineColor="border-gray-2"
-          />
-          <Button content="정보 등록하기" types="addInfo" />
-          <ImageUploadButton
-            content="사진 선택"
-            imagePaths={imagePaths}
-            error={imageUploadError}
-            handleImageUpload={handleImageUpload}
-          />
-        </div>
-        <div className="mt-5 w-full">
-          버튼 하나 짜리
-          <Button
-            content="모달"
-            types="lg"
-            textColor="text-white"
-            bgColor="bg-main-4"
-            onClick={handleOpenModal}
-          />
-        </div>
-        <div className="mt-5 w-full">
-          버튼 두개 짜리
-          <Button
-            content="모달"
-            types="lg"
-            textColor="text-white"
-            bgColor="bg-main-4"
-            onClick={handleOpenModalTwoButton}
           />
         </div>
       </div>

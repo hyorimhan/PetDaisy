@@ -10,14 +10,14 @@ function LastMedical() {
   const { medicalLists, isPending, isError } = useMedicalById(petId);
 
   return (
-    <QueryStateHandler
-      data={medicalLists}
-      isError={isError}
-      isPending={isPending}
-    >
-      <Card>
+    <Card>
+      <QueryStateHandler
+        data={medicalLists}
+        isError={isError}
+        isPending={isPending}
+      >
         <div className="flex justify-center text-[14px]">
-          {medicalLists ? (
+          {medicalLists?.length > 0 ? (
             <div className="text-gray-4">
               <span className="text-main-5">{name}</span>
               {`은(는) `}
@@ -33,8 +33,8 @@ function LastMedical() {
             </div>
           )}
         </div>
-      </Card>
-    </QueryStateHandler>
+      </QueryStateHandler>
+    </Card>
   );
 }
 

@@ -44,14 +44,11 @@ function Button({
   };
   const activeStyle = "border border-main-5 text-main-5";
   const debouncedClick = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
-      const debouncedFn = debounce(() => {
-        if (onClick) {
-          onClick(event);
-        }
-      }, 1000);
-      debouncedFn();
-    },
+    debounce((event: MouseEvent<HTMLButtonElement>) => {
+      if (onClick) {
+        onClick(event);
+      }
+    }, 300),
     [onClick]
   );
 
@@ -115,6 +112,7 @@ function Button({
   return (
     <button
       className={`${bgColor} ${textColor} ${variantStyle[types]}`}
+      onClick={debouncedClick}
       {...(props as ComponentProps<"button">)}
     >
       {content}

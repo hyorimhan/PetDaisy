@@ -14,8 +14,8 @@ function Modal() {
   } = useModalStore((state) => state);
 
   const IconByType = {
-    success: "/img/icon/success.svg",
     error: "/img/icon/error.svg",
+    success: "/img/icon/success.svg",
     warning: "/img/icon/warning.svg",
   };
 

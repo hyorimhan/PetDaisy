@@ -27,7 +27,7 @@ function WeightData() {
           <div>
             {weightData?.data.map((weight, index) => {
               const prevWeight = weightData.data[index + 1]?.weight;
-              let weightChange = prevWeight
+              const weightChange = prevWeight
                 ? +(weight.weight - prevWeight).toFixed(1)
                 : 0;
 

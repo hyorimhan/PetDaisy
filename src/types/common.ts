@@ -1,9 +1,12 @@
 export type ParamsType = {
-  params: {
+  params: Promise<{
     id?: string;
     petId?: string;
     postId?: string;
-  };
+    visitId?: string;
+    vaccineId?: string;
+    userId?: string;
+  }>;
 };
 
 export type SearchDateType = {

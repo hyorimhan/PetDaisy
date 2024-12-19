@@ -5,11 +5,9 @@ import {
   handleSuccess,
 } from "@/utils/error/api";
 import { NextRequest } from "next/server";
+import { ParamsType } from "../../../../types/common";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+export async function GET(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
   const { userId } = await params;
 
@@ -28,6 +26,7 @@ export async function GET(
 
     return handleSuccess(undefined, data);
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

@@ -9,7 +9,7 @@ export const VACCINE_TYPE = {
 };
 
 export const VACCINE_TYPE_LIST = Object.entries(VACCINE_TYPE).map(
-  ([key, value], index) => ({
+  ([value], index) => ({
     key: index,
     value: value,
   })
@@ -24,7 +24,7 @@ export const VACCINE_ICON = {
 };
 
 export const VACCINE_ICON_LIST = Object.entries(VACCINE_ICON).map(
-  ([key, value], index) => ({
+  ([key, value]) => ({
     key: key,
     value: value,
   })

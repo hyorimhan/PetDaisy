@@ -66,6 +66,7 @@ export async function POST(request: NextRequest, { params }: ParamsType) {
     }
     return handleSuccess(undefined, data);
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

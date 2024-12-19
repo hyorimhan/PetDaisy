@@ -24,7 +24,7 @@ function SearchByMonth({
     if (year && month) {
       onSearch(year, month);
     }
-  }, [year, month]);
+  }, [year, month, onSearch]);
 
   return (
     <div className="w-full flex gap-3 mb-3">

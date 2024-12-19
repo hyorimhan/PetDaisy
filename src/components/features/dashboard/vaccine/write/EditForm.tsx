@@ -30,7 +30,7 @@ function EditForm({ vaccineId }: EditFormProps) {
 
   const { vaccinations } = useGetVaccineList(petId);
 
-  const vaccineDetail = vaccinations.find(
+  const vaccineDetail = vaccinations?.data.find(
     (vaccine) => vaccine.id === vaccineId
   );
 
@@ -41,7 +41,7 @@ function EditForm({ vaccineId }: EditFormProps) {
       setValue("note", vaccineDetail.note || "");
       setValue("price", vaccineDetail.price);
     }
-  }, [vaccinations]);
+  }, [vaccinations, setValue, vaccineDetail]);
 
   const { mutate: addVaccine } = useMutation({
     mutationFn: (data: UpdataVaccineData) => updateVaccination(data, petId),

@@ -51,7 +51,7 @@ function Select<TFieldValues extends FieldValues>({
       setValue(name, defaultValue);
       setSelectedOption(defaultValue);
     }
-  }, [defaultValue]);
+  }, [defaultValue, name, setValue]);
 
   const handleSelectOption = (
     option: PathValue<TFieldValues, Path<TFieldValues>>

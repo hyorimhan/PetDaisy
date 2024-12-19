@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ imageURL: imageData.path });
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

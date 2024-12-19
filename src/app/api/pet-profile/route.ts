@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
 
     return handleSuccess("반려동물 등록이 완료되었습니다.", petList);
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

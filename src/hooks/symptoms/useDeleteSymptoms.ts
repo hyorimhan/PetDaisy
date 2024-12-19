@@ -3,7 +3,6 @@ import useModalStore from "@/zustand/useModalStore";
 import { usePetStore } from "@/zustand/usePetStore";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 function useDeleteSymptoms() {
   const { petId } = usePetStore();

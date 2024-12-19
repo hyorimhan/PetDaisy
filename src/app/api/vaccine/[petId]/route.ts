@@ -6,11 +6,9 @@ import {
 } from "@/utils/error/api";
 import { getPaginationParams } from "@/utils/paginate/pagination";
 import { NextRequest } from "next/server";
+import { ParamsType } from "../../../../types/common";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { petId: string } }
-) {
+export async function GET(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
   const { petId } = await params;
   const searchParams = request.nextUrl.searchParams;
@@ -47,14 +45,12 @@ export async function GET(
 
     return handleSuccess(undefined, { data, count, page, limit });
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { petId: string } }
-) {
+export async function POST(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
 
   const data = await request.json();
@@ -85,14 +81,12 @@ export async function POST(
       Vaccinations
     );
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }
 
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { petId: string } }
-) {
+export async function PATCH(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
 
   const data = await request.json();
@@ -124,6 +118,7 @@ export async function PATCH(
       Vaccinations
     );
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

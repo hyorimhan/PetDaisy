@@ -57,7 +57,7 @@ export async function GET(
     return handleNetworkError();
   }
 }
-export async function PUT(
+export async function POST(
   request: NextRequest,
   { params }: { params: { petId: string } }
 ) {

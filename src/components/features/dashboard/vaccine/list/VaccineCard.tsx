@@ -14,7 +14,9 @@ function VaccineCard({ vaccination }: VaccineCardProps) {
       <div>
         <div className="flex justify-between items-center text-[16px]">
           <h4 className="line-clamp-2">{vaccination.vaccine_name}</h4>
-          <span className="text-red-4">{vaccination.price}원</span>
+          <span className="text-red-4">
+            {vaccination.price.toLocaleString()}원
+          </span>
         </div>
         <p className="text-[14px] text-gray-3">{vaccination.note}</p>
         <VaccineAction vaccineId={vaccination.id} />

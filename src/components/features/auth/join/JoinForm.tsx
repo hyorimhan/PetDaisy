@@ -1,15 +1,15 @@
+"use client";
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
 import {
-  NICKNAME_VALIDATION,
   EMAIL_VALIDATION,
-  PASSWORD_VALIDATION,
+  NICKNAME_VALIDATION,
   PASSWORD_CONFIRM_VALIDATION,
+  PASSWORD_VALIDATION,
 } from "@/constants/authValidation";
 import { useJoinMutation } from "@/hooks/auth/useJoinMutation";
 import { formError } from "@/utils/error/form";
 
-import React from "react";
 import { useForm } from "react-hook-form";
 
 type JoinFormDataType = {

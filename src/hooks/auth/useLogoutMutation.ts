@@ -20,9 +20,9 @@ export const useLogoutMutation = () => {
         title: "로그아웃 성공",
         content: response.message,
         onConfirm: () => {
+          router.replace("/");
           saveUser(null);
           resetPet();
-          router.replace("/");
           queryClient.clear();
         },
       });
@@ -33,8 +33,8 @@ export const useLogoutMutation = () => {
         title: "로그아웃 실패",
         content: error.message,
         onConfirm: () => {
-          resetPet();
           router.replace("/");
+          resetPet();
         },
       });
     },

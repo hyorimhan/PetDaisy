@@ -3,7 +3,6 @@ import ModalProvider from "./(providers)/_providers/ModalProvider";
 import QueryProvider from "./(providers)/_providers/QueryProvider";
 import "./globals.css";
 
-// import { usePathname } from "next/navigation";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -30,6 +29,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/img/favicon.ico",
     apple: [
+      { url: "/img/apple-icon.png" },
       { url: "/img/apple-icon-72x72.png", sizes: "72x72" },
       { url: "/img/apple-icon-144x144.png", sizes: "144x144" },
       { url: "/img/apple-icon-180x180.png", sizes: "180x180" },

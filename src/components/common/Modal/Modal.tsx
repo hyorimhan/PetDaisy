@@ -21,11 +21,17 @@ function Modal() {
 
   return (
     <div
-      className="z-50 fixed bg-black/40 left-0 top-0 right-0 bottom-0 flex justify-center items-center"
+      className="z-50 fixed bg-black/50 left-0 top-0 right-0 bottom-0 flex justify-center items-center"
       onClick={closeModal}
     >
-      <div className="w-[300px] py-[20px] px-[20px] bg-white rounded-lg flex flex-col items-center gap-[15px]">
-        <div className="flex flex-col items-center gap-[10px]">
+      <div
+        className={`w-[300px] ${
+          modalTitle && "p-[20px]"
+        } bg-white rounded-lg flex flex-col items-center`}
+      >
+        <div
+          className={`flex flex-col items-center ${modalTitle && "gap-[10px]"}`}
+        >
           {modalType && (
             <Image
               src={IconByType[modalType]}

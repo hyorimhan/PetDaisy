@@ -2,7 +2,14 @@ import { ComponentProps, useId } from "react";
 import { FieldError } from "react-hook-form";
 type InputProps = {
   label: string;
-  type: "text" | "password" | "email" | "date" | "number" | "textarea";
+  type:
+    | "text"
+    | "password"
+    | "email"
+    | "date"
+    | "number"
+    | "textarea"
+    | "select";
   error?: FieldError;
   unit?: string;
   placeholder?: string;

@@ -2,18 +2,18 @@ import { getWeightList } from "@/service/weight";
 import { usePetStore } from "@/zustand/usePetStore";
 import { useQuery } from "@tanstack/react-query";
 
-export type weightTableType = {
+export type WeightTableType = {
   id: string;
   pet_id: string;
   weight: number;
   measured_at: string;
 };
 
-export type weightDataType = {
-  data: weightTableType[];
-  count: number;
-  page: number;
-  limit: number;
+export type WeightDataType = {
+  data: WeightTableType[];
+  count?: number;
+  page?: number;
+  limit?: number;
 };
 export function useGetWeight(page?: number, limit?: number) {
   const { petId } = usePetStore();
@@ -21,7 +21,7 @@ export function useGetWeight(page?: number, limit?: number) {
     data: weightData,
     isPending,
     isError,
-  } = useQuery<weightDataType>({
+  } = useQuery<WeightDataType>({
     queryKey: ["weightData", petId, page, limit],
     queryFn: () => {
       if (!petId) throw new Error();

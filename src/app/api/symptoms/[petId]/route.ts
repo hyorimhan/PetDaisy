@@ -1,5 +1,4 @@
 import { NextRequest } from "next/server";
-import { paramsType } from "../../../../types/common";
 import { createClient } from "@/supabase/server";
 import {
   handleError,
@@ -7,10 +6,11 @@ import {
   handleSuccess,
 } from "@/utils/error/api";
 import { getPaginationParams } from "@/utils/paginate/pagination";
+import { ParamsType } from "@/types/common";
 
-export async function GET(request: NextRequest, { params }: paramsType) {
+export async function GET(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
-  const { pet_id } = await params;
+  const { petId } = await params;
   const searchParams = request.nextUrl.searchParams;
   const { page, limit, from, to } = getPaginationParams(searchParams);
   try {
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest, { params }: paramsType) {
       const { data: symptomsAllData, error: allDataError } = await supabase
         .from("symptoms")
         .select("*")
-        .eq("pet_id", pet_id);
+        .eq("pet_id", petId);
       if (allDataError) {
         return handleError(allDataError.message);
       }
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest, { params }: paramsType) {
     const { data, error, count } = await supabase
       .from("symptoms")
       .select("*", { count: "exact" })
-      .eq("pet_id", pet_id)
+      .eq("pet_id", petId)
       .range(from, to)
       .order("created_at", { ascending: false });
 
@@ -40,9 +40,9 @@ export async function GET(request: NextRequest, { params }: paramsType) {
   }
 }
 
-export async function POST(request: NextRequest, { params }: paramsType) {
+export async function POST(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
-  const { pet_id } = await params;
+  const { petId } = await params;
 
   try {
     const formData = await request.json();
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest, { params }: paramsType) {
         content: formData.content,
         symptom_date: formData.symptom_date,
         images: imageUrls,
-        pet_id,
+        pet_id: petId,
       })
       .select("*");
 

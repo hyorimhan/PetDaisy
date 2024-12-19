@@ -1,9 +1,9 @@
 export const getWeightList = async (
-  pet_id: string,
+  petId: string,
   page?: number,
   limit?: number
 ) => {
-  const baseUrl = `/api/weight/${pet_id}`;
+  const baseUrl = `/api/weight/${petId}`;
   const url =
     page && limit ? `${baseUrl}?page=${page}&limit=${limit}` : baseUrl;
   const response = await fetch(url);
@@ -14,13 +14,13 @@ export const getWeightList = async (
 export const registerWeight = async ({
   date,
   weight,
-  pet_id,
+  petId,
 }: {
   date: string;
   weight: number;
-  pet_id: string;
+  petId: string;
 }) => {
-  const response = await fetch(`/api/weight/${pet_id}`, {
+  const response = await fetch(`/api/weight/${petId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ date, weight }),
@@ -28,8 +28,8 @@ export const registerWeight = async ({
   return response.json();
 };
 
-export const deleteWeight = async (post_id: string, pet_id: string) => {
-  const response = await fetch(`/api/weight/${pet_id}/${post_id}`, {
+export const deleteWeight = async (postId: string, petId: string) => {
+  const response = await fetch(`/api/weight/${petId}/${postId}`, {
     method: "DELETE",
   });
   return response.json();

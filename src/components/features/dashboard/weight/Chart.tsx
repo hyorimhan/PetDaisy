@@ -1,10 +1,8 @@
 "use client";
 
-
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetWeight from "@/hooks/weight/useGetWeight";
 import { ResponsiveContainer, LineChart, XAxis, Line } from "recharts";
-
 
 function Chart() {
   const { weightData, isPending, isError } = useGetWeight();

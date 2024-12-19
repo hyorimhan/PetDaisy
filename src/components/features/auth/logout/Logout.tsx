@@ -5,7 +5,10 @@ import Image from "next/image";
 function Logout() {
   const logoutMutation = useLogoutMutation();
   return (
-    <button onClick={() => logoutMutation.mutate()}>
+    <button
+      onClick={() => logoutMutation.mutate()}
+      className="flex flex-col items-center gap-1"
+    >
       <Image
         src={"/icon/login.svg"}
         alt="home"

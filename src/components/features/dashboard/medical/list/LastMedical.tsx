@@ -16,7 +16,7 @@ function LastMedical() {
       isPending={isPending}
     >
       <Card>
-        <div className="flex justify-center">
+        <div className="flex justify-center text-[14px]">
           {medicalLists ? (
             <div className="text-gray-4">
               <span className="text-main-5">{name}</span>

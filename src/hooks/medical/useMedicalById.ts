@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export function useMedicalById(petId: string) {
   const {
-    data: medicalLists,
+    data: medicalLists = [],
     isPending,
     isError,
   } = useQuery<MedicalVisits>({

@@ -12,6 +12,7 @@ export const VACCINE_TYPE_LIST = Object.entries(VACCINE_TYPE).map(
   ([key, value], index) => ({
     key: index,
     value: value,
+    keyName: key,
   })
 );
 export const VACCINE_ICON = {

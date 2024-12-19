@@ -9,7 +9,7 @@ import { usePetStore } from "@/zustand/usePetStore";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-type weightFormType = {
+type WeightFormType = {
   date: string;
   weight: number;
 };
@@ -21,11 +21,11 @@ function WeightForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<weightFormType>();
+  } = useForm<WeightFormType>();
 
   const weightMutation = useRegistWeight();
 
-  const handleWeight = (data: weightFormType) => {
+  const handleWeight = (data: WeightFormType) => {
     weightMutation.mutate({
       weight: data.weight,
       date: data.date,

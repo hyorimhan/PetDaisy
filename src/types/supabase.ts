@@ -221,11 +221,8 @@ export type Database = {
         };
         Relationships: [];
       };
-
       vaccinations: {
         Row: {
-<<<<<<< HEAD
-<<<<<<< HEAD
           created_at: string
           hospital_name: string
           id: string
@@ -255,51 +252,6 @@ export type Database = {
           vaccination_date?: string
           vaccine_name?: string
         }
-=======
-=======
->>>>>>> 5d3587479bf18d0f8973f767f54c45c5c51f2b6a
-          created_at: string;
-          hospital_name: string;
-          id: string;
-          note: string | null;
-          pet_id: string;
-<<<<<<< HEAD
-=======
-          price: number;
->>>>>>> 5d3587479bf18d0f8973f767f54c45c5c51f2b6a
-          vaccination_date: string;
-          vaccine_name: string;
-        };
-        Insert: {
-          created_at?: string;
-          hospital_name: string;
-          id?: string;
-          note?: string | null;
-          pet_id: string;
-<<<<<<< HEAD
-=======
-          price: number;
->>>>>>> 5d3587479bf18d0f8973f767f54c45c5c51f2b6a
-          vaccination_date: string;
-          vaccine_name: string;
-        };
-        Update: {
-          created_at?: string;
-          hospital_name?: string;
-          id?: string;
-          note?: string | null;
-          pet_id?: string;
-<<<<<<< HEAD
-          vaccination_date?: string;
-          vaccine_name?: string;
-        };
->>>>>>> ff8f6910b4f3a010cd245a475931676e3d59fb6f
-=======
-          price?: number;
-          vaccination_date?: string;
-          vaccine_name?: string;
-        };
->>>>>>> 5d3587479bf18d0f8973f767f54c45c5c51f2b6a
         Relationships: [
           {
             foreignKeyName: "vaccinations_pet_id_fkey";

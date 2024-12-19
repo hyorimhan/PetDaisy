@@ -1,6 +1,6 @@
 import Logo from '@/components/common/Logo/Logo';
 import Page from '@/components/common/Page/Page';
-import JoinForm from '@/components/features/auth/join/JoinForm';
+import JoinForm from '@/components/features/auth/join/Join';
 
 const JoinPage = () => {
   return (

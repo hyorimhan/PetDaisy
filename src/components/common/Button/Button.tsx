@@ -1,6 +1,7 @@
+import { debounce } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
-import { ComponentProps } from "react";
+import { ComponentProps, MouseEvent, useCallback } from "react";
 
 type ButtonBaseProps = {
   content: string;
@@ -13,11 +14,14 @@ type ButtonBaseProps = {
 
 type LinkProps = ButtonBaseProps & {
   href: string;
+  onClick?: never;
 } & ComponentProps<typeof Link>;
 
 type NativeButtonProps = ButtonBaseProps & {
   href?: never;
-} & ComponentProps<"button">;
+} & Omit<ComponentProps<"button">, "onClick"> & {
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  };
 
 type ButtonProps = LinkProps | NativeButtonProps;
 function Button({
@@ -28,6 +32,7 @@ function Button({
   textColor,
   outlineColor,
   isActive = false,
+  onClick,
   ...props
 }: ButtonProps) {
   const variantStyle = {
@@ -38,11 +43,23 @@ function Button({
       "w-full py-[10px] text-[14px] rounded-lg flex items-center justify-center border border-main-3 bg-white gap-[7px] text-main-4",
   };
   const activeStyle = "border border-main-5 text-main-5";
+  const debouncedClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const debouncedFn = debounce(() => {
+        if (onClick) {
+          onClick(event);
+        }
+      }, 1000);
+      debouncedFn();
+    },
+    [onClick]
+  );
 
   if (!href && types === "addInfo") {
     return (
       <button
         className={`${variantStyle[types]}`}
+        onClick={debouncedClick}
         {...(props as ComponentProps<"button">)}
       >
         <Image
@@ -87,6 +104,7 @@ function Button({
         className={`bg-white border ${outlineColor} ${textColor} ${
           variantStyle[types]
         } ${isActive && activeStyle}`}
+        onClick={debouncedClick}
         {...(props as ComponentProps<"button">)}
       >
         {content}

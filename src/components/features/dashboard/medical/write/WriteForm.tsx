@@ -51,6 +51,8 @@ function WriteForm() {
         content: "진료 기록이 성공적으로 등록되었습니다.",
         onConfirm: () => route.push("/dashboard/medicalList"),
       });
+
+      queryClient.refetchQueries({ queryKey: ["medicalList"] });
     },
   });
 

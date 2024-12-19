@@ -1,15 +1,24 @@
 "use client";
 import Card from "@/components/common/Card/Card";
+import Empty from "@/components/common/Empty/Empty";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 
 import PaginateBtn from "@/components/common/paginate/PaginateBtn";
 import usePagination from "@/hooks/paginate/usePagination";
 import useGetSymptoms from "@/hooks/symptoms/useGetSymptoms";
+import { useSymptomsSearchByDate } from "@/hooks/symptoms/useSymptomsSearchByDate";
+import { usePetStore } from "@/zustand/usePetStore";
 import Link from "next/link";
+import SearchByMonth from "../medical/list/SearchByMonth";
 
 function SymptomsList() {
+  const petId = usePetStore((state) => state.petId) as string;
   const { page, limit, onPageChange, currentPage } = usePagination();
   const { symptomsData, isPending, isError } = useGetSymptoms(page, limit);
+
+  const { searchResults, handleSearch } = useSymptomsSearchByDate(petId);
+
+  const displayData = searchResults?.data || symptomsData?.data || [];
 
   return (
     <QueryStateHandler
@@ -18,20 +27,13 @@ function SymptomsList() {
       isError={isError}
     >
       <div className="pt-3 ">
+        <SearchByMonth onSearch={handleSearch} />
         <Card>
           <div>
-            {!symptomsData?.data || symptomsData.data.length === 0 ? (
-              <Card>
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-center p-6 py-[120px]">
-                    <p className="text-lg text-gray-4">
-                      관찰 기록을 등록해주세요
-                    </p>
-                  </div>
-                </div>
-              </Card>
+            {!displayData || displayData.length === 0 ? (
+              <Empty content="관찰 기록을 등록해주세요." />
             ) : (
-              symptomsData?.data.map((symptom) => (
+              displayData.map((symptom) => (
                 <div className="bg-main-1 p-3 rounded-lg mb-2" key={symptom.id}>
                   <Link
                     href={`/dashboard/symptomsDetail/${symptom.id}`}

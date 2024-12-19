@@ -2,7 +2,7 @@
 
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetWeight from "@/hooks/weight/useGetWeight";
-import { ResponsiveContainer, LineChart, XAxis, Line } from "recharts";
+import { Line, LineChart, ResponsiveContainer, XAxis } from "recharts";
 
 function Chart() {
   const { weightData, isPending, isError } = useGetWeight();
@@ -35,7 +35,7 @@ function Chart() {
           data={recentData}
           margin={{ top: 30, right: 30, left: 20, bottom: 5 }}
         >
-          <XAxis dataKey="date" dy={10} tick={{ fontSize: 12 }} interval={0} />{" "}
+          <XAxis dataKey="date" dy={10} tick={{ fontSize: 12 }} interval={0} />
           <Line
             type="monotone"
             dataKey="weight"

@@ -56,3 +56,14 @@ export const editSymptoms = async (data: FormDataType) => {
   });
   return response.json();
 };
+
+export async function getSymtomsByMonth(
+  petId: string,
+  year: number | null,
+  month: number | null
+) {
+  const url = `/api/symptoms/${petId}?year=${year}&month=${month}`;
+  const response = await fetch(url);
+  const result = await response.json();
+  return result.data;
+}

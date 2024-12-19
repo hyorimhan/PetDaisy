@@ -5,8 +5,6 @@ import useGetSymptomsDetail from "@/hooks/symptoms/useGetSymptomsDetail";
 import useModalStore from "@/zustand/useModalStore";
 import Image from "next/image";
 
-import React from "react";
-
 function SymptomDetailData({ postId }: { postId: string }) {
   const { symptomsDetail } = useGetSymptomsDetail(postId);
   const { openModal } = useModalStore();
@@ -31,7 +29,7 @@ function SymptomDetailData({ postId }: { postId: string }) {
                 <span>{detail.content}</span>
               </div>
             </Card>
-            <div className="grid grid-cols-3   mt-4">
+            <div className="grid grid-cols-3 mt-4 gap-3">
               {imageUrls.map((imgUrl: string) => (
                 <Image
                   key={imgUrl.split("/").pop()}
@@ -39,16 +37,15 @@ function SymptomDetailData({ postId }: { postId: string }) {
                   alt={`symptom-image`}
                   width={300}
                   height={300}
-                  className="w-full h-[200px]"
+                  className="w-full h-auto aspect-square rounded-lg"
                   onClick={() =>
                     openModal({
                       content: (
                         <Image
                           src={imgUrl}
                           alt="detailImg"
-                          width={1000}
-                          height={1000}
-                          className="w-[350px] h-[350px]"
+                          width={350}
+                          height={350}
                         />
                       ),
                       onConfirm: undefined,
@@ -58,7 +55,7 @@ function SymptomDetailData({ postId }: { postId: string }) {
                 />
               ))}
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 mt-8">
               <Button
                 types="lg"
                 bgColor="bg-yellow-5"

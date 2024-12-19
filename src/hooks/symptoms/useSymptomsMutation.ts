@@ -1,14 +1,17 @@
 import { symptomsRegist } from "@/service/symptoms";
 import useModalStore from "@/zustand/useModalStore";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 export const useSymptomsMutation = () => {
   const router = useRouter();
   const openModal = useModalStore((state) => state.openModal);
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: symptomsRegist,
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: ["symptomsData"] }),
     onSuccess: () => {
       openModal({
         type: "success",

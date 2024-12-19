@@ -4,7 +4,7 @@ import Empty from "@/components/common/Empty/Empty";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import PaginateBtn from "@/components/common/paginate/PaginateBtn";
 import { useGetMedicalVisitLists } from "@/hooks/medical/useGetMedicaVisitlLists";
-import { useSearchByDate } from "@/hooks/medical/useSearchByDate";
+import { useMedicalSearchByDate } from "@/hooks/medical/useMedicalSearchByDate";
 import usePagination from "@/hooks/paginate/usePagination";
 import { MedicalVisits } from "@/types/medical";
 import { usePetStore } from "@/zustand/usePetStore";
@@ -19,7 +19,7 @@ function MedicalList() {
     limit
   );
 
-  const { searchResults, handleSearch } = useSearchByDate(petId);
+  const { searchResults, handleSearch } = useMedicalSearchByDate(petId);
 
   const displayData = (searchResults ||
     medicalLists?.data ||

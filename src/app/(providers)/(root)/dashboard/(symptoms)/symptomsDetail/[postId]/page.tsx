@@ -1,13 +1,13 @@
 import Page from "@/components/common/Page/Page";
 import SymptomDetail from "@/components/features/dashboard/symptoms/SymptomDetail";
-import { paramsType } from "@/types/common";
 import React from "react";
+import { ParamsType } from "../../../../../../../types/common";
 
-const SymptomDetailPage = async ({ params }: paramsType) => {
-  const { post_id } = await params;
+const SymptomDetailPage = async ({ params }: ParamsType) => {
+  const { postId } = await params;
   return (
     <Page>
-      <SymptomDetail post_id={post_id ?? ""} />
+      <SymptomDetail postId={postId ?? ""} />
     </Page>
   );
 };

@@ -10,7 +10,7 @@ function useDeleteSymptoms() {
   const { openModal } = useModalStore();
   const router = useRouter();
   const mutation = useMutation({
-    mutationFn: (post_id: string) => deleteSymptoms(petId ?? "", post_id),
+    mutationFn: (postId: string) => deleteSymptoms(petId ?? "", postId),
     onSuccess: () =>
       openModal({
         type: "success",
@@ -21,13 +21,13 @@ function useDeleteSymptoms() {
       }),
   });
 
-  const handleDeleteSymptoms = (post_id: string) => {
+  const handleDeleteSymptoms = (postId: string) => {
     openModal({
       type: "warning",
       content: "기록을 삭제하시겠습니까",
       isTwoButton: true,
       onConfirm: () => {
-        mutation.mutate(post_id);
+        mutation.mutate(postId);
       },
       onCancel: () => {},
     });

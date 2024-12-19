@@ -2,7 +2,7 @@ import { getSymptomsList } from "@/service/symptoms";
 import { usePetStore } from "@/zustand/usePetStore";
 import { useQuery } from "@tanstack/react-query";
 
-export type symptomsDataType = {
+export type SymptomsDataType = {
   pet_id: string;
   id: string;
   symptom_date: string;
@@ -11,8 +11,8 @@ export type symptomsDataType = {
   images?: string;
 };
 
-export type symptomsPaginateType = {
-  data: symptomsDataType[];
+export type SymptomsPaginateType = {
+  data: SymptomsDataType[];
   page: number;
   limit: number;
   count: number;
@@ -24,7 +24,7 @@ function useGetSymptoms(page?: number, limit?: number) {
     data: symptomsData,
     isPending,
     isError,
-  } = useQuery<symptomsPaginateType>({
+  } = useQuery<SymptomsPaginateType>({
     queryKey: ["symptomsData", petId, page, limit],
     queryFn: () => getSymptomsList(petId ?? "", page, limit),
     enabled: !!petId,

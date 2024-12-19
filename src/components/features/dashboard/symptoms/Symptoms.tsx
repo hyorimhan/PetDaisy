@@ -2,15 +2,13 @@
 import Card from "@/components/common/Card/Card";
 import CardTitle from "@/components/common/Card/CardTitle";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
-import useGetSymptoms, {
-  symptomsDataType,
-} from "@/hooks/symptoms/useGetSymptoms";
+import useGetSymptoms, { SymptomsDataType } from "@/hooks/symptoms/useGetSymptoms";
 import Link from "next/link";
 
 function Symptoms() {
   const { symptomsData, isError, isPending } = useGetSymptoms();
   const recentSymptoms = symptomsData?.data.slice(-3).reverse();
-  console.log(symptomsData);
+
   return (
     <QueryStateHandler
       data={symptomsData}
@@ -20,7 +18,7 @@ function Symptoms() {
       <Card>
         <div className="w-full h-[240px]">
           <CardTitle title="관찰 기록" link="/dashboard/symptomsList" />
-          {recentSymptoms?.map((symptoms: symptomsDataType) => (
+          {recentSymptoms?.map((symptoms: SymptomsDataType) => (
             <Link
               key={symptoms.id}
               href={`dashboard/symptomsDetail/${symptoms.id}`}

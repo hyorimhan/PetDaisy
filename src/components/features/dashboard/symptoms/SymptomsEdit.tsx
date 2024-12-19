@@ -3,8 +3,8 @@ import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetSymptomsDetail from "@/hooks/symptoms/useGetSymptomsDetail";
 import SymptomsWrite from "./SymptomsWrite";
 
-function SymptomsEdit({ post_id }: Readonly<{ post_id: string }>) {
-  const { symptomsDetail, isPending, isError } = useGetSymptomsDetail(post_id);
+function SymptomsEdit({ postId }: Readonly<{ postId: string }>) {
+  const { symptomsDetail, isPending, isError } = useGetSymptomsDetail(postId);
   return (
     <QueryStateHandler
       data={symptomsDetail}

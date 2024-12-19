@@ -1,8 +1,8 @@
-export type paramsType = {
+export type ParamsType = {
   params: {
     id?: string;
-    pet_id?: string;
-    post_id?: string;
+    petId?: string;
+    postId?: string;
   };
 };
 

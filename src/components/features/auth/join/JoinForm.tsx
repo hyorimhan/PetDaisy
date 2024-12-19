@@ -1,18 +1,18 @@
-"use client";
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
 import {
-  EMAIL_VALIDATION,
   NICKNAME_VALIDATION,
-  PASSWORD_CONFIRM_VALIDATION,
+  EMAIL_VALIDATION,
   PASSWORD_VALIDATION,
+  PASSWORD_CONFIRM_VALIDATION,
 } from "@/constants/authValidation";
 import { useJoinMutation } from "@/hooks/auth/useJoinMutation";
 import { formError } from "@/utils/error/form";
 
+import React from "react";
 import { useForm } from "react-hook-form";
 
-type joinFormDataType = {
+type JoinFormDataType = {
   email: string;
   password: string;
   passwordConfirm: string;
@@ -25,14 +25,12 @@ function JoinForm() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<joinFormDataType>({
+  } = useForm<JoinFormDataType>({
     mode: "onChange",
   });
   const password = watch("password");
 
   const joinMutation = useJoinMutation();
-
-  // formError(errors);
   return (
     <form
       onSubmit={handleSubmit((data) => joinMutation.mutate(data), formError)}

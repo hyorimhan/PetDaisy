@@ -19,7 +19,7 @@ function Chart() {
     return (
       <div className="w-full h-full flex items-center justify-center">
         <div className="text-center p-6">
-          <p className="text-lg text-gray-4">몸무게를 추가해주세요</p>
+          <p className="text-lg text-gray-4">몸무게를 등록해주세요</p>
         </div>
       </div>
     );

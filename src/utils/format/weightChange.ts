@@ -5,7 +5,7 @@ export const formatWeightChange = (change: number) => {
 };
 
 export const weightChangeColor = (change: number) => {
-  if (change === 0) return "text-gray-400";
-  if (change > 0) return "text-red-500";
+  if (change === 0) return "text-gray-4";
+  if (change > 0) return "text-red-4";
   return "text-blue-5";
 };

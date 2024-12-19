@@ -28,6 +28,7 @@ function SymptomForm({
         <Input
           label="날짜"
           type="date"
+          max={new Date().toISOString().split("T")[0]}
           {...form.register("symptom_date", DATE_VALIDATION())}
         />
         <Input
@@ -38,7 +39,7 @@ function SymptomForm({
         />
         <Input
           label="내용"
-          type="text"
+          type="textarea"
           placeholder="증상에 대한 상세한 내용을 적어주세요"
           {...form.register("content", CONTENT_VALIDATION())}
         />

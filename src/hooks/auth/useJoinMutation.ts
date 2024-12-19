@@ -1,3 +1,4 @@
+"use client";
 import { handleJoin } from "@/service/auth";
 import useModalStore from "@/zustand/useModalStore";
 import { useMutation } from "@tanstack/react-query";

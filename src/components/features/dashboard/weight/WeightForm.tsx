@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 
 type WeightFormType = {
   date: string;
-  weight: number;
+  weight: string;
 };
 
 function WeightForm() {
@@ -39,6 +39,7 @@ function WeightForm() {
           label="날짜"
           type="date"
           error={errors.date}
+          max={new Date().toISOString().split("T")[0]}
           {...register("date", DATE_VALIDATION())}
         />
         <Input

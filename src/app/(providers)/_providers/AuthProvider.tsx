@@ -35,7 +35,7 @@ function AuthProvider({ children }: Readonly<PropsWithChildren>) {
     if (pets.length > 0 && !petId && userInfo?.user) {
       savePet(pets[0].id, pets[0].name);
     }
-  }, [pets, petId, savePet]);
+  }, [pets, petId, savePet, userInfo?.user]);
 
   return <div>{children}</div>;
 }

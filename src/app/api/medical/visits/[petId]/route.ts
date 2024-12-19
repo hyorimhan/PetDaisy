@@ -1,4 +1,5 @@
 import { createClient } from "@/supabase/server";
+import { ParamsType } from "@/types/common";
 import { MedicalExpenses } from "@/types/medical";
 import {
   handleError,
@@ -8,10 +9,7 @@ import {
 import { getPaginationParams } from "@/utils/paginate/pagination";
 import { NextRequest } from "next/server";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { petId: string } }
-) {
+export async function GET(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
   const { petId } = await params;
   const searchParams = request.nextUrl.searchParams;
@@ -54,13 +52,11 @@ export async function GET(
 
     return handleSuccess(undefined, { data, count, page, limit });
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { petId: string } }
-) {
+export async function POST(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
   const data = await request.json();
   const { petId } = await params;
@@ -103,14 +99,12 @@ export async function POST(
 
     return handleSuccess(undefined, medicalExpensesData);
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }
 
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { petId: string } }
-) {
+export async function PATCH(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
   const data = await request.json();
   const { petId } = await params;
@@ -153,7 +147,7 @@ export async function PATCH(
       pet_id: petId,
     }));
 
-    const { data: medicalExpensesData, error: expensesError } = await supabase
+    const { error: expensesError } = await supabase
       .from("medical_expenses")
       .insert(expensesData)
       .select("*");
@@ -166,6 +160,7 @@ export async function PATCH(
 
     return handleSuccess("진료 정보가 수정되었습니다", null);
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

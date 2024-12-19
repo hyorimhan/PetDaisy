@@ -1,7 +1,7 @@
 import Card from "@/components/common/Card/Card";
-import { MedicalVisits } from "@/types/medical";
+import { MedicalVisit } from "@/types/medical";
 
-function Detail({ details }: { details: MedicalVisits }) {
+function Detail({ details }: { details: MedicalVisit }) {
   return (
     <Card>
       <div className="flex flex-col gap-[10px]">

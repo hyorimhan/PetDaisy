@@ -66,7 +66,7 @@ function EditForm({ visitId }: EditFormProps) {
     if (medicalExpenses) {
       setValue("expenses", medicalExpenses);
     }
-  }, [details, medicalExpenses]);
+  }, [details, medicalExpenses, setValue]);
 
   const { mutate: updateMedical } = useMutation({
     mutationFn: (data: MedicalFormValues) => updateMedicalVisit(data, petId),

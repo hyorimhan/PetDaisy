@@ -61,6 +61,9 @@ export const signInWithKakao = async () => {
       redirectTo: `${window.location.origin}/api/auth/kakao`,
     },
   });
+  if (error) {
+    console.error(error);
+  }
 };
 export const signInWithGoogle = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
@@ -73,4 +76,7 @@ export const signInWithGoogle = async () => {
       redirectTo: `${window.location.origin}/api/auth/google`,
     },
   });
+  if (error) {
+    console.error(error);
+  }
 };

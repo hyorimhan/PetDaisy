@@ -4,7 +4,7 @@ import ModalProvider from "./(providers)/_providers/ModalProvider";
 import QueryProvider from "./(providers)/_providers/QueryProvider";
 import "./globals.css";
 
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,8 +14,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  const dashboard = pathname === "/dashboard";
+  // const pathname = usePathname();
+  // const dashboard = pathname === "/dashboard";
   return (
     <html lang="ko">
       <body className="min-h-screen">

@@ -37,6 +37,7 @@ export async function DELETE(request: NextRequest) {
 
     return handleSuccess("진료 기록을 삭제하였습니다.", visitId);
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

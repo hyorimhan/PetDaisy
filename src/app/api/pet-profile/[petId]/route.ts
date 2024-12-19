@@ -5,11 +5,9 @@ import {
   handleSuccess,
 } from "@/utils/error/api";
 import { NextRequest } from "next/server";
+import { ParamsType } from "../../../../types/common";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { petId: string } }
-) {
+export async function GET(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
   const { petId } = await params;
 
@@ -28,19 +26,17 @@ export async function GET(
 
     return handleSuccess(undefined, data);
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { petId: string } }
-) {
+export async function DELETE(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
   const { petId } = await params;
 
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("pet_details")
       .delete()
       .eq("pet_id", petId);
@@ -51,7 +47,7 @@ export async function DELETE(
       );
     }
 
-    const { data: petList, error: petListError } = await supabase
+    const { error: petListError } = await supabase
       .from("pet_list")
       .delete()
       .eq("id", petId);
@@ -64,6 +60,7 @@ export async function DELETE(
 
     return handleSuccess("반려동물 정보를 삭제하였습니다.", null);
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

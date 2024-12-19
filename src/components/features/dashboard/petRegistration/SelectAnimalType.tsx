@@ -14,7 +14,7 @@ function SelectAnimalType({ setValue }: SelectAnimalTypeProps) {
 
   useEffect(() => {
     setValue("animalType", selectAnimalType);
-  }, [selectAnimalType]);
+  }, [selectAnimalType, setValue]);
 
   const handleSelectAnimalType = (type: string) => {
     setValue("animalType", type);

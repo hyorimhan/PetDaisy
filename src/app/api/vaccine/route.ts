@@ -28,6 +28,7 @@ export async function DELETE(request: NextRequest) {
       Vaccinations
     );
   } catch (error) {
+    console.error(error);
     return handleNetworkError();
   }
 }

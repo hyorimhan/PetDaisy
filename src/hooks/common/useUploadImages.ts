@@ -54,6 +54,7 @@ export default function useUploadImages({
       setImagePaths(comprssedImagesURLs);
       setImageUploadError(null);
     } catch (error) {
+      console.error(error);
       setImageUploadError("이미지 압축 중 오류가 발생했습니다.");
       setImagePaths([]);
     }

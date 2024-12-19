@@ -29,7 +29,12 @@ export async function GET(
           `예방 접종 정보를 가져오는데 실패했습니다. ${error.message}`
         );
       }
-      return handleSuccess(undefined, data);
+      return handleSuccess(undefined, {
+        data,
+        count: null,
+        page: null,
+        limit: null,
+      });
     }
 
     const { data, error, count } = await query.range(from, to);

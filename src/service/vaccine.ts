@@ -1,7 +1,15 @@
 import { VaccineFormData } from "@/types/vaccine";
 
-export async function getVaccinationById(petId: string) {
-  const response = await fetch(`/api/vaccine/${petId}`);
+export async function getVaccinationById(
+  petId: string,
+  page?: number,
+  limit?: number
+) {
+  const url =
+    page && limit
+      ? `/api/vaccine/${petId}?page=${page}&limit=${limit}`
+      : `/api/vaccine/${petId}`;
+  const response = await fetch(url);
   const data = await response.json();
   return data.data;
 }

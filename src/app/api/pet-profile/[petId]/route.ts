@@ -31,3 +31,39 @@ export async function GET(
     return handleNetworkError();
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { petId: string } }
+) {
+  const supabase = await createClient();
+  const { petId } = await params;
+
+  try {
+    const { data, error } = await supabase
+      .from("pet_details")
+      .delete()
+      .eq("pet_id", petId);
+
+    if (error) {
+      return handleError(
+        `반려동물 정보를 삭제하는 데 실패했습니다. ${error.message}`
+      );
+    }
+
+    const { data: petList, error: petListError } = await supabase
+      .from("pet_list")
+      .delete()
+      .eq("id", petId);
+
+    if (petListError) {
+      return handleError(
+        `반려동물 정보를 삭제하는 데 실패했습니다.${petListError.message}`
+      );
+    }
+
+    return handleSuccess("반려동물 정보를 삭제하였습니다.", null);
+  } catch (error) {
+    return handleNetworkError();
+  }
+}

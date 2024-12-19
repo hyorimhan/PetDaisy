@@ -22,3 +22,10 @@ export async function getPetProfile(petId: string) {
   const data = await response.json();
   return data.data;
 }
+
+export async function deletePetProfile(petId: string) {
+  const response = await fetch(`/api/pet-profile/${petId}`, {
+    method: "DELETE",
+  });
+  return response.json();
+}

@@ -4,6 +4,7 @@ import Page from "@/components/common/Page/Page";
 import LastMedical from "@/components/features/dashboard/medical/list/LastMedical";
 import Medical from "@/components/features/dashboard/medical/list/Medical";
 import PetList from "@/components/features/dashboard/petList/PetList";
+import DeletePet from "@/components/features/dashboard/petProfile/DeletePet";
 import PetProfile from "@/components/features/dashboard/petProfile/PetProfile";
 import Symptoms from "@/components/features/dashboard/symptoms/Symptoms";
 import Vaccine from "@/components/features/dashboard/vaccine/list/Vaccine";
@@ -27,6 +28,7 @@ const DashboardPage = () => {
               <Medical />
               <Vaccine />
               <Symptoms />
+              <DeletePet />
             </div>
           </>
         ) : (

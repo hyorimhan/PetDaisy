@@ -19,7 +19,7 @@ function SymptomsList() {
     >
       <div className="pt-3 ">
         <Card>
-          <div className="h-[600px]">
+          <div>
             {!symptomsData?.data || symptomsData.data.length === 0 ? (
               <Card>
                 <div className="w-full h-full flex items-center justify-center">

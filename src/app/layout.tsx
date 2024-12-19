@@ -14,14 +14,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const pathname = usePathname();
-  // const dashboard = pathname === "/dashboard";
   return (
     <html lang="ko">
       <body className="min-h-screen">
         <QueryProvider>
           <ModalProvider>
-            <div className=" bg-main-2">
+            <div className="bg-main-2">
               <main>{children}</main>
             </div>
           </ModalProvider>

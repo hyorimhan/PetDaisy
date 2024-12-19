@@ -44,16 +44,31 @@ const useModalStore = create<ModalStore>((set) => ({
     isTwoButton = false,
     onConfirm,
     onCancel,
-  }) =>
+  }) => {
+    const wrappedOnConfirm = onConfirm
+      ? () => {
+          onConfirm();
+          set((state) => ({ ...state, isOpen: false })); // 확인 버튼 클릭 시 자동으로 모달 닫기
+        }
+      : undefined;
+
+    const wrappedOnCancel = onCancel
+      ? () => {
+          onCancel();
+          set((state) => ({ ...state, isOpen: false })); // 취소 버튼 클릭 시 자동으로 모달 닫기
+        }
+      : undefined;
+
     set({
       isOpen: true,
       modalType: type,
       modalTitle: title,
       modalContent: content,
       isTwoButton,
-      onConfirm,
-      onCancel,
-    }),
+      onConfirm: wrappedOnConfirm,
+      onCancel: wrappedOnCancel,
+    });
+  },
 
   closeModal: () =>
     set({

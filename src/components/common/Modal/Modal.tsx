@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 
 function Modal() {
   const {
+    isOpen,
     closeModal,
     modalType,
     modalTitle,
@@ -12,6 +13,8 @@ function Modal() {
     onConfirm,
     onCancel,
   } = useModalStore((state) => state);
+
+  if (!isOpen) return null;
 
   const IconByType = {
     error: "/img/icon/error.svg",
@@ -25,6 +28,7 @@ function Modal() {
       onClick={closeModal}
     >
       <div
+        onClick={(e) => e.stopPropagation()}
         className={`w-[300px] ${
           modalTitle && "p-[20px]"
         } bg-white rounded-lg flex flex-col items-center`}
@@ -71,15 +75,13 @@ function Modal() {
             />
           </div>
         ) : (
-          onConfirm && (
-            <Button
-              content="확인"
-              types="lg"
-              bgColor="bg-gray-4"
-              textColor="text-white"
-              onClick={onConfirm}
-            />
-          )
+          <Button
+            content="확인"
+            types="lg"
+            bgColor="bg-main-5"
+            textColor="text-white"
+            onClick={onConfirm}
+          />
         )}
       </div>
     </div>

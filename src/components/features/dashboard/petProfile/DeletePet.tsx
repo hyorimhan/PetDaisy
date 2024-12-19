@@ -7,9 +7,9 @@ function DeletePet() {
   return (
     <Button
       content="반려동물 삭제하기"
-      outlineColor="border-red-4"
-      textColor="text-red-4"
-      types="lg"
+      outlineColor="border-red-3"
+      textColor="text-red-3"
+      types="md"
       onClick={handleDeletePet}
     />
   );

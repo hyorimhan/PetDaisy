@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/components/common/Button/Button";
 import Card from "@/components/common/Card/Card";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 
@@ -17,38 +16,28 @@ function SymptomsList() {
       isPending={isPending}
       isError={isError}
     >
-      <div className="opacity-90 py-[1.6875rem] text-main-5 text-base font-light">
-        관찰 기록
-      </div>
-      <Button
-        content="관찰 기록 등록"
-        types="addInfo"
-        href={"/dashboard/symptomsWrite"}
-      />
       <div className="pt-3 ">
         <Card>
-          <div className="h-[600px]">
-            {symptomsData?.data.map((symptom) => (
-              <div className="bg-main-1 p-3 rounded-lg mb-2" key={symptom.id}>
-                <Link
-                  href={`/dashboard/symptomsDetail/${symptom.id}`}
-                  className="flex flex-col"
-                >
-                  <span className="text-gray-3 text-xs">
-                    {symptom.symptom_date}
-                  </span>
-                  <span className="mt-2">{symptom.title}</span>
-                </Link>
-              </div>
-            ))}
-          </div>
+          {symptomsData?.data.map((symptom) => (
+            <div className="bg-main-1 p-3 rounded-lg mb-2" key={symptom.id}>
+              <Link
+                href={`/dashboard/symptomsDetail/${symptom.id}`}
+                className="flex flex-col"
+              >
+                <span className="text-gray-3 text-xs">
+                  {symptom.symptom_date}
+                </span>
+                <span className="mt-2">{symptom.title}</span>
+              </Link>
+            </div>
+          ))}
+          <PaginateBtn
+            pageCount={Math.ceil((symptomsData?.count ?? 0) / limit)}
+            currentPage={currentPage}
+            onPageChange={onPageChange}
+          />
         </Card>
       </div>
-      <PaginateBtn
-        pageCount={Math.ceil((symptomsData?.count ?? 0) / limit)}
-        currentPage={currentPage}
-        onPageChange={onPageChange}
-      />
     </QueryStateHandler>
   );
 }

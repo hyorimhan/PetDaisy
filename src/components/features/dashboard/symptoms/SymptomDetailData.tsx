@@ -4,13 +4,14 @@ import useDeleteSymptoms from "@/hooks/symptoms/useDeleteSymptoms";
 import useGetSymptomsDetail from "@/hooks/symptoms/useGetSymptomsDetail";
 import useModalStore from "@/zustand/useModalStore";
 import Image from "next/image";
-import Link from "next/link";
+
 import React from "react";
 
 function SymptomDetailData({ postId }: { postId: string }) {
   const { symptomsDetail } = useGetSymptomsDetail(postId);
   const { openModal } = useModalStore();
   const handleDelete = useDeleteSymptoms();
+
   return (
     <>
       {symptomsDetail?.map((detail) => {

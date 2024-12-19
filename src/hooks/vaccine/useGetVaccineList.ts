@@ -1,16 +1,21 @@
 import { getVaccinationById } from "@/service/vaccine";
-import { Vaccinations } from "@/types/vaccine";
+import { VaccineData } from "@/types/vaccine";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetVaccineList(petId: string) {
+export function useGetVaccineList(
+  petId: string,
+  page?: number,
+  limit?: number
+) {
   const {
-    data: vaccinations = [],
+    data: vaccinations,
     isPending,
     isError,
-  } = useQuery<Vaccinations>({
-    queryKey: ["vaccineList", petId],
-    queryFn: () => getVaccinationById(petId),
+  } = useQuery<VaccineData>({
+    queryKey: ["vaccineList", petId, page, limit],
+    queryFn: () => getVaccinationById(petId, page, limit),
     enabled: !!petId,
+    staleTime: 1000 * 60 * 5,
   });
 
   return {

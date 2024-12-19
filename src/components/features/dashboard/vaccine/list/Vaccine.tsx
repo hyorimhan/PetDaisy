@@ -12,7 +12,7 @@ function Vaccine() {
   const petId = usePetStore((state) => state.petId) as string;
 
   const { vaccinations, isPending, isError } = useGetVaccineList(petId);
-  const lastVaccinations = vaccinations.slice(0, 3);
+  const lastVaccinations = vaccinations?.data.slice(0, 3) ?? [];
 
   return (
     <QueryStateHandler

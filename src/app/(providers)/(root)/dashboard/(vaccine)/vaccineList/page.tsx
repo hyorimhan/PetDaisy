@@ -5,12 +5,18 @@ import Page from "@/components/common/Page/Page";
 import PageTitle from "@/components/common/Page/PageTitle";
 import HasVaccineIcon from "@/components/features/dashboard/vaccine/list/HasVaccineIcon";
 import VaccineList from "@/components/features/dashboard/vaccine/list/VaccineList";
+import usePagination from "@/hooks/paginate/usePagination";
 import { useGetVaccineList } from "@/hooks/vaccine/useGetVaccineList";
 import { usePetStore } from "@/zustand/usePetStore";
 
 const VaccineListpage = () => {
   const petId = usePetStore((state) => state.petId) as string;
-  const { vaccinations, isPending, isError } = useGetVaccineList(petId);
+  const { page, limit, onPageChange, currentPage } = usePagination();
+  const { vaccinations, isPending, isError } = useGetVaccineList(
+    petId,
+    page,
+    limit
+  );
   return (
     <Page>
       <PageTitle title="예방 접종 기록" />
@@ -27,8 +33,18 @@ const VaccineListpage = () => {
           isPending={isPending}
           isError={isError}
         >
-          <VaccineList vaccinations={vaccinations} />
-          <HasVaccineIcon vaccinations={vaccinations} />
+          {vaccinations && (
+            <>
+              <VaccineList
+                vaccinations={vaccinations.data}
+                onPageChange={onPageChange}
+                currentPage={currentPage}
+                limit={limit}
+                count={vaccinations.count}
+              />
+              <HasVaccineIcon vaccinations={vaccinations.data} />
+            </>
+          )}
         </QueryStateHandler>
       </div>
     </Page>

@@ -11,6 +11,7 @@ import Link from "next/link";
 function SymptomsList() {
   const { page, limit, onPageChange, currentPage } = usePagination();
   const { symptomsData, isPending, isError } = useGetSymptoms(page, limit);
+
   return (
     <QueryStateHandler
       data={symptomsData}
@@ -28,27 +29,39 @@ function SymptomsList() {
       <div className="pt-3 ">
         <Card>
           <div className="h-[600px]">
-            {symptomsData?.data.map((symptom) => (
-              <div className="bg-main-1 p-3 rounded-lg mb-2" key={symptom.id}>
-                <Link
-                  href={`/dashboard/symptomsDetail/${symptom.id}`}
-                  className="flex flex-col"
-                >
-                  <span className="text-gray-3 text-xs">
-                    {symptom.symptom_date}
-                  </span>
-                  <span className="mt-2">{symptom.title}</span>
-                </Link>
-              </div>
-            ))}
+            {!symptomsData?.data || symptomsData.data.length === 0 ? (
+              <Card>
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center p-6 py-[120px]">
+                    <p className="text-lg text-gray-4">
+                      관찰 기록을 등록해주세요
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            ) : (
+              symptomsData?.data.map((symptom) => (
+                <div className="bg-main-1 p-3 rounded-lg mb-2" key={symptom.id}>
+                  <Link
+                    href={`/dashboard/symptomsDetail/${symptom.id}`}
+                    className="flex flex-col"
+                  >
+                    <span className="text-gray-3 text-xs">
+                      {symptom.symptom_date}
+                    </span>
+                    <span className="mt-2">{symptom.title}</span>
+                  </Link>
+                </div>
+              ))
+            )}
           </div>
+          <PaginateBtn
+            pageCount={Math.ceil((symptomsData?.count ?? 0) / limit)}
+            currentPage={currentPage}
+            onPageChange={onPageChange}
+          />
         </Card>
       </div>
-      <PaginateBtn
-        pageCount={Math.ceil((symptomsData?.count ?? 0) / limit)}
-        currentPage={currentPage}
-        onPageChange={onPageChange}
-      />
     </QueryStateHandler>
   );
 }

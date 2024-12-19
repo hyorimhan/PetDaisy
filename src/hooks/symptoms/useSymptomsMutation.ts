@@ -15,7 +15,7 @@ export const useSymptomsMutation = () => {
         title: "관찰 기록",
         content: "등록에 성공했습니다.",
         onConfirm: () => {
-          router.replace("/dashboard");
+          router.replace("/dashboard/symptomsList");
         },
       });
     },
@@ -25,7 +25,7 @@ export const useSymptomsMutation = () => {
         title: "오류",
         content: "등록에 실패했습니다",
         onConfirm: () => {
-          router.replace("/dashboard");
+          router.replace("/dashboard/symptomsList");
         },
       });
     },

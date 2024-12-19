@@ -17,7 +17,7 @@ export const registerWeight = async ({
   petId,
 }: {
   date: string;
-  weight: number;
+  weight: string;
   petId: string;
 }) => {
   const response = await fetch(`/api/weight/${petId}`, {

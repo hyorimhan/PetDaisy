@@ -14,6 +14,7 @@ function WeightData() {
   const { page, limit, onPageChange, currentPage } = usePagination();
   const { weightData } = useGetWeight(page, limit);
   const handleDelete = useDeleteMutation();
+
   return (
     <div className="pt-3">
       <Card>
@@ -29,6 +30,7 @@ function WeightData() {
               let weightChange = prevWeight
                 ? +(weight.weight - prevWeight).toFixed(1)
                 : 0;
+
               return (
                 <div
                   key={weight.id}
@@ -37,9 +39,9 @@ function WeightData() {
                   <span>{weight.measured_at}</span>
                   <span>{weight.weight}kg</span>
                   <div className="flex justify-end items-center gap-2 pr-14">
-                    <span className={weightChangeColor(weightChange)}>
+                    <div className={`${weightChangeColor(weightChange)}`}>
                       {formatWeightChange(weightChange)}
-                    </span>
+                    </div>
                     <button
                       onClick={() => handleDelete.handleDeleteWeight(weight.id)}
                     >

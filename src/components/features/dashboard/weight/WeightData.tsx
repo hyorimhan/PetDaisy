@@ -4,16 +4,18 @@ import usePagination from "@/hooks/paginate/usePagination";
 import useDeleteMutation from "@/hooks/weight/useDeleteMutation";
 
 import useGetWeight from "@/hooks/weight/useGetWeight";
-import {
-  weightChangeColor,
-  formatWeightChange,
-} from "@/utils/format/weightChange";
+import { formatWeightChange } from "@/utils/format/weightChange";
 import React from "react";
 
 function WeightData() {
   const { page, limit, onPageChange, currentPage } = usePagination();
   const { weightData } = useGetWeight(page, limit);
   const handleDelete = useDeleteMutation();
+  const weightChangeColor = (change: number) => {
+    if (change === 0) return "text-gray-4";
+    if (change > 0) return "text-red-4";
+    if (change < 0) return "text-blue-5";
+  };
 
   return (
     <div className="pt-3">

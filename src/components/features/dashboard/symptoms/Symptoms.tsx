@@ -10,7 +10,7 @@ import Link from "next/link";
 
 function Symptoms() {
   const { symptomsData, isError, isPending } = useGetSymptoms();
-  const recentSymptoms = symptomsData?.data.slice(-3).reverse();
+  const recentSymptoms = symptomsData?.data.slice(-3);
 
   if (recentSymptoms?.length === 0) {
     return (

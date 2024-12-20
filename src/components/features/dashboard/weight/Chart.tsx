@@ -9,11 +9,15 @@ function Chart() {
   const { weightData, isPending, isError } = useGetWeight();
 
   const recentData = weightData?.data
-    .slice(-6)
+    .sort(
+      (a, b) =>
+        new Date(b.measured_at).getTime() - new Date(a.measured_at).getTime()
+    )
+    .slice(0, 6)
     .reverse()
     .map((weight) => ({
       date: weight.measured_at.slice(5, 10),
-      weight: weight.weight,
+      weight: Number(weight.weight),
     }));
 
   if (recentData?.length === 0) {

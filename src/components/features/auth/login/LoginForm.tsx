@@ -28,11 +28,11 @@ function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit((data) => loginMutation.mutate(data), formError)}
-      className="pt-[3.125rem] space-y-5 w-full"
+      className="pt-[50px] space-y-5 w-full"
     >
       <div>
         <Input
-          label="아이디"
+          label="이메일"
           type="email"
           {...register("email", EMAIL_VALIDATION())}
           error={errors.email}

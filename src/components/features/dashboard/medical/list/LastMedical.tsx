@@ -19,7 +19,7 @@ function LastMedical() {
         <div className="flex justify-center text-[14px]">
           {medicalLists?.length > 0 ? (
             <div className="text-gray-4">
-              <span className="text-main-5">{name}</span>
+              <span className="text-main-5 font-bold">{name}</span>
               {`은(는) `}
               <span className="font-bold text-main-5">
                 {medicalLists[0]?.visit_date || ""}

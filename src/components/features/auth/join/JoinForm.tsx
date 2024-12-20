@@ -30,10 +30,15 @@ function JoinForm() {
   });
   const password = watch("password");
 
-  const joinMutation = useJoinMutation();
+  const { mutate: joinMutaion } = useJoinMutation();
+
+  const onSubmit = (data: JoinFormDataType) => {
+    joinMutaion(data);
+  };
+
   return (
     <form
-      onSubmit={handleSubmit((data) => joinMutation.mutate(data), formError)}
+      onSubmit={handleSubmit(onSubmit, formError)}
       className="space-y-5 pt-[3.125rem] w-full"
     >
       <div>
@@ -46,7 +51,7 @@ function JoinForm() {
       </div>
       <div>
         <Input
-          label="아이디"
+          label="이메일"
           type="email"
           {...register("email", EMAIL_VALIDATION())}
           error={errors.email}

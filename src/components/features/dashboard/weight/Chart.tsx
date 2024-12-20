@@ -1,5 +1,6 @@
 "use client";
 
+import Empty from "@/components/common/Empty/Empty";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetWeight from "@/hooks/weight/useGetWeight";
 import { Line, LineChart, ResponsiveContainer, XAxis } from "recharts";
@@ -16,13 +17,7 @@ function Chart() {
     }));
 
   if (recentData?.length === 0) {
-    return (
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="text-center p-6">
-          <p className="text-lg text-gray-4">몸무게를 등록해주세요</p>
-        </div>
-      </div>
-    );
+    return <Empty content="몸무게를 등록해주세요." />;
   }
   return (
     <QueryStateHandler

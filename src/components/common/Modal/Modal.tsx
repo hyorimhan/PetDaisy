@@ -58,7 +58,7 @@ function Modal() {
           <p className="text-base text-gray-4">{modalContent}</p>
         </div>
         {isTwoButton ? (
-          <div className="w-full flex gap-2 justify-center">
+          <div className="w-full flex gap-2 justify-center mt-3">
             <Button
               content="취소"
               types="lg"
@@ -75,13 +75,17 @@ function Modal() {
             />
           </div>
         ) : (
-          <Button
-            content="확인"
-            types="lg"
-            bgColor="bg-main-5"
-            textColor="text-white"
-            onClick={onConfirm}
-          />
+          <div className={`w-full ${modalTitle && "mt-3"}`}>
+            {onConfirm && (
+              <Button
+                content="확인"
+                types="lg"
+                bgColor="bg-main-5"
+                textColor="text-white"
+                onClick={onConfirm}
+              />
+            )}
+          </div>
         )}
       </div>
     </div>

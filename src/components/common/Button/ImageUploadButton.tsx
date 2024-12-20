@@ -43,7 +43,7 @@ function ImageUploadButton({
           {imagePaths.map((path) => (
             <li
               key={path.split("/").pop()}
-              className="relative flex justify-center items-center bg-white w-full h-[110px] md:h-[200px]"
+              className="relative flex justify-center items-center w-full h-[110px] md:h-[200px]"
             >
               <Image
                 src={path}

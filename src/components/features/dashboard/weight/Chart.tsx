@@ -9,7 +9,7 @@ function Chart() {
   const { weightData, isPending, isError } = useGetWeight();
 
   const recentData = weightData?.data
-    .slice(-10)
+    .slice(-6)
     .reverse()
     .map((weight) => ({
       date: weight.measured_at.slice(5, 10),
@@ -39,6 +39,7 @@ function Chart() {
               position: "top",
               fill: "#8884d8",
               fontSize: 12,
+              dy: -10,
             }}
           />
         </LineChart>

@@ -38,8 +38,8 @@ function WeightData() {
                 >
                   <span>{weight.measured_at}</span>
                   <span>{weight.weight}kg</span>
-                  <div className="flex justify-end items-center gap-2 pr-14">
-                    <div className={`${weightChangeColor(weightChange)}`}>
+                  <div className="flex justify-end items-center gap-2  pr-4 sm:pr-4 md:pr-14 lg:pr-14  ">
+                    <div className={weightChangeColor(weightChange)}>
                       {formatWeightChange(weightChange)}
                     </div>
                     <button

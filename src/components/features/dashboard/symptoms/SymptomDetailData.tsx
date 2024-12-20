@@ -25,8 +25,8 @@ function SymptomDetailData({ postId }: { postId: string }) {
                     .replace("-", ".")
                     .replace("-", ".")}
                 </span>
-                <span className="text-xl">{detail.title}</span>
-                <span>{detail.content}</span>
+                <h3 className="text-xl">{detail.title}</h3>
+                <p className="whitespace-pre-line">{detail.content}</p>
               </div>
             </Card>
             <div className="grid grid-cols-3 mt-4 gap-3">
@@ -34,7 +34,7 @@ function SymptomDetailData({ postId }: { postId: string }) {
                 <Image
                   key={imgUrl.split("/").pop()}
                   src={imgUrl}
-                  alt={`symptom-image`}
+                  alt={`${detail.title} 이미지`}
                   width={300}
                   height={300}
                   className="w-full h-auto aspect-square rounded-lg"
@@ -43,7 +43,7 @@ function SymptomDetailData({ postId }: { postId: string }) {
                       content: (
                         <Image
                           src={imgUrl}
-                          alt="detailImg"
+                          alt={`${detail.title} 이미지`}
                           width={350}
                           height={350}
                         />

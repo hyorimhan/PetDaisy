@@ -23,7 +23,6 @@ function LoginForm() {
   } = useForm<LoginDataType>();
 
   const loginMutation = useLoginMutation();
-  //formError(errors); 알럿이 아니라 에러메세지를 띄워야할 듯함
 
   return (
     <form

@@ -6,6 +6,7 @@ import useUploadImages from "../common/useUploadImages";
 import useSymptomsEditMutation from "./useSymptomsEditMutation";
 import { useSymptomsMutation } from "./useSymptomsMutation";
 import { FormDataType } from "@/components/features/dashboard/symptoms/SymptomsWrite";
+import { useQueryClient } from "@tanstack/react-query";
 
 function useSymptomsImgUpload({
   defaultValue,
@@ -14,6 +15,7 @@ function useSymptomsImgUpload({
   defaultValue?: FormDataType;
   isEdit: boolean;
 }) {
+  const queryClient = useQueryClient();
   const { petId } = usePetStore();
   const form = useForm<FormDataType>({
     defaultValues: defaultValue,
@@ -44,10 +46,19 @@ function useSymptomsImgUpload({
       };
 
       if (isEdit) {
-        symptomsEditMutation.mutate({
-          postId: defaultValue?.id,
-          ...symptomsData,
-        });
+        symptomsEditMutation.mutate(
+          {
+            postId: defaultValue?.id,
+            ...symptomsData,
+          },
+          {
+            onSuccess: () => {
+              queryClient.invalidateQueries({
+                queryKey: ["symptomsDetail", petId, defaultValue?.id],
+              });
+            },
+          }
+        );
       } else {
         symptomsMutation.mutate(symptomsData);
       }

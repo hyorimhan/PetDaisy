@@ -54,8 +54,8 @@ function SymptomForm({
       <div className="mt-[1.875rem] space-y-[.625rem]">
         <Button
           content={
-            imageUpload.imagePaths.length > 0 &&
-            imageUpload.uploadImageURLs.length === 0
+            imageUpload.imagePaths.some((path) => path.startsWith("blob:")) &&
+            imageUpload.imagePaths.length > imageUpload.uploadImageURLs.length
               ? "이미지 업로드중"
               : isEdit
               ? "수정하기"
@@ -66,8 +66,8 @@ function SymptomForm({
           bgColor="bg-main-5"
           type="submit"
           disabled={
-            imageUpload.imagePaths.length > 0 &&
-            imageUpload.uploadImageURLs.length === 0
+            imageUpload.imagePaths.some((path) => path.startsWith("blob:")) &&
+            imageUpload.imagePaths.length > imageUpload.uploadImageURLs.length
           }
         />
         <Button

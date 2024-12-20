@@ -1,6 +1,7 @@
 "use client";
 import Card from "@/components/common/Card/Card";
 import CardTitle from "@/components/common/Card/CardTitle";
+import Empty from "@/components/common/Empty/Empty";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import useGetSymptoms, {
   SymptomsDataType,
@@ -15,11 +16,7 @@ function Symptoms() {
     return (
       <Card>
         <CardTitle title="관찰 기록" link="/dashboard/symptomsList" />
-        <div className="w-full h-full flex items-center justify-center">
-          <div className="text-center p-6 py-[120px]">
-            <p className="text-lg text-gray-4">관찰 기록을 등록해주세요</p>
-          </div>
-        </div>
+        <Empty content="관찰 기록을 등록해주세요." />
       </Card>
     );
   }

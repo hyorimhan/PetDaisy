@@ -10,9 +10,7 @@ export const useLoginMutation = () => {
   return useMutation({
     mutationFn: handleLogin,
     onSuccess: (response) => {
-      if (
-        response.message === "해당 계정은 존재하지 않습니다. 다시 확인해주세요"
-      ) {
+      if (response.message === "로그인에 실패했습니다. 다시 확인해주세요") {
         openModal({
           type: "error",
           title: "로그인 실패",

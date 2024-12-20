@@ -31,6 +31,43 @@ export async function GET(request: NextRequest, { params }: ParamsType) {
   }
 }
 
+export async function PATCH(request: NextRequest, { params }: ParamsType) {
+  const supabase = await createClient();
+  const { petId } = await params;
+  const data = await request.json();
+
+  try {
+    const { data: PetDetails, error: petDetailsError } = await supabase
+      .from("pet_details")
+      .update({
+        gender: data.gender,
+        birth_date: data.birth,
+        weight: data.weight,
+        neutered: data.neutered,
+        images: data.images,
+        animal_type: data.animalType,
+      })
+      .eq("pet_id", petId)
+      .select("*, pet_list(name)")
+      .single();
+
+    if (petDetailsError) {
+      console.error(petDetailsError);
+      return handleError(
+        `반려동물 정보를 수정하는 데 실패했습니다. ${petDetailsError.message}`
+      );
+    }
+
+    return handleSuccess(
+      "반려동물 정보를 수정하는데 성공했습니다.",
+      PetDetails
+    );
+  } catch (error) {
+    console.error(error);
+    return handleNetworkError();
+  }
+}
+
 export async function DELETE(request: NextRequest, { params }: ParamsType) {
   const supabase = await createClient();
   const { petId } = await params;

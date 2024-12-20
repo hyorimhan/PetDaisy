@@ -9,6 +9,14 @@ export type PetRegistrationType = {
   animalType: string;
 };
 
+export type PetUpdateType = {
+  gender: string;
+  birth: string;
+  weight: string;
+  neutered: string;
+  animalType: string;
+};
+
 type PetDetailData = Omit<
   Tables<"pet_details">,
   "id" | "created_at" | "pet_id"

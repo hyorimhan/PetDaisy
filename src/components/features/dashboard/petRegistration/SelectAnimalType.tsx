@@ -7,10 +7,11 @@ import { UseFormSetValue } from "react-hook-form";
 
 interface SelectAnimalTypeProps {
   setValue: UseFormSetValue<PetRegistrationType>;
+  defaultValue?: string;
 }
-function SelectAnimalType({ setValue }: SelectAnimalTypeProps) {
+function SelectAnimalType({ setValue, defaultValue }: SelectAnimalTypeProps) {
   const [isActive, setIsActive] = useState(true);
-  const [selectAnimalType, setSelectAnimalType] = useState(DOG);
+  const [selectAnimalType, setSelectAnimalType] = useState(defaultValue || DOG);
 
   useEffect(() => {
     setValue("animalType", selectAnimalType);

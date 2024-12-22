@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/components/common/Button/Button";
 import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Input from "@/components/common/Input/Input";
 import Select from "@/components/common/Input/Select";
@@ -30,6 +29,7 @@ interface FormFieldsProps {
   imagePaths: string[];
   imageUploadError: string | null;
   handleImageUpload: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleDeleteImage: (path: string) => void;
 }
 
 function FormField({
@@ -40,6 +40,7 @@ function FormField({
   imagePaths,
   imageUploadError,
   handleImageUpload,
+  handleDeleteImage,
 }: FormFieldsProps) {
   const handleSetWeight = (e: ChangeEvent<HTMLInputElement>) => {
     const value = handleFixedWeight(e);
@@ -52,6 +53,7 @@ function FormField({
         imagePaths={imagePaths}
         error={imageUploadError}
         handleImageUpload={handleImageUpload}
+        handleDeleteImage={handleDeleteImage}
       />
       <SelectAnimalType setValue={setValue} />
       <Input
@@ -93,13 +95,6 @@ function FormField({
         error={errors.neutered}
         registerOptions={PET_NEUTERED_VALIDATION()}
         setValue={setValue}
-      />
-      <Button
-        content="등록하기"
-        type="submit"
-        bgColor="bg-main-5"
-        textColor="text-white"
-        types="lg"
       />
     </>
   );

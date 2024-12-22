@@ -2,6 +2,11 @@
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
 import Select from "@/components/common/Input/Select";
+import {
+  VACCINE_HOSPITAL_VALIDATION,
+  VACCINE_MEMO_VALIDATION,
+  VACCINE_PRICE_VALIDATION,
+} from "@/constants/vaccinValidation";
 import { VACCINE_TYPE_LIST } from "@/constants/vaccine";
 import { addVaccination } from "@/service/vaccine";
 import { VaccineFormData } from "@/types/vaccine";
@@ -56,10 +61,7 @@ function WriteForm() {
         label="병원명"
         type="text"
         error={errors.hospitalName}
-        {...register("hospitalName", {
-          required: "병원 이름을 입력해주세요.",
-          maxLength: 20,
-        })}
+        {...register("hospitalName", VACCINE_HOSPITAL_VALIDATION())}
       />
       <Select
         label="종류"
@@ -74,17 +76,13 @@ function WriteForm() {
         label="메모"
         type="text"
         error={errors.note}
-        {...register("note", { maxLength: 50 })}
+        {...register("note", VACCINE_MEMO_VALIDATION())}
       />
       <Input
         label="접종비"
         type="number"
         error={errors.price}
-        {...register("price", {
-          required: "비용을 입력해주세요",
-          max: 999999999,
-          min: 0,
-        })}
+        {...register("price", VACCINE_PRICE_VALIDATION())}
         unit="원"
       />
       <div className="space-y-[10px]">

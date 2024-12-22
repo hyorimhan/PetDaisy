@@ -10,10 +10,10 @@ function Footer() {
     return null;
   }
   return (
-    <div className="relative flex text-main-4 justify-end items-center bg-white w-[390px] md:w-[600px] mx-auto px-3 h-[60px] shadow-shadow">
+    <div className="relative flex text-main-4 justify-end items-start bg-white w-[390px] md:w-[600px] mx-auto px-6 pt-3 h-[65px] shadow-shadow">
       <Link
         href={"/dashboard"}
-        className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+        className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-[10px]"
       >
         <Image
           src={"/icon/home.svg"}

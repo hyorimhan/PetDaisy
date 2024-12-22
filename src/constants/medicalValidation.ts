@@ -1,3 +1,5 @@
+import { EmptyDelete } from "./common";
+
 export const MEDICAL_DATE_VALIDATION = () => ({
   required: "진료 날짜를 선택해주세요.",
 });
@@ -8,6 +10,7 @@ export const MEDICAL_HOSPITAL_VALIDATION = () => ({
     value: 20,
     message: "병원이름은 20자까지 입력 가능합니다",
   },
+  ...EmptyDelete,
 });
 export const MEDICAL_TITLE_VALIDATION = () => ({
   required: "진료 기록 제목을 입력해주세요",
@@ -15,6 +18,7 @@ export const MEDICAL_TITLE_VALIDATION = () => ({
     value: 30,
     message: "진료 기록 제목은 30자까지 입력 가능합니다",
   },
+  ...EmptyDelete,
 });
 
 export const MEDICAL_CONTENT_VALIDATION = () => ({
@@ -27,6 +31,7 @@ export const MEDICAL_CONTENT_VALIDATION = () => ({
     value: 500,
     message: "진료 기록 제목은 500자까지 입력 가능합니다",
   },
+  ...EmptyDelete,
 });
 
 export const MEDICAL_EXPENSES_SERVICE_VALIDATION = () => ({
@@ -39,6 +44,7 @@ export const MEDICAL_EXPENSES_SERVICE_VALIDATION = () => ({
     value: 20,
     message: "진료 기록 제목은 20자까지 입력 가능합니다",
   },
+  ...EmptyDelete,
 });
 
 export const MEDICAL_EXPENSES_PRICE_VALIDATION = () => ({

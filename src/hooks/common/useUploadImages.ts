@@ -17,7 +17,7 @@ export default function useUploadImages({
   const [imagePaths, setImagePaths] = useState<string[]>(initialPath);
   const [imageUploadError, setImageUploadError] = useState<string | null>(null);
 
-  const { mutate: uploadNewImageFile } = useMutation({
+  const { mutateAsync: uploadNewImageFile } = useMutation({
     mutationFn: async (newImageFile: File) => {
       const formData = new FormData();
       formData.append("file", newImageFile);
@@ -49,7 +49,13 @@ export default function useUploadImages({
     }
 
     try {
-      const { comprssedImagesURLs } = await handleImageCompression(newFiles);
+      const { comprssedImagesURLs, error } = await handleImageCompression(
+        newFiles
+      );
+      if (error) {
+        setImageUploadError(error);
+        return;
+      }
       setImagePaths((prev) => [...prev, ...comprssedImagesURLs]);
 
       for (const file of newFiles) {

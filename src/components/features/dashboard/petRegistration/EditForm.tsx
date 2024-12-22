@@ -54,7 +54,7 @@ function EditForm({ petId }: EditFormProps) {
     initialPath: initialImg,
   });
 
-  const handleSetWeight = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSetWeight = async (e: ChangeEvent<HTMLInputElement>) => {
     const value = handleFixedWeight(e);
     setValue("weight", value);
   };
@@ -68,7 +68,7 @@ function EditForm({ petId }: EditFormProps) {
       weight: String(Number(data.weight).toFixed(2)),
       neutered: data.neutered,
       images:
-        uploadImageURLs.length !== 0
+        uploadImageURLs && uploadImageURLs.length > 0
           ? JSON.stringify(uploadImageURLs)
           : JSON.stringify([DEFAULT_PET_IMAGE]),
       animalType: data.animalType,

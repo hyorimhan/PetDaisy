@@ -38,15 +38,13 @@ function PetRegistrationForm() {
       weight: String(Number(data.weight).toFixed(2)),
       neutered: data.neutered,
       images:
-        uploadImageURLs.length !== 0
+        uploadImageURLs && uploadImageURLs.length > 0
           ? JSON.stringify(uploadImageURLs)
           : JSON.stringify([DEFAULT_PET_IMAGE]),
       animal_type: data.animalType,
     };
     registPet(petData);
   };
-
-  console.log("PetRegistrationForm render", handleDeleteImage);
 
   return (
     <form

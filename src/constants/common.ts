@@ -1,3 +1,5 @@
+export const MAX_FILE_SIZE = 1024 * 1024 * 1;
+
 export const YEARS = [...Array(2024 - 1999 + 1)].map((_, i) => ({
   key: 2024 - i,
   value: 2024 - i,

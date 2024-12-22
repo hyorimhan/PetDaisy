@@ -26,7 +26,7 @@ export default function useUploadImages({
       setImagePaths([]);
       setUploadImageURLs([]);
     }
-  }, [JSON.stringify(initialPath)]);
+  }, [JSON.stringify(initialPath), initialPath]);
 
   const { mutate: uploadNewImageFile } = useMutation({
     mutationFn: async (newImageFile: File) => {

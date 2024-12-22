@@ -22,6 +22,10 @@ export default function useUploadImages({
       setImagePaths(initialPath);
       setUploadImageURLs(initialPath);
     }
+    if (initialPath.length === 0) {
+      setImagePaths([]);
+      setUploadImageURLs([]);
+    }
   }, [JSON.stringify(initialPath)]);
 
   const { mutate: uploadNewImageFile } = useMutation({
@@ -34,9 +38,10 @@ export default function useUploadImages({
 
       const newImageURL = `https://ldkycewtchhtokppnajz.supabase.co/storage/v1/object/public/${type}/${data.imageURL}`;
 
-      setUploadImageURLs((prev) => [...prev, newImageURL]);
-
       return newImageURL;
+    },
+    onSuccess: (data) => {
+      setUploadImageURLs((prev) => [...prev, data]);
     },
   });
 
@@ -44,27 +49,34 @@ export default function useUploadImages({
     e.preventDefault();
     const files = e.target.files;
 
-    setUploadImageURLs([]);
+    if (!files) return;
 
-    if (!files || files.length > 3) {
+    const newFiles = Array.from(files);
+
+    const currentUploadCount = imagePaths.length; // imagePaths와 sync
+    if (currentUploadCount + newFiles.length > 3) {
       setImageUploadError("이미지는 최대 3개까지 업로드 가능합니다.");
-      setImagePaths([]);
       return;
     }
 
-    const imageFiles = Array.from(files);
-
     try {
-      const { comprssedImagesURLs } = await handleImageCompression(imageFiles);
-      imageFiles.forEach((image) => uploadNewImageFile(image));
+      const { comprssedImagesURLs } = await handleImageCompression(newFiles);
+      setImagePaths((prev) => [...prev, ...comprssedImagesURLs]);
 
-      setImagePaths(comprssedImagesURLs);
+      for (const file of newFiles) {
+        await uploadNewImageFile(file);
+      }
+
       setImageUploadError(null);
     } catch (error) {
       console.error(error);
       setImageUploadError("이미지 압축 중 오류가 발생했습니다.");
-      setImagePaths([]);
     }
+  };
+
+  const handleDeleteImage = (path: string) => {
+    setImagePaths((prev) => prev.filter((p) => p !== path));
+    setUploadImageURLs((prev) => prev.filter((p) => p !== path));
   };
 
   return {
@@ -72,5 +84,6 @@ export default function useUploadImages({
     imagePaths,
     imageUploadError,
     handleImageUpload,
+    handleDeleteImage,
   };
 }

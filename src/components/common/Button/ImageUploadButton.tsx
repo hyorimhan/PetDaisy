@@ -5,6 +5,7 @@ interface ImageUploadButtonProps {
   error?: string | null;
   imagePaths?: string[];
   handleImageUpload?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDeleteImage: (path: string) => void;
 }
 
 function ImageUploadButton({
@@ -12,6 +13,7 @@ function ImageUploadButton({
   error,
   imagePaths = [],
   handleImageUpload,
+  handleDeleteImage,
 }: ImageUploadButtonProps) {
   return (
     <>
@@ -31,12 +33,16 @@ function ImageUploadButton({
         <input
           type="file"
           className="hidden"
-          accept="image/*"
+          accept="image/jpg, image/png, image/webp, image/jpeg"
           id="image-file"
           multiple
           onChange={handleImageUpload}
         />
       </div>
+      <p className="text-[12px] text-gray-3">
+        이미지는 jpeg/jpg/png/webp 확장자만 업로드 가능합니다.
+        <br /> 이미지는 한번에 3개까지만 업로드 가능합니다.
+      </p>
       {error && <p className="text-[12px] text-red-5">{error}</p>}
       {imagePaths && (
         <ul className="w-full grid grid-cols-3 gap-2">
@@ -51,6 +57,13 @@ function ImageUploadButton({
                 alt="이미지"
                 className="aspect-auto rounded-lg object-cover"
               />
+              <button
+                type="button"
+                onClick={() => handleDeleteImage(path)}
+                className="absolute -right-1 -top-2 bg-gray-4 text-[10px] rounded-full w-[16px] h-[16px] text-gray-1 shadow-shadow-1 hover:bg-red-4 hover:text-red-1"
+              >
+                -
+              </button>
             </li>
           ))}
         </ul>

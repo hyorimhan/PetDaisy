@@ -1,8 +1,13 @@
-function Empty({ content }: { content: string }) {
+import Link from "next/link";
+
+function Empty({ content, href }: { content: string; href: string }) {
   return (
-    <div className="text-gray-4 flex justify-center items-center py-[120px]">
+    <Link
+      href={href}
+      className="text-gray-4 flex justify-center items-center py-[120px]"
+    >
       {content}
-    </div>
+    </Link>
   );
 }
 

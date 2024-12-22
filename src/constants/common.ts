@@ -9,3 +9,10 @@ export const MONTH = [...Array(12)].map((_, i) => ({
   key: i + 1,
   value: i + 1,
 }));
+
+export const EmptyDelete = {
+  validate: {
+    emptyCheck: (value: string) =>
+      value.trim().length > 0 || "공백 입력은 불가합니다",
+  },
+};

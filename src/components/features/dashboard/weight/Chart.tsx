@@ -21,7 +21,9 @@ function Chart() {
     }));
 
   if (recentData?.length === 0) {
-    return <Empty content="몸무게를 등록해주세요." />;
+    return (
+      <Empty href="/dashboard/weightWrite" content="몸무게를 등록해주세요." />
+    );
   }
   return (
     <QueryStateHandler

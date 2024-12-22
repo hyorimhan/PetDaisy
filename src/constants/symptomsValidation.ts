@@ -1,9 +1,12 @@
+import { EmptyDelete } from "./common";
+
 export const TITLE_VALIDATION = () => ({
   required: "제목을 입력해주세요",
   maxLength: {
-    value: 15,
-    message: "15자 이상 입력하실 수 없습니다",
+    value: 30,
+    message: "30자 이상 입력하실 수 없습니다",
   },
+  ...EmptyDelete,
 });
 
 export const CONTENT_VALIDATION = () => ({
@@ -12,4 +15,5 @@ export const CONTENT_VALIDATION = () => ({
     value: 300,
     message: "300자 이상 입력하실 수 없습니다",
   },
+  ...EmptyDelete,
 });

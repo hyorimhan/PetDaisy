@@ -18,7 +18,7 @@ interface ModalStore {
   modalType?: ModalType;
   modalTitle?: string;
   modalContent?: string | ReactNode;
-  isTwoButton: boolean;
+  isTwoButton?: boolean;
   onConfirm?: () => void;
   onCancel?: () => void;
 

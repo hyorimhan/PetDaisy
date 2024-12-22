@@ -43,7 +43,9 @@ function ProfileImage({ images }: ProfileImageProps) {
                 src={imageUrl}
                 alt="pet-profile"
                 fill
+                sizes="(max-width: 600px) 100vw, 200px"
                 className="rounded-lg object-cover aspect-[3/4]"
+                priority
               />
             </div>
           </SwiperSlide>

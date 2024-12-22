@@ -4,6 +4,7 @@ import useUploadImages from "@/hooks/common/useUploadImages";
 import { usePetRegistration } from "@/hooks/profile/usePetRegistration";
 import { usePetRegistrationForm } from "@/hooks/profile/usePetRegistrationForm";
 
+import Button from "@/components/common/Button/Button";
 import { uploadPetImages } from "@/service/petProfile";
 import { PetRegistrationType } from "@/types/petProfile";
 import { useAuthStore } from "@/zustand/useAuthStore";
@@ -12,11 +13,16 @@ import FormField from "./FormField";
 function PetRegistrationForm() {
   const user = useAuthStore((state) => state.user);
 
-  const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
-    useUploadImages({
-      type: "pet-profiles",
-      uploadFn: uploadPetImages,
-    });
+  const {
+    uploadImageURLs,
+    imagePaths,
+    imageUploadError,
+    handleImageUpload,
+    handleDeleteImage,
+  } = useUploadImages({
+    type: "pet-profiles",
+    uploadFn: uploadPetImages,
+  });
 
   const { register, handleSubmit, setValue, watch, errors } =
     usePetRegistrationForm();
@@ -40,6 +46,8 @@ function PetRegistrationForm() {
     registPet(petData);
   };
 
+  console.log("PetRegistrationForm render", handleDeleteImage);
+
   return (
     <form
       className="flex flex-col gap-5 pb-[130px]"
@@ -53,6 +61,14 @@ function PetRegistrationForm() {
         imagePaths={imagePaths}
         imageUploadError={imageUploadError}
         handleImageUpload={handleImageUpload}
+        handleDeleteImage={handleDeleteImage}
+      />
+      <Button
+        content="등록하기"
+        type="submit"
+        bgColor="bg-main-5"
+        textColor="text-white"
+        types="lg"
       />
     </form>
   );

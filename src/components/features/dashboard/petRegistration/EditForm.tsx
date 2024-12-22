@@ -42,12 +42,17 @@ function EditForm({ petId }: EditFormProps) {
 
   const initialImg = details && JSON.parse(details.images);
 
-  const { uploadImageURLs, imagePaths, imageUploadError, handleImageUpload } =
-    useUploadImages({
-      type: "pet-profiles",
-      uploadFn: uploadPetImages,
-      initialPath: initialImg,
-    });
+  const {
+    uploadImageURLs,
+    imagePaths,
+    imageUploadError,
+    handleImageUpload,
+    handleDeleteImage,
+  } = useUploadImages({
+    type: "pet-profiles",
+    uploadFn: uploadPetImages,
+    initialPath: initialImg,
+  });
 
   const handleSetWeight = (e: ChangeEvent<HTMLInputElement>) => {
     const value = handleFixedWeight(e);
@@ -81,6 +86,7 @@ function EditForm({ petId }: EditFormProps) {
         imagePaths={imagePaths}
         error={imageUploadError}
         handleImageUpload={handleImageUpload}
+        handleDeleteImage={handleDeleteImage}
       />
       <SelectAnimalType
         setValue={setValue}

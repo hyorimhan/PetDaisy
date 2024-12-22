@@ -2,6 +2,11 @@
 import Button from "@/components/common/Button/Button";
 import Input from "@/components/common/Input/Input";
 import Select from "@/components/common/Input/Select";
+import {
+  VACCINE_HOSPITAL_VALIDATION,
+  VACCINE_MEMO_VALIDATION,
+  VACCINE_PRICE_VALIDATION,
+} from "@/constants/vaccinValidation";
 import { VACCINE_TYPE_LIST } from "@/constants/vaccine";
 import { useGetVaccineList } from "@/hooks/vaccine/useGetVaccineList";
 import { updateVaccination } from "@/service/vaccine";
@@ -82,7 +87,7 @@ function EditForm({ vaccineId }: EditFormProps) {
         type="text"
         error={errors.hospitalName}
         placeholder="병원 이름을 입력해주세요."
-        {...register("hospitalName", { required: "병원 이름을 입력해주세요." })}
+        {...register("hospitalName", VACCINE_HOSPITAL_VALIDATION())}
       />
       <Select
         label="종류"
@@ -98,14 +103,14 @@ function EditForm({ vaccineId }: EditFormProps) {
         label="메모"
         type="text"
         error={errors.note}
-        {...register("note")}
+        {...register("note", VACCINE_MEMO_VALIDATION())}
         placeholder="간단한 참고 내용을 입력해주세요."
       />
       <Input
         label="접종비"
         type="number"
         error={errors.price}
-        {...register("price", { required: "비용을 입력해주세요" })}
+        {...register("price", VACCINE_PRICE_VALIDATION())}
         unit="원"
       />
       <Button

@@ -1,5 +1,3 @@
-export const BIG_NUMBER = 999999999;
-
 export const YEARS = [...Array(2024 - 1999 + 1)].map((_, i) => ({
   key: 2024 - i,
   value: 2024 - i,

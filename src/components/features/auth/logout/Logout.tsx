@@ -7,7 +7,7 @@ function Logout() {
   return (
     <button
       onClick={() => logoutMutation.mutate()}
-      className="flex flex-col items-center gap-1"
+      className="flex flex-col items-center gap-1 text-[10px]"
     >
       <Image
         src={"/icon/login.svg"}

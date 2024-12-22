@@ -1,7 +1,7 @@
 "use client";
 import { handleImageCompression } from "@/utils/image/compression";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface UploadImagesProps {
   type: "pet-profiles" | "symptoms";
@@ -13,20 +13,9 @@ export default function useUploadImages({
   uploadFn,
   initialPath = [],
 }: UploadImagesProps) {
-  const [uploadImageURLs, setUploadImageURLs] = useState<string[]>([]);
+  const [uploadImageURLs, setUploadImageURLs] = useState<string[]>(initialPath);
   const [imagePaths, setImagePaths] = useState<string[]>(initialPath);
   const [imageUploadError, setImageUploadError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (initialPath.length > 0) {
-      setImagePaths(initialPath);
-      setUploadImageURLs(initialPath);
-    }
-    if (initialPath.length === 0) {
-      setImagePaths([]);
-      setUploadImageURLs([]);
-    }
-  }, [JSON.stringify(initialPath), initialPath]);
 
   const { mutate: uploadNewImageFile } = useMutation({
     mutationFn: async (newImageFile: File) => {

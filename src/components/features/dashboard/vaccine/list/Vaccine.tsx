@@ -23,7 +23,10 @@ function Vaccine() {
       <Card>
         <CardTitle title="예방 접종 기록" link="/dashboard/vaccineList" />
         {lastVaccinations.length === 0 ? (
-          <Empty content="예방 접종 내역이 없습니다 " />
+          <Empty
+            href="/dashboard/vaccineWrite"
+            content="예방 접종 내역이 없습니다 "
+          />
         ) : (
           <ul className="mt-2 flex flex-col gap-2">
             {lastVaccinations.map((vaccination: Vaccination) => (

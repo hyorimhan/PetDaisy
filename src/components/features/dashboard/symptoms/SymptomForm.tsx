@@ -20,7 +20,7 @@ function SymptomForm({
     isEdit,
     defaultValue,
   });
-
+  const { errors } = form.formState;
   return (
     <form onSubmit={form.handleSubmit(handleSymptoms)}>
       <div className="space-y-3">
@@ -29,18 +29,21 @@ function SymptomForm({
           type="date"
           max={new Date().toISOString().split("T")[0]}
           {...form.register("symptom_date", DATE_VALIDATION())}
+          error={errors.symptom_date}
         />
         <Input
           label="제목"
           type="text"
           placeholder="증상에 대해 간략히 적어주세요"
           {...form.register("title", TITLE_VALIDATION())}
+          error={errors.title}
         />
         <Input
           label="내용"
           type="textarea"
           placeholder="증상에 대한 상세한 내용을 적어주세요"
           {...form.register("content", CONTENT_VALIDATION())}
+          error={errors.content}
         />
 
         <ImageUploadButton

@@ -1,5 +1,6 @@
 "use client";
 import Card from "@/components/common/Card/Card";
+import Empty from "@/components/common/Empty/Empty";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 
 import PaginateBtn from "@/components/common/paginate/PaginateBtn";
@@ -21,15 +22,10 @@ function SymptomsList() {
         <Card>
           <div>
             {!symptomsData?.data || symptomsData.data.length === 0 ? (
-              <Card>
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-center p-6 py-[120px]">
-                    <p className="text-lg text-gray-4">
-                      관찰 기록을 등록해주세요
-                    </p>
-                  </div>
-                </div>
-              </Card>
+              <Empty
+                href={"/dashboard/symptomsWrite"}
+                content="관찰 기록 정보가 없습니다."
+              />
             ) : (
               symptomsData?.data.map((symptom) => (
                 <div className="bg-main-1 p-3 rounded-lg mb-2" key={symptom.id}>

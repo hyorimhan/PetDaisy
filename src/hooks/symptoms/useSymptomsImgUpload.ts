@@ -18,6 +18,7 @@ function useSymptomsImgUpload({
   const queryClient = useQueryClient();
   const { petId } = usePetStore();
   const form = useForm<FormDataType>({
+    mode: "onChange",
     defaultValues: defaultValue,
   });
   const initialImg = defaultValue?.images

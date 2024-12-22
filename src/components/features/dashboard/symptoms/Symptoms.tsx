@@ -16,7 +16,10 @@ function Symptoms() {
     return (
       <Card>
         <CardTitle title="관찰 기록" link="/dashboard/symptomsList" />
-        <Empty content="관찰 기록을 등록해주세요." />
+        <Empty
+          href={"/dashboard/symptomsWrite"}
+          content="관찰 기록 정보가 없습니다."
+        />
       </Card>
     );
   }

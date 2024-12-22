@@ -22,7 +22,7 @@ function Footer() {
           height={20}
           className="mx-auto w-5 h-5"
         />
-        대시보드
+        HOME
       </Link>
       <Logout />
     </div>

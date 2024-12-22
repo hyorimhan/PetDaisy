@@ -1,3 +1,5 @@
+import { EmptyDelete } from "./common";
+
 export const PET_NAME_VALIDATION = () => ({
   required: "닉네임을 입력해주세요",
   minLength: {
@@ -8,6 +10,7 @@ export const PET_NAME_VALIDATION = () => ({
     value: 4,
     message: "닉네임은 4자까지 입력 가능합니다",
   },
+  ...EmptyDelete,
 });
 
 export const PET_BIRTH_VALIDATION = () => ({

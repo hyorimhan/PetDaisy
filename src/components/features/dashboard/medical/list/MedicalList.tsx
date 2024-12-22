@@ -33,7 +33,12 @@ function MedicalList() {
     >
       <SearchByMonth onSearch={handleSearch} />
       <Card>
-        {!displayData.length && <Empty content="진료 기록 정보가 없습니다." />}
+        {!displayData.length && (
+          <Empty
+            href="/dashboard/medicalWrite"
+            content="진료 기록 정보가 없습니다."
+          />
+        )}
         <ul className="flex flex-col gap-2">
           {displayData.map((list) => (
             <li key={list.id}>

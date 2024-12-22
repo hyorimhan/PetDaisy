@@ -20,7 +20,10 @@ function Medical() {
       <Card>
         <CardTitle title="진료 기록" link="/dashboard/medicalList" />
         {medicalLists && medicalLists.length === 0 && (
-          <Empty content="진료 기록 정보가 없습니다." />
+          <Empty
+            href="/dashboard/medicalWrite"
+            content="진료 기록 정보가 없습니다."
+          />
         )}
         <ul className="mt-2 flex flex-col gap-2">
           {medicalLists &&

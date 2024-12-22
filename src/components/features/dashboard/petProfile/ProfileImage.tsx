@@ -36,8 +36,6 @@ function ProfileImage({ images }: ProfileImageProps) {
                       height={0}
                     />
                   ),
-                  onConfirm: undefined,
-                  onCancel: undefined,
                 })
               }
             >

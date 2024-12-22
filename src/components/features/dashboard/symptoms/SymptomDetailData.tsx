@@ -48,8 +48,6 @@ function SymptomDetailData({ postId }: { postId: string }) {
                           height={350}
                         />
                       ),
-                      onConfirm: undefined,
-                      onCancel: undefined,
                     })
                   }
                 />

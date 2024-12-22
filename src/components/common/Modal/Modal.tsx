@@ -5,7 +5,6 @@ import Button from "../Button/Button";
 function Modal() {
   const {
     isOpen,
-    closeModal,
     modalType,
     modalTitle,
     modalContent,
@@ -23,10 +22,7 @@ function Modal() {
   };
 
   return (
-    <div
-      className="z-50 fixed bg-black/50 left-0 top-0 right-0 bottom-0 flex justify-center items-center"
-      onClick={closeModal}
-    >
+    <div className="z-50 fixed bg-black/50 left-0 top-0 right-0 bottom-0 flex justify-center items-center">
       <div
         onClick={(e) => e.stopPropagation()}
         className={`w-[300px] ${

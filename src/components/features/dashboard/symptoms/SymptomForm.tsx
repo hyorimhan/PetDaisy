@@ -2,10 +2,11 @@ import Button from "@/components/common/Button/Button";
 import ImageUploadButton from "@/components/common/Button/ImageUploadButton";
 import Input from "@/components/common/Input/Input";
 import {
-  CONTENT_VALIDATION,
   TITLE_VALIDATION,
+  CONTENT_VALIDATION,
 } from "@/constants/symptomsValidation";
 import { DATE_VALIDATION } from "@/constants/weightValidation";
+import React from "react";
 import useSymptomsImgUpload from "@/hooks/symptoms/useSymptomsImgUpload";
 import { FormDataType } from "./SymptomsWrite";
 

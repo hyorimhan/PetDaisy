@@ -73,6 +73,13 @@ function PetRegistrationForm() {
         textColor="text-white"
         types="lg"
       />
+      <Button
+        content="취소하기"
+        types="lg"
+        bgColor="bg-gray-1"
+        textColor="text-gray-3"
+        href="/dashboard"
+      />
     </form>
   );
 }

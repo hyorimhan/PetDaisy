@@ -16,23 +16,11 @@ import Link from "next/link";
 const DashboardPage = () => {
   const user = useAuthStore((state) => state.user);
   const petId = usePetStore((state) => state.petId);
-  return (
-    <>
-      <PetList />
-      <Page>
-        {user?.id && petId ? (
-          <>
-            <div className="space-y-3">
-              <PetProfile />
-              <LastMedical />
-              <Weight />
-              <Medical />
-              <Vaccine />
-              <Symptoms />
-              <DeletePet />
-            </div>
-          </>
-        ) : (
+  if (user?.id && !petId) {
+    return (
+      <>
+        <PetList />
+        <Page>
           <Card>
             <div className="py-[120px] text-center text-gray-4">
               <Link href="/dashboard/pet-registration">
@@ -40,6 +28,25 @@ const DashboardPage = () => {
               </Link>
             </div>
           </Card>
+        </Page>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <PetList />
+      <Page>
+        {petId && user?.id && (
+          <div className="space-y-3">
+            <PetProfile />
+            <LastMedical />
+            <Weight />
+            <Medical />
+            <Vaccine />
+            <Symptoms />
+            <DeletePet />
+          </div>
         )}
       </Page>
     </>

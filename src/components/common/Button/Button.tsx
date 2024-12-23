@@ -1,4 +1,4 @@
-import { debounce } from "lodash";
+import { throttle } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
 import { ComponentProps, MouseEvent, useCallback } from "react";
@@ -43,8 +43,8 @@ function Button({
       "w-full py-[10px] text-[14px] rounded-lg flex items-center justify-center border border-main-3 bg-white gap-[7px] text-main-4",
   };
   const activeStyle = "border border-main-5 text-main-5";
-  const debouncedClick = useCallback(
-    debounce((event: MouseEvent<HTMLButtonElement>) => {
+  const throtteledClick = useCallback(
+    throttle((event: MouseEvent<HTMLButtonElement>) => {
       if (onClick) {
         onClick(event);
       }
@@ -56,7 +56,7 @@ function Button({
     return (
       <button
         className={`${variantStyle[types]}`}
-        onClick={debouncedClick}
+        onClick={throtteledClick}
         {...(props as ComponentProps<"button">)}
       >
         <Image
@@ -101,7 +101,7 @@ function Button({
         className={`bg-white border ${outlineColor} ${textColor} ${
           variantStyle[types]
         } ${isActive && activeStyle}`}
-        onClick={debouncedClick}
+        onClick={throtteledClick}
         {...(props as ComponentProps<"button">)}
       >
         {content}
@@ -112,7 +112,7 @@ function Button({
   return (
     <button
       className={`${bgColor} ${textColor} ${variantStyle[types]}`}
-      onClick={debouncedClick}
+      onClick={throtteledClick}
       {...(props as ComponentProps<"button">)}
     >
       {content}

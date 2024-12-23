@@ -72,6 +72,17 @@ function PetRegistrationForm() {
         bgColor="bg-main-5"
         textColor="text-white"
         types="lg"
+        disabled={
+          imagePaths.some((path) => path.startsWith("blob:")) &&
+          imagePaths.length > uploadImageURLs.length
+        }
+      />
+      <Button
+        content="취소하기"
+        types="lg"
+        bgColor="bg-gray-1"
+        textColor="text-gray-3"
+        href="/dashboard"
       />
     </form>
   );

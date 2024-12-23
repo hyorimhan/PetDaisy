@@ -28,7 +28,6 @@ const DashboardPage = () => {
   return (
     <>
       <PetList />
-
       <Page>
         {user?.id && petId ? (
           <div className="space-y-3">

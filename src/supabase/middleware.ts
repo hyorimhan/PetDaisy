@@ -44,19 +44,11 @@ export async function updateSession(request: NextRequest) {
     }
   }
 
-  // 로그인/회원가입 페이지에 접근하려 할 때
   if (
+    request.nextUrl.pathname === "/" ||
     request.nextUrl.pathname === "/login" ||
     request.nextUrl.pathname === "/join"
   ) {
-    if (user) {
-      const redirectUrl = new URL("/dashboard", request.url);
-      return NextResponse.redirect(redirectUrl);
-    }
-  }
-
-  // 메인 페이지에 접근하려 할 때
-  if (request.nextUrl.pathname === "/") {
     if (user) {
       const redirectUrl = new URL("/dashboard", request.url);
       return NextResponse.redirect(redirectUrl);

@@ -5,7 +5,7 @@ import LoginForm from "@/components/features/auth/login/LoginForm";
 const LoginPage = () => {
   return (
     <AuthPage>
-      <div className="flex flex-col items-center pt-[9.375rem]">
+      <div className="w-full flex flex-col items-center">
         <Logo size="md" />
         <LoginForm />
       </div>

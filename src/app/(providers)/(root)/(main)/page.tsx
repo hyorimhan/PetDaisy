@@ -8,7 +8,7 @@ import { signInWithGoogle, signInWithKakao } from "@/service/auth";
 const MainPage = () => {
   return (
     <AuthPage>
-      <div className="py-[130px] flex flex-col items-center justify-center">
+      <div className="w-full flex flex-col items-center justify-center">
         <Logo size="lg" />
         <AppDescription />
         <div className="w-full flex flex-col justify-center gap-[10px]">

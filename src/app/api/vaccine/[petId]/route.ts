@@ -17,7 +17,7 @@ export async function GET(request: NextRequest, { params }: ParamsType) {
   try {
     const query = supabase
       .from("vaccinations")
-      .select("*")
+      .select("*", { count: "exact" })
       .eq("pet_id", petId)
       .order("vaccination_date", { ascending: false });
 

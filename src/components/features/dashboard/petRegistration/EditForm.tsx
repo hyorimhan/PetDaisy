@@ -54,7 +54,7 @@ function EditForm({ petId }: EditFormProps) {
     initialPath: initialImg,
   });
 
-  const handleSetWeight = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSetWeight = async (e: ChangeEvent<HTMLInputElement>) => {
     const value = handleFixedWeight(e);
     setValue("weight", value);
   };
@@ -68,7 +68,7 @@ function EditForm({ petId }: EditFormProps) {
       weight: String(Number(data.weight).toFixed(2)),
       neutered: data.neutered,
       images:
-        uploadImageURLs.length !== 0
+        uploadImageURLs && uploadImageURLs.length > 0
           ? JSON.stringify(uploadImageURLs)
           : JSON.stringify([DEFAULT_PET_IMAGE]),
       animalType: data.animalType,
@@ -129,7 +129,12 @@ function EditForm({ petId }: EditFormProps) {
         defaultValue={details?.neutered}
       />
       <Button
-        content="수정하기"
+        content={
+          imagePaths.some((path) => path.startsWith("blob:")) &&
+          imagePaths.length > uploadImageURLs.length
+            ? "이미지 업로드 중"
+            : "수정하기"
+        }
         type="submit"
         bgColor="bg-main-5"
         textColor="text-white"

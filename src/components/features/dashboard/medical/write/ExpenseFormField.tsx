@@ -15,6 +15,7 @@ function ExpenseFormField({ error }: ExpenseFormFieldProps) {
   });
 
   const handleAddList = () => {
+    if (fields.length >= 20) return;
     append({ service: "", price: 0 });
   };
 

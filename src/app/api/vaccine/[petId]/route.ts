@@ -15,9 +15,11 @@ export async function GET(request: NextRequest, { params }: ParamsType) {
   const { page, limit, from, to } = getPaginationParams(searchParams);
 
   try {
-    let query = supabase.from("vaccinations").select("*").eq("pet_id", petId);
-
-    query = query.order("vaccination_date", { ascending: false });
+    const query = supabase
+      .from("vaccinations")
+      .select("*")
+      .eq("pet_id", petId)
+      .order("vaccination_date", { ascending: false });
 
     if (!searchParams.get("page") || !searchParams.get("limit")) {
       const { data, error } = await query;

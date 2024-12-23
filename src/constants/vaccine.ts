@@ -3,6 +3,7 @@ export const VACCINE_TYPE = {
   COMBINED_VACCINE_2ND: "종합 백신 2차 접종",
   COMBINED_VACCINE_3RD: "종합 백신 3차 접종",
   COMBINED_VACCINE_BOOSTER: "종합 백신 추가 접종",
+  HEARTWORM_VACCINE: "심장사상충 예방 접종",
   RABIES_VACCINE: "광견병 예방 접종",
   LEUKEMIA_VACCINE: "백혈병 예방 접종",
   PERITONITIS_VACCINE: "복막염 예방 접종",

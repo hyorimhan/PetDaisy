@@ -11,6 +11,7 @@ import Vaccine from "@/components/features/dashboard/vaccine/list/Vaccine";
 import Weight from "@/components/features/dashboard/weight/Weight";
 import { useAuthStore } from "@/zustand/useAuthStore";
 import { usePetStore } from "@/zustand/usePetStore";
+import Link from "next/link";
 
 const DashboardPage = () => {
   const user = useAuthStore((state) => state.user);
@@ -34,7 +35,9 @@ const DashboardPage = () => {
         ) : (
           <Card>
             <div className="py-[120px] text-center text-gray-4">
-              반려 동물을 등록해주세요.
+              <Link href="/dashboard/pet-registration">
+                반려동물을 등록해주세요.
+              </Link>
             </div>
           </Card>
         )}

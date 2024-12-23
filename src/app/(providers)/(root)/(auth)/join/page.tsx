@@ -5,7 +5,7 @@ import JoinForm from "@/components/features/auth/join/JoinForm";
 const JoinPage = () => {
   return (
     <AuthPage>
-      <div className="flex flex-col items-center justify-center pt-[180px] ">
+      <div className="w-full flex flex-col items-center justify-center">
         <Logo size="md" />
         <JoinForm />
       </div>

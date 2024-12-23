@@ -129,7 +129,12 @@ function EditForm({ petId }: EditFormProps) {
         defaultValue={details?.neutered}
       />
       <Button
-        content="수정하기"
+        content={
+          imagePaths.some((path) => path.startsWith("blob:")) &&
+          imagePaths.length > uploadImageURLs.length
+            ? "이미지 업로드 중"
+            : "수정하기"
+        }
         type="submit"
         bgColor="bg-main-5"
         textColor="text-white"

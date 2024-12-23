@@ -28,14 +28,6 @@ function WriteForm() {
           service: "",
           price: 0,
         },
-        {
-          service: "",
-          price: 0,
-        },
-        {
-          service: "",
-          price: 0,
-        },
       ],
     },
   });

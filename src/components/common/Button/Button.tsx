@@ -48,9 +48,17 @@ function Button({
       if (onClick) {
         onClick(event);
       }
-    }, 300),
+    }, 500),
     [onClick]
   );
+
+  // const debouncedClick = () => {
+  //   debounce((event: MouseEvent<HTMLButtonElement>) => {
+  //     if (onClick) {
+  //       onClick(event);
+  //     }
+  //   }, 500);
+  // };
 
   if (!href && types === "addInfo") {
     return (

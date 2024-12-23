@@ -1,12 +1,12 @@
 import { symptomsUpload } from "@/service/symptoms";
 import { usePetStore } from "@/zustand/usePetStore";
 
+import { FormDataType } from "@/components/features/dashboard/symptoms/SymptomsWrite";
+import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import useUploadImages from "../common/useUploadImages";
 import useSymptomsEditMutation from "./useSymptomsEditMutation";
 import { useSymptomsMutation } from "./useSymptomsMutation";
-import { FormDataType } from "@/components/features/dashboard/symptoms/SymptomsWrite";
-import { useQueryClient } from "@tanstack/react-query";
 
 function useSymptomsImgUpload({
   defaultValue,

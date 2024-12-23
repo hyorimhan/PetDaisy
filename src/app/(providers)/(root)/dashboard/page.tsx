@@ -1,8 +1,7 @@
 "use client";
+import Card from "@/components/common/Card/Card";
 import Loading from "@/components/common/Loading/Loading";
 import Page from "@/components/common/Page/Page";
-import DashboardLoading from "@/components/features/dashboard/loadingState/DashboardLoading";
-import NoDataLoading from "@/components/features/dashboard/loadingState/NoDataLoading";
 import LastMedical from "@/components/features/dashboard/medical/list/LastMedical";
 import PetList from "@/components/features/dashboard/petList/PetList";
 import PetProfile from "@/components/features/dashboard/petProfile/PetProfile";
@@ -24,36 +23,38 @@ const DeletePet = lazy(
 );
 
 const DashboardPage = () => {
-  const { user, initial } = useAuthStore();
+  const user = useAuthStore((state) => state.user);
   const petId = usePetStore((state) => state.petId);
-
-  if (!initial || !user?.id) {
-    return <DashboardLoading />;
-  } else if (!petId || !user?.id) {
-    return <NoDataLoading />;
-  }
-
   return (
     <>
       <PetList />
+
       <Page>
-        <div className="space-y-3">
-          <PetProfile />
-          <LastMedical />
-          <Weight />
-          <Suspense fallback={<Loading />}>
-            <Medical />
-          </Suspense>
-          <Suspense fallback={<Loading />}>
-            <Vaccine />
-          </Suspense>
-          <Suspense fallback={<Loading />}>
-            <Symptoms />
-          </Suspense>
-          <Suspense fallback={<Loading />}>
-            <DeletePet />
-          </Suspense>
-        </div>
+        {user?.id && petId ? (
+          <div className="space-y-3">
+            <PetProfile />
+            <LastMedical />
+            <Weight />
+            <Suspense fallback={<Loading />}>
+              <Medical />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <Vaccine />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <Symptoms />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <DeletePet />
+            </Suspense>
+          </div>
+        ) : (
+          <Card>
+            <div className="py-[120px] text-center text-gray-4">
+              반려 동물을 등록해주세요.
+            </div>
+          </Card>
+        )}
       </Page>
     </>
   );

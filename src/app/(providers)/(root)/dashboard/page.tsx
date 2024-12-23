@@ -11,32 +11,42 @@ import Vaccine from "@/components/features/dashboard/vaccine/list/Vaccine";
 import Weight from "@/components/features/dashboard/weight/Weight";
 import { useAuthStore } from "@/zustand/useAuthStore";
 import { usePetStore } from "@/zustand/usePetStore";
+import Link from "next/link";
 
 const DashboardPage = () => {
   const user = useAuthStore((state) => state.user);
   const petId = usePetStore((state) => state.petId);
+  if (user?.id && !petId) {
+    return (
+      <>
+        <PetList />
+        <Page>
+          <Card>
+            <div className="py-[120px] text-center text-gray-4">
+              <Link href="/dashboard/pet-registration">
+                반려동물을 등록해주세요.
+              </Link>
+            </div>
+          </Card>
+        </Page>
+      </>
+    );
+  }
+
   return (
     <>
       <PetList />
       <Page>
-        {user?.id && petId ? (
-          <>
-            <div className="space-y-3">
-              <PetProfile />
-              <LastMedical />
-              <Weight />
-              <Medical />
-              <Vaccine />
-              <Symptoms />
-              <DeletePet />
-            </div>
-          </>
-        ) : (
-          <Card>
-            <div className="py-[120px] text-center text-gray-4">
-              반려 동물을 등록해주세요.
-            </div>
-          </Card>
+        {petId && user?.id && (
+          <div className="space-y-3">
+            <PetProfile />
+            <LastMedical />
+            <Weight />
+            <Medical />
+            <Vaccine />
+            <Symptoms />
+            <DeletePet />
+          </div>
         )}
       </Page>
     </>

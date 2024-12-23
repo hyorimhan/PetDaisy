@@ -15,23 +15,25 @@ function PetProfile() {
 
   return (
     <QueryStateHandler data={details} isPending={isPending} isError={isError}>
-      <div className="flex gap-3 relative">
-        <ProfileImage images={parsedImages} />
-        <Card>
-          {details && (
-            <>
-              <ProfileTitle details={details} />
-              <ProfileInfo details={details} />
-            </>
-          )}
-          <Link
-            href={`/dashboard/pet-registration/${petId}`}
-            className="text-[12px] text-gray-3 absolute right-3 top-3"
-          >
-            수정
-          </Link>
-        </Card>
-      </div>
+      {details && petId && (
+        <div className="flex gap-3 relative">
+          <ProfileImage images={parsedImages} />
+          <Card>
+            {details && (
+              <>
+                <ProfileTitle details={details} />
+                <ProfileInfo details={details} />
+              </>
+            )}
+            <Link
+              href={`/dashboard/pet-registration/${petId}`}
+              className="text-[12px] text-gray-3 absolute right-3 top-3"
+            >
+              수정
+            </Link>
+          </Card>
+        </div>
+      )}
     </QueryStateHandler>
   );
 }

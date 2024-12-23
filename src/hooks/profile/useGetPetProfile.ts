@@ -11,6 +11,7 @@ export function useGetPetProfile(petId: string) {
     queryKey: ["petProfile", petId],
     queryFn: () => getPetProfile(petId),
     enabled: !!petId,
+    retry: 0,
   });
 
   return { details, isPending, isError };

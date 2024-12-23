@@ -15,9 +15,7 @@ export const useLoginMutation = () => {
           type: "error",
           title: "로그인 실패",
           content: response.message,
-          onConfirm: () => {
-            router.replace("/join");
-          },
+          onConfirm: () => {},
         });
         return;
       }
@@ -36,7 +34,7 @@ export const useLoginMutation = () => {
         title: "로그인 실패",
         content: "로그인에 실패했습니다.",
         onConfirm: () => {
-          alert(error.message);
+          console.error(error);
         },
       });
     },

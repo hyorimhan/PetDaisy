@@ -135,6 +135,10 @@ function EditForm({ petId }: EditFormProps) {
             ? "이미지 업로드 중"
             : "수정하기"
         }
+        disabled={
+          imagePaths.some((path) => path.startsWith("blob:")) &&
+          imagePaths.length > uploadImageURLs.length
+        }
         type="submit"
         bgColor="bg-main-5"
         textColor="text-white"

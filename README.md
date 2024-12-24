@@ -27,8 +27,9 @@
 ## 👨‍👩‍👦‍👦 Team Members
 <div align="center">
 
-| <img src="https://avatars.githubusercontent.com/u/166181947?v=4" width="150"><br/>**조민수** | <img src="https://avatars.githubusercontent.com/u/151856914?v=4" width="150"><br/>**한효림** |
-|:---:|:---:|
+| <img src="https://avatars.githubusercontent.com/u/166181947?v=4" width="150"><br>**조민수** | <img src="https://avatars.githubusercontent.com/u/151856914?v=4" width="150"><br>**한효림** |
+| :---: | :---: |
+| [![GitHub](https://img.shields.io/badge/GitHub-black?style=flat-square&logo=github)](https://github.com/erinmzo) | [![GitHub](https://img.shields.io/badge/GitHub-black?style=flat-square&logo=github)](https://github.com/hyorimhan) |
 | ![프론트엔드](https://img.shields.io/badge/Frontend-3178C6?style=flat-square&logoColor=white) | ![프론트엔드](https://img.shields.io/badge/Frontend-3178C6?style=flat-square&logoColor=white) |
 | 메인 페이지<br>공통 컴포넌트<br>동물 등록<br>진료 기록<br>예방 접종 | 초기 셋팅<br>로그인/회원가입<br>헤더/푸터<br>증상 기록<br>몸무게 기록 |
 

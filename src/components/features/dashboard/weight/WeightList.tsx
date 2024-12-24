@@ -1,10 +1,13 @@
 "use client";
-import Chart from "./Chart";
+
 import Button from "@/components/common/Button/Button";
 import useGetWeight from "@/hooks/weight/useGetWeight";
 import QueryStateHandler from "@/components/common/Handler/QueryStateHandler";
 import Card from "@/components/common/Card/Card";
 import WeightData from "./WeightData";
+import { lazy } from "react";
+
+const Chart = lazy(() => import("./Chart"));
 
 function WeightList() {
   const { weightData, isPending, isError } = useGetWeight();

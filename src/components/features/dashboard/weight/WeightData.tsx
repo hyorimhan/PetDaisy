@@ -4,7 +4,10 @@ import usePagination from "@/hooks/paginate/usePagination";
 import useDeleteMutation from "@/hooks/weight/useDeleteMutation";
 
 import useGetWeight from "@/hooks/weight/useGetWeight";
-import { formatWeightChange } from "@/utils/format/weightChange";
+import {
+  formatWeightChange,
+  weightCalculate,
+} from "@/utils/format/weightChange";
 import React from "react";
 
 function WeightData() {
@@ -29,10 +32,10 @@ function WeightData() {
           <div>
             {weightData?.data.map((weight, index) => {
               const prevWeight = weightData.data[index + 1]?.weight;
-              const weightChange = prevWeight
-                ? +(weight.weight - prevWeight).toFixed(1)
-                : 0;
-
+              const weightChange = weightCalculate({
+                weight: weight.weight,
+                prevWeight,
+              });
               return (
                 <div
                   key={weight.id}

@@ -2,10 +2,7 @@
 import Card from "@/components/common/Card/Card";
 import Loading from "@/components/common/Loading/Loading";
 import Page from "@/components/common/Page/Page";
-import LastMedical from "@/components/features/dashboard/medical/list/LastMedical";
 import PetList from "@/components/features/dashboard/petList/PetList";
-import PetProfile from "@/components/features/dashboard/petProfile/PetProfile";
-import Weight from "@/components/features/dashboard/weight/Weight";
 import { useAuthStore } from "@/zustand/useAuthStore";
 import { usePetStore } from "@/zustand/usePetStore";
 import { lazy, Suspense } from "react";
@@ -21,29 +18,36 @@ const Symptoms = lazy(
 const DeletePet = lazy(
   () => import("@/components/features/dashboard/petProfile/DeletePet")
 );
+const LastMedical = lazy(
+  () => import("@/components/features/dashboard/medical/list/LastMedical")
+);
+const PetProfile = lazy(
+  () => import("@/components/features/dashboard/petProfile/PetProfile")
+);
+const Weight = lazy(
+  () => import("@/components/features/dashboard/weight/Weight")
+);
 
 const DashboardPage = () => {
-  const user = useAuthStore((state) => state.user);
+  const user_id = useAuthStore((state) => state.user?.id);
   const petId = usePetStore((state) => state.petId);
   return (
     <>
       <PetList />
       <Page>
-        {user?.id && petId ? (
+        {user_id && petId ? (
           <div className="space-y-3">
-            <PetProfile />
-            <LastMedical />
-            <Weight />
             <Suspense fallback={<Loading />}>
+              <PetProfile />
+              <LastMedical />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <Weight />
               <Medical />
             </Suspense>
             <Suspense fallback={<Loading />}>
               <Vaccine />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
               <Symptoms />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
               <DeletePet />
             </Suspense>
           </div>

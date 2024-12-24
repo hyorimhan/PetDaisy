@@ -45,7 +45,7 @@ function ProfileImage({ images }: ProfileImageProps) {
                 fill
                 sizes="(max-width: 600px) 100vw, 200px"
                 className="rounded-lg object-cover aspect-[3/4]"
-                priority
+                {...(index === 0 ? { priority: true } : { loading: "lazy" })}
               />
             </div>
           </SwiperSlide>

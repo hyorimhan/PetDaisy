@@ -1,47 +1,49 @@
 
+# 🌼 PetDaisy
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/07600da3-9713-4202-8dd4-df77754bf198"
- alt="PetDaisy Logo" width="200">
-  
-  ### 반려동물의 건강과 일상을 체계적으로 기록하는 스마트 헬스케어 다이어리
-  
-  <a href="https://pet-daisy.vercel.app">🔗 배포 링크</a> &nbsp; | &nbsp; 
-  <a href="https://swanky-find-76e.notion.site/162f0495803c80cba576f4a816e219be?pvs=4">📚 기술 문서</a>
+ alt="PetDaisy Logo" width="250">
+
+  <h3>반려동물의 건강과 일상을 체계적으로 기록하는<br>스마트 헬스케어 다이어리</h3>
+
+  [![배포 링크](https://img.shields.io/badge/PetDaisy-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://pet-daisy.vercel.app)
+  [![기술 문서](https://img.shields.io/badge/Documentation-18A303?style=for-the-badge&logo=notion&logoColor=white)](https://swanky-find-76e.notion.site/162f0495803c80cba576f4a816e219be?pvs=4)
 </div>
 
-## 💫 프로젝트 소개
-펫데이지는 소중한 반려동물의 건강 여정을 함께하는 똑똑한 건강 관리 플랫폼입니다. 체중 변화부터 병원 진료 기록, 예방접종 일정까지 한눈에 확인할 수 있어 더욱 건강한 반려생활을 도와드립니다.
+## 🎯 About PetDaisy
+펫데이지는 소중한 반려동물의 건강 여정을 함께하는 똑똑한 건강 관리 플랫폼입니다.<br>
+체중 변화부터 병원 진료 기록, 예방접종 일정까지 한눈에 확인할 수 있어 더욱 건강한 반려생활을 도와드립니다.
 
-## 주요 기능 ⚡
+## ✨ 주요 기능
 | 기능 | 설명 |
 |:---:|---|
-| 프로필 관리 | 반려동물의 기본 정보를 등록하고 관리 |
-| 체중 기록 | 반려동물의 체중 변화를 그래프로 시각화 |
-| 진료 기록 | 병원 방문 기록과 진료 내용을 체계적으로 관리 |
-| 예방접종 | 예방접종 일정을 등록하고 알림 서비스 제공 |
-| 증상 기록 | 특이사항이나 증상을 사진과 함께 기록 |
+| 🏷️ 프로필 관리 | 반려동물의 기본 정보를 등록하고 관리 |
+| ⚖️ 체중 기록 | 반려동물의 체중 변화를 그래프로 시각화 |
+| 🏥 진료 기록 | 병원 방문 기록과 진료 내용을 체계적으로 관리 |
+| 💉 예방접종 | 예방접종 일정을 등록하고 알림 서비스 제공 |
+| 📝 증상 기록 | 특이사항이나 증상을 사진과 함께 기록 |
 
-## 👥 팀원 소개
-| <img src="https://avatars.githubusercontent.com/u/123456789" width="130"><br/>**조민수** | <img src="https://avatars.githubusercontent.com/u/987654321" width="130"><br/>**한효림** |
+## 👨‍👩‍👦‍👦 Team Members
+<div align="center">
+
+| <img src="https://avatars.githubusercontent.com/u/166181947?v=4" width="150"><br/>**조민수** | <img src="https://avatars.githubusercontent.com/u/151856914?v=4" width="150"><br/>**한효림** |
 |:---:|:---:|
-| 메인 페이지 | 초기 셋팅 |
-| 공통 컴포넌트 | 로그인/회원가입 |
-| 동물 등록 | 헤더/푸터 |
-| 진료 기록 | 증상 기록 |
-| 예방 접종 | 몸무게 기록 |
+| ![프론트엔드](https://img.shields.io/badge/Frontend-3178C6?style=flat-square&logoColor=white) | ![프론트엔드](https://img.shields.io/badge/Frontend-3178C6?style=flat-square&logoColor=white) |
+| 메인 페이지<br>공통 컴포넌트<br>동물 등록<br>진료 기록<br>예방 접종 | 초기 셋팅<br>로그인/회원가입<br>헤더/푸터<br>증상 기록<br>몸무게 기록 |
 
-## 개발 일정 ⏰
+</div>
 
+## ⏰ 개발 일정
 ```mermaid
 gantt
     dateFormat  YYYY-MM-DD
-    title       PetDaisy 개발 일정
+    title       PetDaisy Development Timeline
     
     section 기획/디자인
     UI/UX 디자인    :2024-12-02, 1d
     DB 설계        :2024-12-02, 1d
-    초기 세팅      :2024-12-03, 1d
+    초기 셋팅      :2024-12-03, 1d
     
     section 개발
     기능 개발      :2024-12-04, 16d
@@ -51,28 +53,35 @@ gantt
     피드백 반영    :2024-12-20, 5d
 ```
 
-## 🛠 기술 스택
-| 분류 | 기술 | 선택 이유 |
-|:---:|:---:|---|
-| 프레임워크 | Next.js | • 서버/클라이언트 컴포넌트 효과적 분리<br>• 직관적인 페이지 라우팅<br>• SSR을 통한 초기 로딩 속도 개선<br>• SEO 최적화 |
-| 상태관리 | TanStack Query | • 클라이언트 데이터 캐싱<br>• 자동 데이터 동기화<br>• 백그라운드 업데이트<br>• 직관적인 에러 및 로딩 상태 관리 |
-| 상태관리 | Zustand | • 가벼운 전역 상태 관리<br>• 간단한 설정<br>• TypeScript 호환성<br>• Redux 대비 적은 보일러플레이트 |
+## 🛠️ 기술 스택
+<div align="center">
 
-## User Test 결과 📊
+| Category | Technologies Used |
+|:---:|:---|
+| **Frontend** | ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwind-css&logoColor=white) |
+| **상태관리** | ![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=flat-square&logo=react-query&logoColor=white) ![Zustand](https://img.shields.io/badge/Zustand-000000?style=flat-square) |
+| **배포** | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white) |
+
+</div>
+
+## 📊 유저 테스트
 | 항목 | 내용 |
 |:---:|---|
-| 진행 일시 | 2024.12.20 - 2024.12.21 |
-| 참여 인원 | 4명 |
-| 테스트 환경 | • iOS (모바일/Safari)<br>• Mac (데스크톱/Chrome)<br>• Windows (데스크톱/Chrome) |
-| 전반적 만족도 | 4.25/5 |
-| 주요 피드백 | • 깔끔한 디자인<br>• 직관적인 UI<br>• 빠른 반응성 |
+| 📅 진행 일시 | 2024.12.20 - 2024.12.21 |
+| 👥 참여 인원 | 4명 |
+| 💻 테스트 환경 | • iOS (모바일/Safari)<br>• Mac (데스크톱/Chrome)<br>• Windows (데스크톱/Chrome) |
+| ⭐ 전반적 만족도 | **4.25/5** |
+| 💬 주요 피드백 | • 깔끔한 디자인<br>• 직관적인 UI<br>• 빠른 반응성 |
 
-## 📱 스크린샷
+## 📱 Screenshots
 <div align="center">
-  <img src="/api/placeholder/200/400" alt="메인화면" width="200">
-  <img src="/api/placeholder/200/400" alt="체중기록" width="200">
-  <img src="/api/placeholder/200/400" alt="진료기록" width="200">
+  <img src="/api/placeholder/200/400" alt="메인화면" width="250" style="margin: 10px">
+  <img src="/api/placeholder/200/400" alt="체중기록" width="250" style="margin: 10px">
+  <img src="/api/placeholder/200/400" alt="진료기록" width="250" style="margin: 10px">
 </div>
 
 ---
-*더 나은 반려생활을 위한 우리의 여정은 계속됩니다* 🐾
+<div align="center">
+  <i>더 나은 반려생활을 위한 우리의 여정은 계속됩니다</i> 🐾<br>
+  <sub>Made with 💖 by Team PetDaisy</sub>
+</div>

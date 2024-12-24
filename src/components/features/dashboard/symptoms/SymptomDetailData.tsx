@@ -26,7 +26,9 @@ function SymptomDetailData({ postId }: { postId: string }) {
                     .replace("-", ".")}
                 </span>
                 <h3 className="text-xl">{detail.title}</h3>
-                <p className="whitespace-pre-line">{detail.content}</p>
+                <p className="whitespace-pre-line text-wrap">
+                  {detail.content}
+                </p>
               </div>
             </Card>
             <div className="grid grid-cols-3 mt-4 gap-3">

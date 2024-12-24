@@ -1,52 +1,62 @@
 "use client";
 import Card from "@/components/common/Card/Card";
+import Loading from "@/components/common/Loading/Loading";
 import Page from "@/components/common/Page/Page";
-import LastMedical from "@/components/features/dashboard/medical/list/LastMedical";
-import Medical from "@/components/features/dashboard/medical/list/Medical";
 import PetList from "@/components/features/dashboard/petList/PetList";
-import DeletePet from "@/components/features/dashboard/petProfile/DeletePet";
-import PetProfile from "@/components/features/dashboard/petProfile/PetProfile";
-import Symptoms from "@/components/features/dashboard/symptoms/Symptoms";
-import Vaccine from "@/components/features/dashboard/vaccine/list/Vaccine";
-import Weight from "@/components/features/dashboard/weight/Weight";
 import { useAuthStore } from "@/zustand/useAuthStore";
 import { usePetStore } from "@/zustand/usePetStore";
-import Link from "next/link";
+import { lazy, Suspense } from "react";
+const Medical = lazy(
+  () => import("@/components/features/dashboard/medical/list/Medical")
+);
+const Vaccine = lazy(
+  () => import("@/components/features/dashboard/vaccine/list/Vaccine")
+);
+const Symptoms = lazy(
+  () => import("@/components/features/dashboard/symptoms/Symptoms")
+);
+const DeletePet = lazy(
+  () => import("@/components/features/dashboard/petProfile/DeletePet")
+);
+const LastMedical = lazy(
+  () => import("@/components/features/dashboard/medical/list/LastMedical")
+);
+const PetProfile = lazy(
+  () => import("@/components/features/dashboard/petProfile/PetProfile")
+);
+const Weight = lazy(
+  () => import("@/components/features/dashboard/weight/Weight")
+);
 
 const DashboardPage = () => {
-  const user = useAuthStore((state) => state.user);
+  const user_id = useAuthStore((state) => state.user?.id);
   const petId = usePetStore((state) => state.petId);
-  if (user?.id && !petId) {
-    return (
-      <>
-        <PetList />
-        <Page>
-          <Card>
-            <div className="py-[120px] text-center text-gray-4">
-              <Link href="/dashboard/pet-registration">
-                반려동물을 등록해주세요.
-              </Link>
-            </div>
-          </Card>
-        </Page>
-      </>
-    );
-  }
-
   return (
     <>
       <PetList />
       <Page>
-        {petId && user?.id && (
+        {user_id && petId ? (
           <div className="space-y-3">
-            <PetProfile />
-            <LastMedical />
-            <Weight />
-            <Medical />
-            <Vaccine />
-            <Symptoms />
-            <DeletePet />
+            <Suspense fallback={<Loading />}>
+              <PetProfile />
+              <LastMedical />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <Weight />
+              <Medical />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <Vaccine />
+              <Symptoms />
+              <DeletePet />
+            </Suspense>
           </div>
+        ) : (
+          <Card>
+            <div className="py-[120px] text-center text-gray-4">
+              반려 동물을 등록해주세요.
+            </div>
+          </Card>
         )}
       </Page>
     </>

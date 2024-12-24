@@ -9,3 +9,13 @@ export const formatWeightChange = (change: number) => {
 //   if (change > 0) return "text-red-4";
 //   if (change < 0) return "text-blue-5";
 // };
+
+export const weightCalculate = ({
+  prevWeight,
+  weight,
+}: {
+  prevWeight: number;
+  weight: number;
+}) => {
+  return prevWeight ? Number((weight - prevWeight).toFixed(2)) : 0;
+};

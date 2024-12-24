@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "gen": "supabase gen types typescript --project-id ldkycewtchhtokppnajz --schema public > src/types/supabase.ts",
-    "analyze": "ANALYZE=true yarn build"
+    "analyze": "ANALYZE=true yarn build",
+    "test:auth": "playwright test tests/auth.test.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

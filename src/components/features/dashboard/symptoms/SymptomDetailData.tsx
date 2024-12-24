@@ -3,8 +3,8 @@ import Card from "@/components/common/Card/Card";
 import useDeleteSymptoms from "@/hooks/symptoms/useDeleteSymptoms";
 import useGetSymptomsDetail from "@/hooks/symptoms/useGetSymptomsDetail";
 import useModalStore from "@/zustand/useModalStore";
-import Image from "next/image";
 import parse from "html-react-parser";
+import Image from "next/image";
 
 function SymptomDetailData({ postId }: { postId: string }) {
   const { symptomsDetail } = useGetSymptomsDetail(postId);

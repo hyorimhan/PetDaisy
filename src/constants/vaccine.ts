@@ -16,6 +16,7 @@ export const VACCINE_TYPE_LIST = Object.entries(VACCINE_TYPE).map(
     keyName: key,
   })
 );
+
 export const VACCINE_ICON = {
   COMBINED_VACCINE_1ST: "1개월 종합 백신 1차 접종",
   COMBINED_VACCINE_2ND: "2개월 종합 백신 2차 접종",

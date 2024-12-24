@@ -75,10 +75,21 @@ gantt
 
 ## 📱 Screenshots
 <div align="center">
-  <img src="/api/placeholder/200/400" alt="메인화면" width="250" style="margin: 10px">
-  <img src="/api/placeholder/200/400" alt="체중기록" width="250" style="margin: 10px">
-  <img src="/api/placeholder/200/400" alt="진료기록" width="250" style="margin: 10px">
+
+## 1. 메인 대시보드
+전체 화면 캡처
+<img src="https://github.com/user-attachments/assets/fa7fbd15-c27d-4f1f-a67f-9b57d0569373" alt="메인화면" width="1200">
+
+### 상단 영역
+펫 정보, 마지막 진료일, 몸무게, 진료기록
+<img src="https://github.com/user-attachments/assets/16e6d290-7e65-4896-9b1c-8d6c1baf90b3" alt="상단 영역" width="1200">
+
+### 하단 영역
+예방접종 기록, 관찰 기록, 반려동물 삭제
+<img src="https://github.com/user-attachments/assets/9a4e44b3-3bf9-4dfa-9003-c07d96150d51" alt="하단 영역" width="1200">
+
 </div>
+
 
 ---
 <div align="center">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ReactPaginate from "react-paginate";
 
 export type PaginateType = {
@@ -31,4 +31,4 @@ function PaginateBtn({
   );
 }
 
-export default PaginateBtn;
+export default memo(PaginateBtn);

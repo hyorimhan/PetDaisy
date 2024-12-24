@@ -3,6 +3,7 @@ import Card from "@/components/common/Card/Card";
 import useDeleteSymptoms from "@/hooks/symptoms/useDeleteSymptoms";
 import useGetSymptomsDetail from "@/hooks/symptoms/useGetSymptomsDetail";
 import useModalStore from "@/zustand/useModalStore";
+import parse from "html-react-parser";
 import Image from "next/image";
 
 function SymptomDetailData({ postId }: { postId: string }) {
@@ -26,9 +27,7 @@ function SymptomDetailData({ postId }: { postId: string }) {
                     .replace("-", ".")}
                 </span>
                 <h3 className="text-xl">{detail.title}</h3>
-                <p className="whitespace-pre-line text-wrap">
-                  {detail.content}
-                </p>
+                <p>{parse(detail.content)}</p>
               </div>
             </Card>
             <div className="grid grid-cols-3 mt-4 gap-3">
@@ -39,6 +38,7 @@ function SymptomDetailData({ postId }: { postId: string }) {
                   alt={`${detail.title} 이미지`}
                   width={300}
                   height={300}
+                  priority={true}
                   className="w-full h-auto aspect-square rounded-lg"
                   onClick={() =>
                     openModal({

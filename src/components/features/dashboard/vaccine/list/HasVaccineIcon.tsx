@@ -3,7 +3,7 @@ import Card from "@/components/common/Card/Card";
 import { VACCINE_ICON_LIST, VACCINE_TYPE } from "@/constants/vaccine";
 import { Vaccinations } from "@/types/vaccine";
 import Image from "next/image";
-
+import parse from "html-react-parser";
 interface HasVaccineIconProps {
   vaccinations: Vaccinations;
 }
@@ -35,10 +35,9 @@ function HasVaccineIcon({ vaccinations }: HasVaccineIconProps) {
                 width={40}
                 height={0}
                 alt="백신 아이콘"
+                priority
               />
-              <span className="whitespace-pre-line text-center">
-                {vaccine.value}
-              </span>
+              <span className="text-center">{parse(vaccine.value)}</span>
             </div>
           </Card>
         </li>

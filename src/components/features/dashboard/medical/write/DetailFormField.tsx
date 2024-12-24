@@ -33,6 +33,7 @@ function DetailFormField({ error }: DetailFormFieldProps) {
       <Input
         label="제목"
         type="text"
+        max={30}
         error={error.title}
         {...register("title", MEDICAL_TITLE_VALIDATION())}
       />

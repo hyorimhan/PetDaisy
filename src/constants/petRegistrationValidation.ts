@@ -1,20 +1,20 @@
 import { EmptyDelete } from "./common";
 
 export const PET_NAME_VALIDATION = () => ({
-  required: "닉네임을 입력해주세요",
+  required: "이름은 필수 항목입니다.",
   minLength: {
     value: 2,
-    message: "닉네임은 최소 2자 이상 입력해주세요",
+    message: "이름은 최소 2자 이상 입력해주세요",
   },
   maxLength: {
     value: 4,
-    message: "닉네임은 4자까지 입력 가능합니다",
+    message: "이름은 4자까지 입력 가능합니다",
   },
   ...EmptyDelete,
 });
 
 export const PET_BIRTH_VALIDATION = () => ({
-  required: "날짜를 선택해주세요.",
+  required: "생일을 입력해주세요.",
 });
 
 export const PET_WEIGHT_VALIDATION = () => ({
@@ -30,9 +30,9 @@ export const PET_WEIGHT_VALIDATION = () => ({
 });
 
 export const PET_GENDER_VALIDATION = () => ({
-  required: "옵션을 선택해주세요.",
+  required: "성별을 선택해주세요.",
 });
 
 export const PET_NEUTERED_VALIDATION = () => ({
-  required: "옵션을 선택해주세요.",
+  required: "중성화 여부를 선택해주세요.",
 });

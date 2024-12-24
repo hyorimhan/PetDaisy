@@ -77,16 +77,25 @@ gantt
 <div align="center">
 
 ## 1. 메인 대시보드
-전체 화면 캡처
-<img src="https://github.com/user-attachments/assets/fa7fbd15-c27d-4f1f-a67f-9b57d0569373" alt="메인화면" width="1200">
+<img src="https://github.com/user-attachments/assets/1c204fee-5211-4b38-8cd0-6f27fe8d34e4" alt="메인화면" width="1200">
 
-### 상단 영역
-펫 정보, 마지막 진료일, 몸무게, 진료기록
-<img src="https://github.com/user-attachments/assets/16e6d290-7e65-4896-9b1c-8d6c1baf90b3" alt="상단 영역" width="1200">
+## 2. 펫 정보
+<img src="https://github.com/user-attachments/assets/2c135e5f-ad18-42ef-a31a-0a8a3b915409" alt="상단 영역" width="1200">
 
-### 하단 영역
-예방접종 기록, 관찰 기록, 반려동물 삭제
-<img src="https://github.com/user-attachments/assets/9a4e44b3-3bf9-4dfa-9003-c07d96150d51" alt="하단 영역" width="1200">
+## 3. 체중 기록
+<img src="https://github.com/user-attachments/assets/d0dc8580-71e1-4221-98da-57eec341f89f" alt="하단 영역" width="1200">
+
+## 4. 진료 기록
+<img src="https://github.com/user-attachments/assets/66a75636-deb4-4971-8013-a49f95a233f0" alt="하단 영역" width="1200">
+
+## 5. 예방 접종 기록
+<img src="https://github.com/user-attachments/assets/16bba434-52cd-4935-b18e-a18c712b928d" alt="하단 영역" width="1200">
+
+## 6. 관찰 기록
+<img src="https://github.com/user-attachments/assets/bba911e3-8c97-423d-98a2-ce131a700394" alt="하단 영역" width="1200">
+
+
+
 
 </div>
 

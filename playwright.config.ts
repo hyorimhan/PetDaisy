@@ -10,7 +10,7 @@ export default defineConfig({
 
   use: {
     // baseURL 설정 필요
-    baseURL: "http://localhost:3000",
+    baseURL: "http://127.0.0.1:3000",
 
     // 브라우저 상태 유지 (로그인 등)
     storageState: "./tests/auth.json",

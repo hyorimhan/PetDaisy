@@ -43,6 +43,8 @@ const DashboardPage = () => {
             </Suspense>
             <Suspense fallback={<Loading />}>
               <Weight />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
               <Medical />
             </Suspense>
             <Suspense fallback={<Loading />}>

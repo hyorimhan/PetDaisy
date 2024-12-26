@@ -8,7 +8,7 @@ import {
   formatWeightChange,
   weightCalculate,
 } from "@/utils/format/weightChange";
-import React from "react";
+import React, { useMemo } from "react";
 
 function WeightData() {
   const { page, limit, onPageChange, currentPage } = usePagination();
@@ -19,6 +19,10 @@ function WeightData() {
     if (change > 0) return "text-red-4";
     if (change < 0) return "text-blue-5";
   };
+
+  const pageCount = useMemo(() => {
+    return Math.ceil((weightData?.count ?? 0) / limit);
+  }, [weightData?.count, limit]);
 
   return (
     <div className="pt-3">
@@ -59,7 +63,7 @@ function WeightData() {
           </div>
         </div>
         <PaginateBtn
-          pageCount={Math.ceil((weightData?.count ?? 0) / limit)}
+          pageCount={pageCount}
           currentPage={currentPage}
           onPageChange={onPageChange}
         />

@@ -28,11 +28,13 @@ function DetailFormField({ error }: DetailFormFieldProps) {
         label="병원명"
         type="text"
         error={error.hospitalName}
+        max={20}
         {...register("hospitalName", MEDICAL_HOSPITAL_VALIDATION())}
       />
       <Input
         label="제목"
         type="text"
+        max={30}
         error={error.title}
         {...register("title", MEDICAL_TITLE_VALIDATION())}
       />
@@ -40,6 +42,7 @@ function DetailFormField({ error }: DetailFormFieldProps) {
         label="내용"
         type="textarea"
         error={error.content}
+        max={500}
         {...register("content", MEDICAL_CONTENT_VALIDATION())}
       />
       <Input

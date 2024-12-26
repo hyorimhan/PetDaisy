@@ -38,6 +38,7 @@ function ExpenseFormFieldItem({
         <Input
           type="text"
           label="진료 항목"
+          max={20}
           {...register(
             `expenses.${index}.service`,
             MEDICAL_EXPENSES_SERVICE_VALIDATION()

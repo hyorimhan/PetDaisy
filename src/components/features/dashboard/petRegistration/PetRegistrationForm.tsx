@@ -78,6 +78,7 @@ function PetRegistrationForm() {
         }
       />
       <Button
+        type="button"
         content="취소하기"
         types="lg"
         bgColor="bg-gray-1"

@@ -60,6 +60,7 @@ function FormField({
         label="이름"
         type="text"
         error={errors.name}
+        max={4}
         {...register("name", PET_NAME_VALIDATION())}
       />
       <Select
@@ -82,6 +83,7 @@ function FormField({
         label="몸무게"
         type="number"
         unit="kg"
+        max={100}
         error={errors.weight}
         {...register("weight", PET_WEIGHT_VALIDATION())}
         onChange={handleSetWeight}

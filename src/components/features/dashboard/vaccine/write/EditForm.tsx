@@ -86,6 +86,7 @@ function EditForm({ vaccineId }: EditFormProps) {
         label="병원명"
         type="text"
         error={errors.hospitalName}
+        max={20}
         placeholder="병원 이름을 입력해주세요."
         {...register("hospitalName", VACCINE_HOSPITAL_VALIDATION())}
       />
@@ -103,6 +104,7 @@ function EditForm({ vaccineId }: EditFormProps) {
         label="메모"
         type="text"
         error={errors.note}
+        max={50}
         {...register("note", VACCINE_MEMO_VALIDATION())}
         placeholder="간단한 참고 내용을 입력해주세요."
       />

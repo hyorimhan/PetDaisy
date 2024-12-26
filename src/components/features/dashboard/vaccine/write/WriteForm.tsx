@@ -61,6 +61,7 @@ function WriteForm() {
         label="병원명"
         type="text"
         error={errors.hospitalName}
+        max={20}
         {...register("hospitalName", VACCINE_HOSPITAL_VALIDATION())}
       />
       <Select
@@ -76,6 +77,7 @@ function WriteForm() {
         label="메모"
         type="text"
         error={errors.note}
+        max={50}
         {...register("note", VACCINE_MEMO_VALIDATION())}
       />
       <Input

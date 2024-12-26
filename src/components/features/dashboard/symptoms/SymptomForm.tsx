@@ -35,6 +35,7 @@ function SymptomForm({
           label="제목"
           type="text"
           placeholder="증상에 대해 간략히 적어주세요"
+          max={15}
           {...form.register("title", TITLE_VALIDATION())}
           error={errors.title}
         />
@@ -42,6 +43,7 @@ function SymptomForm({
           label="내용"
           type="textarea"
           placeholder="증상에 대한 상세한 내용을 적어주세요"
+          max={500}
           {...form.register("content", CONTENT_VALIDATION())}
           error={errors.content}
         />
